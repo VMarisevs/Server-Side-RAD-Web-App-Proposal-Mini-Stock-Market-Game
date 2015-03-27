@@ -1,0 +1,67 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="GuestMasterPage.master.cs" Inherits="GuestMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+        .auto-style2 {
+        }
+        .auto-style3 {
+            height: 23px;
+        }
+    </style>
+</head>
+<body>
+
+    <div>        
+            <table class="auto-style1">
+                <tr>
+                    <td class="auto-style3" colspan="6">
+                        <h1>GuestPage</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <asp:LinkButton ID="btnHome" runat="server">Home</asp:LinkButton>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="btnContacts" runat="server">Contacts</asp:LinkButton>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="btnLogin" runat="server">Login</asp:LinkButton>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="btnRegister" runat="server">Registration</asp:LinkButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">&nbsp;</td>
+                    <td colspan="5">&nbsp;
+                        <form id="form1" runat="server">
+                            <div>
+        
+                                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+                                </asp:ContentPlaceHolder>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">&nbsp;</td>
+                    <td colspan="5">&nbsp;</td>
+            </table>
+        
+    </div>
+
+</body>
+</html>
