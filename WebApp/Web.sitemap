@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
 
-
     <!--All shared-->
-  <siteMapNode url="Index.aspx" title="Home"  description="">
-    <siteMapNode url="ScoreBoard.aspx" title="Scorebaord"  description="" />
-    
+    <siteMapNode url="Index.aspx" title="Home"  description="">
+    <siteMapNode url="ScoreBoard.aspx" title="Scoreboard"  description="" />
     
     <!-- Available to guest -->
     <siteMapNode url="ViewStocks.aspx" title="Stocks"  description="" />
     <siteMapNode url="Login.aspx" title="Login"  description="" />
     <siteMapNode url="CreateUser.aspx" title="Create User Profile"  description="" />
+    <siteMapNode url="PassRecover.aspx" title="Password Recovery"  description="" />
 
     <!-- Available to User(authenticated) -->
     <siteMapNode url="SellStocks.aspx" title="Sell Stocks"  description="" />
