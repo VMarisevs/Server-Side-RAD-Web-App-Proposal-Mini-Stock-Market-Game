@@ -1136,10 +1136,10 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[aspnet_Applications]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[aspnet_Applications](
-	[ApplicationName] [nvarchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
-	[LoweredApplicationName] [nvarchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
+	[ApplicationName] [nvarchar](256) NOT NULL,
+	[LoweredApplicationName] [nvarchar](256)  NOT NULL,
 	[ApplicationId] [uniqueidentifier] NOT NULL,
-	[Description] [nvarchar](256) COLLATE Latin1_General_CI_AS NULL,
+	[Description] [nvarchar](256)  NULL,
  CONSTRAINT [PK__aspnet_A__C93A4C98014935CB] PRIMARY KEY NONCLUSTERED 
 (
 	[ApplicationId] ASC
@@ -1170,21 +1170,21 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[aspnet_WebEvent_Events]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[aspnet_WebEvent_Events](
-	[EventId] [char](32) COLLATE Latin1_General_CI_AS NOT NULL,
+	[EventId] [char](32)  NOT NULL,
 	[EventTimeUtc] [datetime] NOT NULL,
 	[EventTime] [datetime] NOT NULL,
-	[EventType] [nvarchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
+	[EventType] [nvarchar](256)  NOT NULL,
 	[EventSequence] [decimal](19, 0) NOT NULL,
 	[EventOccurrence] [decimal](19, 0) NOT NULL,
 	[EventCode] [int] NOT NULL,
 	[EventDetailCode] [int] NOT NULL,
-	[Message] [nvarchar](1024) COLLATE Latin1_General_CI_AS NULL,
-	[ApplicationPath] [nvarchar](256) COLLATE Latin1_General_CI_AS NULL,
-	[ApplicationVirtualPath] [nvarchar](256) COLLATE Latin1_General_CI_AS NULL,
-	[MachineName] [nvarchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
-	[RequestUrl] [nvarchar](1024) COLLATE Latin1_General_CI_AS NULL,
-	[ExceptionType] [nvarchar](256) COLLATE Latin1_General_CI_AS NULL,
-	[Details] [ntext] COLLATE Latin1_General_CI_AS NULL,
+	[Message] [nvarchar](1024)  NULL,
+	[ApplicationPath] [nvarchar](256)  NULL,
+	[ApplicationVirtualPath] [nvarchar](256)  NULL,
+	[MachineName] [nvarchar](256)  NOT NULL,
+	[RequestUrl] [nvarchar](1024)  NULL,
+	[ExceptionType] [nvarchar](256)  NULL,
+	[Details] [ntext]  NULL,
  CONSTRAINT [PK__aspnet_W__7944C810797309D9] PRIMARY KEY CLUSTERED 
 (
 	[EventId] ASC
@@ -1278,8 +1278,8 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[aspnet_SchemaVersions]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[aspnet_SchemaVersions](
-	[Feature] [nvarchar](128) COLLATE Latin1_General_CI_AS NOT NULL,
-	[CompatibleSchemaVersion] [nvarchar](128) COLLATE Latin1_General_CI_AS NOT NULL,
+	[Feature] [nvarchar](128)  NOT NULL,
+	[CompatibleSchemaVersion] [nvarchar](128)  NOT NULL,
 	[IsCurrentVersion] [bit] NOT NULL,
  CONSTRAINT [PK__aspnet_S__5A1E6BC11367E606] PRIMARY KEY CLUSTERED 
 (
@@ -1382,9 +1382,9 @@ BEGIN
 CREATE TABLE [dbo].[aspnet_Users](
 	[ApplicationId] [uniqueidentifier] NOT NULL,
 	[UserId] [uniqueidentifier] NOT NULL,
-	[UserName] [nvarchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
-	[LoweredUserName] [nvarchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
-	[MobileAlias] [nvarchar](16) COLLATE Latin1_General_CI_AS NULL,
+	[UserName] [nvarchar](256)  NOT NULL,
+	[LoweredUserName] [nvarchar](256)  NOT NULL,
+	[MobileAlias] [nvarchar](16)  NULL,
 	[IsAnonymous] [bit] NOT NULL,
 	[LastActivityDate] [datetime] NOT NULL,
  CONSTRAINT [PK__aspnet_U__1788CC4D0BC6C43E] PRIMARY KEY NONCLUSTERED 
@@ -1520,8 +1520,8 @@ BEGIN
 CREATE TABLE [dbo].[aspnet_Paths](
 	[ApplicationId] [uniqueidentifier] NOT NULL,
 	[PathId] [uniqueidentifier] NOT NULL,
-	[Path] [nvarchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
-	[LoweredPath] [nvarchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
+	[Path] [nvarchar](256)  NOT NULL,
+	[LoweredPath] [nvarchar](256)  NOT NULL,
  CONSTRAINT [PK__aspnet_P__CD67DC5859063A47] PRIMARY KEY NONCLUSTERED 
 (
 	[PathId] ASC
@@ -1562,9 +1562,9 @@ BEGIN
 CREATE TABLE [dbo].[aspnet_Roles](
 	[ApplicationId] [uniqueidentifier] NOT NULL,
 	[RoleId] [uniqueidentifier] NOT NULL,
-	[RoleName] [nvarchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
-	[LoweredRoleName] [nvarchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
-	[Description] [nvarchar](256) COLLATE Latin1_General_CI_AS NULL,
+	[RoleName] [nvarchar](256)  NOT NULL,
+	[LoweredRoleName] [nvarchar](256)  NOT NULL,
+	[Description] [nvarchar](256)  NULL,
  CONSTRAINT [PK__aspnet_R__8AFACE1B4222D4EF] PRIMARY KEY NONCLUSTERED 
 (
 	[RoleId] ASC
@@ -1658,8 +1658,8 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[as
 BEGIN
 CREATE TABLE [dbo].[aspnet_Profile](
 	[UserId] [uniqueidentifier] NOT NULL,
-	[PropertyNames] [ntext] COLLATE Latin1_General_CI_AS NOT NULL,
-	[PropertyValuesString] [ntext] COLLATE Latin1_General_CI_AS NOT NULL,
+	[PropertyNames] [ntext]  NOT NULL,
+	[PropertyValuesString] [ntext]  NOT NULL,
 	[PropertyValuesBinary] [image] NOT NULL,
 	[LastUpdatedDate] [datetime] NOT NULL,
  CONSTRAINT [PK__aspnet_P__1788CC4C36B12243] PRIMARY KEY CLUSTERED 
@@ -1679,14 +1679,14 @@ BEGIN
 CREATE TABLE [dbo].[aspnet_Membership](
 	[ApplicationId] [uniqueidentifier] NOT NULL,
 	[UserId] [uniqueidentifier] NOT NULL,
-	[Password] [nvarchar](128) COLLATE Latin1_General_CI_AS NOT NULL,
+	[Password] [nvarchar](128)  NOT NULL,
 	[PasswordFormat] [int] NOT NULL,
-	[PasswordSalt] [nvarchar](128) COLLATE Latin1_General_CI_AS NOT NULL,
-	[MobilePIN] [nvarchar](16) COLLATE Latin1_General_CI_AS NULL,
-	[Email] [nvarchar](256) COLLATE Latin1_General_CI_AS NULL,
-	[LoweredEmail] [nvarchar](256) COLLATE Latin1_General_CI_AS NULL,
-	[PasswordQuestion] [nvarchar](256) COLLATE Latin1_General_CI_AS NULL,
-	[PasswordAnswer] [nvarchar](128) COLLATE Latin1_General_CI_AS NULL,
+	[PasswordSalt] [nvarchar](128)  NOT NULL,
+	[MobilePIN] [nvarchar](16)  NULL,
+	[Email] [nvarchar](256)  NULL,
+	[LoweredEmail] [nvarchar](256)  NULL,
+	[PasswordQuestion] [nvarchar](256)  NULL,
+	[PasswordAnswer] [nvarchar](128)  NULL,
 	[IsApproved] [bit] NOT NULL,
 	[IsLockedOut] [bit] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
@@ -1697,7 +1697,7 @@ CREATE TABLE [dbo].[aspnet_Membership](
 	[FailedPasswordAttemptWindowStart] [datetime] NOT NULL,
 	[FailedPasswordAnswerAttemptCount] [int] NOT NULL,
 	[FailedPasswordAnswerAttemptWindowStart] [datetime] NOT NULL,
-	[Comment] [ntext] COLLATE Latin1_General_CI_AS NULL,
+	[Comment] [ntext]  NULL,
  CONSTRAINT [PK__aspnet_M__1788CC4D1FCDBCEB] PRIMARY KEY NONCLUSTERED 
 (
 	[UserId] ASC
