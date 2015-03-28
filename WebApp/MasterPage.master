@@ -20,7 +20,14 @@
                     <asp:SiteMapDataSource ID="SiteMapDataSourceTree" runat="server" />
                 </td>
                 <td id="user">
-                    Welcome &lt;user&gt;!</td>
+                    Welcome 
+                    <asp:LoginName ID="LoginName1" runat="server" />
+                    <br />
+                    <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="White" />
+                    <br />
+                    <asp:LoginView ID="LoginView1" runat="server">
+                    </asp:LoginView>
+                </td>
             </tr>
             <tr id="menu-bar">
                 <td colspan="2">
