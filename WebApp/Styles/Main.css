@@ -1,0 +1,48 @@
+﻿body {
+    
+}
+
+h1{
+    
+}
+
+#mainTable{
+    width: 100%;
+}
+
+#header{
+    font-family: Calibri;
+    color: white;
+    background-color: blue;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+#user{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    background-color: blue;
+    text-align: center;
+}
+
+#menu-bar{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: black;
+    background-color: aqua;
+    text-align: center;
+}
+
+#menu-tree{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: black;
+    background-color: teal;
+    text-align: center;
+}
+
+#footer{
+    font-family: Calibri;
+    color: white;
+    background-color: blue;
+    text-align: center;
+}

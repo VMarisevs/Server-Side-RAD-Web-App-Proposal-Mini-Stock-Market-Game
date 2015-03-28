@@ -1,0 +1,45 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Stock Street</title>
+    <link href="Styles/Main.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="mainForm" runat="server">
+    <div>
+        <table id="mainTable">
+            <tr>
+                <td id="header">
+                    Stock Street</td>
+                <td id="user">
+                    Welcome &lt;user&gt;!</td>
+            </tr>
+            <tr id="menu-bar">
+                <td colspan="2">
+                    &lt;menu-bar&gt;</td>
+            </tr>
+            <tr>
+                <td id="menu-tree">
+                    &lt;menu-tree&gt;</td>
+                <td>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        <p>
+                            &lt;content-area&gt;</p>
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr id="footer">
+                <td colspan="2">
+                    &lt;footer&gt;</td>
+            </tr>
+        </table>
+
+    </div>
+    </form>
+</body>
+</html>
