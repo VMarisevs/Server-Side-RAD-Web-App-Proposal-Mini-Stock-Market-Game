@@ -6,18 +6,19 @@
     <siteMapNode url="ScoreBoard.aspx" title="Scoreboard"  description="" />
     
     <!-- Available to guest -->
-    <siteMapNode url="ViewStocks.aspx" title="Stocks"  description="" />
-    <siteMapNode url="Login.aspx" title="Login"  description="" />
-    <siteMapNode url="CreateUser.aspx" title="Create User Profile"  description="" />
-    <siteMapNode url="PassRecover.aspx" title="Password Recovery"  description="" />
+    <siteMapNode url="Guest/ViewStocks.aspx" title="Stocks"  description="" />
+    <siteMapNode url="Guest/Login.aspx" title="Login"  description="">
+      <siteMapNode url="Guest/CreateUser.aspx" title="Create User Profile"  description="" />
+      <siteMapNode url="Guest/PassRecovery.aspx" title="Password Recovery"  description="" />
+    </siteMapNode>
 
     <!-- Available to User(authenticated) -->
-    <siteMapNode url="SellStocks.aspx" title="Sell Stocks"  description="" />
-    <siteMapNode url="BuyStocks.aspx" title="Buy Stocks"  description=""/>
-    <siteMapNode url="History.aspx" title="History"  description=""/>
+    <siteMapNode url="Authenticated/SellStocks.aspx" title="Sell Stocks"  description="" />
+    <siteMapNode url="Authenticated/BuyStocks.aspx" title="Buy Stocks"  description=""/>
+    <siteMapNode url="Authenticated/History.aspx" title="History"  description=""/>
 
-    <!-- Available to Admin(authorized) -->
-    <siteMapNode url="EditStocks.aspx" title="Edit Stocks"  description="" />
+    <!-- Available to Admin(authorised) -->
+    <siteMapNode url="Authorised/EditStocks.aspx" title="Edit Stocks"  description="" />
     <!--<siteMapNode url="CreateStock.aspx" title="Create a Stock"  description="" />-->
 
   </siteMapNode>

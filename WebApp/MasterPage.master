@@ -15,13 +15,29 @@
         <table id="mainTable">
             <tr>
                 <td id="header">
-                    Stock Street</td>
+                    Stock Street<asp:SiteMapDataSource ID="SiteMapDataSourceMenu" runat="server" 
+                        ShowStartingNode="False" />
+                    <asp:SiteMapDataSource ID="SiteMapDataSourceTree" runat="server" />
+                </td>
                 <td id="user">
                     Welcome &lt;user&gt;!</td>
             </tr>
             <tr id="menu-bar">
                 <td colspan="2">
-                    &lt;menu-bar&gt;</td>
+                    <asp:Menu ID="mnuMain" runat="server" BackColor="#F7F6F3" 
+                        DataSourceID="SiteMapDataSourceMenu" DynamicHorizontalOffset="2" 
+                        Font-Names="Verdana" Font-Size="0.9em" ForeColor="#7C6F57" 
+                        Orientation="Horizontal" StaticSubMenuIndent="10px" style="text-align: center" 
+                        Width="100%">
+                        <DynamicHoverStyle BackColor="#7C6F57" ForeColor="White" />
+                        <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                        <DynamicMenuStyle BackColor="#F7F6F3" />
+                        <DynamicSelectedStyle BackColor="#5D7B9D" />
+                        <StaticHoverStyle BackColor="#7C6F57" ForeColor="White" />
+                        <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                        <StaticSelectedStyle BackColor="#5D7B9D" />
+                    </asp:Menu>
+                </td>
             </tr>
             <tr>
                 <td id="menu-tree">
