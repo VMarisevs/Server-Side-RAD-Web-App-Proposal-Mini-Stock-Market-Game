@@ -1,5 +1,5 @@
 ﻿body {
-    
+    background-color: black;
 }
 
 h1{
@@ -11,9 +11,9 @@ h1{
 }
 
 #header{
-    font-family: Calibri;
+    font-family: FangSong;
     color: white;
-    background-color: blue;
+    background-color: Silver;
     text-align: center;
     font-size: 36px;
     font-weight: bold;
@@ -22,27 +22,37 @@ h1{
 #user{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
-    background-color: blue;
+    background-color: gray;
     text-align: center;
+    width: 30%;
+    
 }
 
 #menu-bar{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: black;
-    background-color: aqua;
+    background-color: gray;
     text-align: center;
 }
 
 #menu-tree{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: black;
-    background-color: teal;
+    background-color: gray;
     text-align: center;
+}
+
+#breadcrumbs{
+    background-color: Gray;   
+    }
+
+#content{
+background-color: Gray;
 }
 
 #footer{
     font-family: Calibri;
     color: white;
-    background-color: blue;
+    background-color: silver;
     text-align: center;
 }
