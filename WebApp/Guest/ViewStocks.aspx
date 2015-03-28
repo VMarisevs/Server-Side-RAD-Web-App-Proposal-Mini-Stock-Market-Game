@@ -49,7 +49,7 @@ END">
         <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" 
             DataSourceID="dsCategories" DataTextField="longName" DataValueField="Id" 
             AppendDataBoundItems="True">
-            <asp:ListItem Value="-1">Select All</asp:ListItem>
+            <asp:ListItem Value="-1">All</asp:ListItem>
         </asp:DropDownList>
     </p>
     <table class="style2">
@@ -57,25 +57,30 @@ END">
             <td class="style3">
                 <asp:GridView ID="gvCompanies" runat="server" AllowPaging="True" 
                     AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
-                    DataSourceID="dsCompanies" ForeColor="#333333" GridLines="None" 
-                    DataKeyNames="Id">
-                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                    DataSourceID="dsCompanies" ForeColor="Black" GridLines="Horizontal" 
+                    DataKeyNames="Id" BackColor="White" BorderColor="#CCCCCC" 
+                    BorderStyle="None" BorderWidth="1px" Height="327px" PageSize="5" Width="356px">
                     <Columns>
-                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                        <asp:BoundField DataField="curprice" HeaderText="curprice" 
-                            SortExpression="curprice" />
-                        <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
+                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" >
+                        <HeaderStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="curprice" HeaderText="Share Price" 
+                            SortExpression="curprice" >
+                        <HeaderStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:CommandField ButtonType="Button" ShowSelectButton="True" >
+                        <ControlStyle Width="80px" />
+                        </asp:CommandField>
                     </Columns>
-                    <EditRowStyle BackColor="#999999" />
-                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                    <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                    <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                    <PagerSettings Mode="NextPrevious" />
+                    <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                    <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                    <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                    <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                    <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                    <SortedDescendingHeaderStyle BackColor="#242121" />
                 </asp:GridView>
             </td>
             <td>
@@ -90,25 +95,22 @@ END">
     </table>
                 <asp:DetailsView ID="dvCompanies" runat="server" AutoGenerateRows="False" 
                     DataSourceID="dsCompaniesDetailed" Height="50px" Width="717px" 
-        CellPadding="4" ForeColor="#333333" GridLines="None">
-                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                    <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
-                    <EditRowStyle BackColor="#999999" />
-                    <FieldHeaderStyle BackColor="#E9ECF1" Font-Bold="True" />
+        CellPadding="4" ForeColor="Black" GridLines="Horizontal" BackColor="White" 
+        BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" DataKeyNames="Id">
+                    <EditRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
                     <Fields>
-                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                        <asp:BoundField DataField="shortDescription" HeaderText="shortDescription" 
-                            SortExpression="shortDescription" />
-                        <asp:BoundField DataField="longDescription" HeaderText="longDescription" 
-                            SortExpression="longDescription" />
-                        <asp:BoundField DataField="curprice" HeaderText="curprice" 
+                        <asp:BoundField DataField="Name" HeaderText="Name" 
+                            SortExpression="Name" />
+                        <asp:BoundField DataField="curprice" HeaderText="Share Price:" 
                             SortExpression="curprice" />
-                        <asp:BoundField DataField="logo" HeaderText="logo" SortExpression="logo" />
+                        <asp:BoundField DataField="shareAmount" HeaderText="Available Shares:" 
+                            SortExpression="shareAmount" />
+                        <asp:BoundField DataField="longDescription" HeaderText="Information:" 
+                            SortExpression="longDescription" />
                     </Fields>
-                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                    <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                    <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
                 </asp:DetailsView>
     <p>
         &nbsp;</p>
