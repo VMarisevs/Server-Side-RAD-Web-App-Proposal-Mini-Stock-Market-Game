@@ -11,4 +11,6 @@ public partial class Guest_ViewStocks : System.Web.UI.Page
     {
 
     }
+
+
 }
