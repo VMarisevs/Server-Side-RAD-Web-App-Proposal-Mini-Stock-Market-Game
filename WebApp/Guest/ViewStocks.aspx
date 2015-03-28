@@ -65,7 +65,7 @@ END">
                         <HeaderStyle HorizontalAlign="Left" />
                         </asp:BoundField>
                         <asp:BoundField DataField="curprice" HeaderText="Share Price" 
-                            SortExpression="curprice" >
+                            SortExpression="curprice" DataFormatString=" {0:c}" >
                         <HeaderStyle HorizontalAlign="Left" />
                         </asp:BoundField>
                         <asp:CommandField ButtonType="Button" ShowSelectButton="True" >
@@ -102,7 +102,7 @@ END">
                         <asp:BoundField DataField="Name" HeaderText="Name" 
                             SortExpression="Name" />
                         <asp:BoundField DataField="curprice" HeaderText="Share Price:" 
-                            SortExpression="curprice" />
+                            SortExpression="curprice" DataFormatString=" {0:c}" />
                         <asp:BoundField DataField="shareAmount" HeaderText="Available Shares:" 
                             SortExpression="shareAmount" />
                         <asp:BoundField DataField="longDescription" HeaderText="Information:" 
