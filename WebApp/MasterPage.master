@@ -8,25 +8,16 @@
     <link href="Styles/Main.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
-    <style type="text/css">
-        .style1
-        {
-        }
-        .style2
-        {
-            width: 136px;
-        }
-    </style>
 </head>
 <body>
     <form id="mainForm" runat="server">
-    <div>
+    <div id="wrapper">
         <table id="mainTable">
             <tr>
                 <td id="header" colspan="4">
                     Stock Street</td>
             </tr>
-            <tr>
+            <tr id="menuRow">
                 <td id="breadcrumbs" colspan="2">
                     <asp:SiteMapDataSource ID="SiteMapDataSourceTree" runat="server" />
                     <asp:SiteMapDataSource ID="SiteMapDataSourceMenu" runat="server" 
@@ -39,7 +30,7 @@
                         <RootNodeStyle Font-Bold="True" ForeColor="#FF8000" />
                     </asp:SiteMapPath>
                 </td>
-                <td id="user">
+                <td id="middle">
                     &nbsp;</td>
                 <td id="user">
                     Welcome 
@@ -57,18 +48,18 @@
                         DataSourceID="SiteMapDataSourceMenu" DynamicHorizontalOffset="2" 
                         Font-Names="Verdana" Font-Size="0.9em" ForeColor="#7C6F57" 
                         Orientation="Horizontal" StaticSubMenuIndent="10px" style="text-align: center" 
-                        Width="100%" RenderingMode="Table">
+                        Width="100%" RenderingMode="Table" Font-Bold="True">
                         <DynamicHoverStyle BackColor="#7C6F57" ForeColor="White" />
                         <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
                         <DynamicMenuStyle BackColor="#F7F6F3" />
                         <DynamicSelectedStyle BackColor="#5D7B9D" />
                         <StaticHoverStyle BackColor="#7C6F57" ForeColor="White" />
                         <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
-                        <StaticSelectedStyle BackColor="#5D7B9D" />
+                        <StaticSelectedStyle BackColor="#99CCFF" />
                     </asp:Menu>
                 </td>
             </tr>
-            <tr>
+            <tr id="mainRow">
                 <td id="menu-tree" class="style2">
                     <asp:TreeView ID="mnuTree" runat="server" 
                         DataSourceID="SiteMapDataSourceTree" ShowLines="True" Font-Size="Large" 
@@ -81,10 +72,8 @@
                             HorizontalPadding="0px" VerticalPadding="0px" />
                     </asp:TreeView>
                 </td>
-                <td class="style1" colspan="3" id="content">
+                <td colspan="3" id="content">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                        <p>
-                            &lt;content-area&gt;</p>
                     </asp:ContentPlaceHolder>
                 </td>
             </tr>
