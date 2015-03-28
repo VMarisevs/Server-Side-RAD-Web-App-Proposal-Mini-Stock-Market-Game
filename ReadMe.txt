@@ -10,25 +10,23 @@ Programs that were used:
 
 
 Master page:
-			- Guest
-					- Homepage
-					- Login
-					- Register
-					- View Stocks
-								- get description
-					- *Score screen display depending on money
-			- User
-					- History
-					- Buy shares
-									- List of shares
-									- Details of selected share (with amount of shares)
-					- Sell shares
-									- list of owned shares
-									- details of share and sell it
-									
-					- top up wallet-> using laser
-					- *Score screen display depending on money
-			- Admin
-					- top up stock for company
-					- add new company/ edit
-					- 
+	- Everyone
+		- Index (homepage)
+		- ScoreBoard (based on money & stocks)
+		
+	- Guest
+		- Login (Register)
+		- ViewStocks
+		
+	- User
+		- History
+		- BuyStocks
+			- List of shares
+			- Details of selected share (with amount of shares)
+		- SellStocks
+			- list of owned shares
+			- details of share and sell it
+						
+	- Admin
+		- top up stock for company
+		- add new company/ edit
