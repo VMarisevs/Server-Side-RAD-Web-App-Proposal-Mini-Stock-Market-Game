@@ -2,21 +2,28 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Stock Street</title>
+	<meta name="description" content="Buy and sell virtual stocks in this fast paced stocks environment!"/>
+	<meta name="keywords" content="buy, sell, stocks, shares, virtual, business"/>
+    
+    <title>Stock Street - Buy and sell virtual stocks!</title>
     <link href="Styles/Main.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="mainForm" runat="server">
-    <div id="wrapper">
-        <table id="mainTable">
+    <div id="container">
+        <div id="header">
+            <asp:Image ID="Image1" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" />
+        </div>
+        
+        <div id="body">
+            <form id="mainForm" runat="server">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <table id="mainTable">
             <tr>
-                <td id="header" colspan="4">
-                    Stock Street</td>
-            </tr>
+                <td colspan="4"></td>           </tr>
             <tr id="menuRow">
                 <td id="breadcrumbs" colspan="2">
                     <asp:SiteMapDataSource ID="SiteMapDataSourceTree" runat="server" />
@@ -50,7 +57,7 @@
                         Orientation="Horizontal" StaticSubMenuIndent="10px" style="text-align: center" 
                         Width="100%" RenderingMode="Table" Font-Bold="True">
                         <DynamicHoverStyle BackColor="#7C6F57" ForeColor="White" />
-                        <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                        <DynamicMenuItemStyle HorizontalPadding="5px" ItemSpacing="5px" />
                         <DynamicMenuStyle BackColor="#F7F6F3" />
                         <DynamicSelectedStyle BackColor="#5D7B9D" />
                         <StaticHoverStyle BackColor="#7C6F57" ForeColor="White" />
@@ -77,18 +84,27 @@
                     </asp:ContentPlaceHolder>
                 </td>
             </tr>
-            <tr id="footer">
+            <tr>
                 <td colspan="4">
-                    <asp:HyperLink ID="hlAbout" runat="server">About</asp:HyperLink>
-&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;
-                    <asp:HyperLink ID="hlContactUs" runat="server">Contact Us</asp:HyperLink>
-&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;
-                    <asp:HyperLink ID="hlFeedback" runat="server">Feedback</asp:HyperLink>
-&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; ZomboCorp © 2015</td>
+                </td>
             </tr>
         </table>
+            </form>
+        </div> <!--Body End-->
 
-    </div>
-    </form>
+        <div id="footer">
+            <a href="/WebApp/Footer/About.aspx" class="headerLinks">About</a>|
+            <a href="/WebApp/Footer/ContactUs.aspx" class="headerLinks">Contact Us</a>|
+            <a href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feedback</a>|
+            <a href="/WebApp/Footer/Legal.aspx" class="headerLinks">Legal</a>|
+            <a href="/WebApp/Footer/Privacy.aspx" class="headerLinks">Privacy</a>|
+            <a href="/WebApp/Footer/Liability.aspx" class="headerLinks">Liability</a>|
+            <a href="/WebApp/Footer/Ownership.aspx" class="headerLinks">Ownership</a>
+            <br /><br /><br /><br />
+            <span class="headerLinks" style="padding:0px">ZomboCorp © 2015</span>
+        </div>
+    </div> <!--container End-->
 </body>
+
+
 </html>
