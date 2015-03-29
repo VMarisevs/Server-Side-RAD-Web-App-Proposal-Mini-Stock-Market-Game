@@ -20,22 +20,11 @@ table
     font-weight: bold;
 }
 
-#user{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: Black;
-    text-align: center;
-    width: 20%;
-}
-
 #menu-bar{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: black;
     background-color: gray;
     text-align: center;
-}
-
-#menu-cell{
-    background-color: Gray;
 }
 
 
@@ -48,17 +37,13 @@ table
     /*min-height: 500px;*/
 }
 
-#breadcrumbs{
-    width: 30%;
-}
 
 
 
-
-#wrapper {
+/*#wrapper {
 	min-height:100%;
 	position:relative;
-}
+}*/
 
 .headerLinks{
     padding: 50px;
@@ -83,10 +68,24 @@ table
    padding:5px;
    background:#49D6BF;
 }
-#body {
-   padding:10px;
-   padding-bottom:60px;   /* Height of the footer */
+#wrapper{
+    width: 100%;
+    overflow: hidden; /* will contain if #first is longer than #second */
 }
+#sideBar{
+    background-color:#E1EDC2;
+    height:100%;
+    width: 15%;
+    float:left; /* add this */
+    min-height:100%;
+}
+#body {
+   padding:0px;
+   padding-bottom:60px;   /* Height of the footer */
+   /*overflow: hidden;*/ /* if you don't want #second to wrap below #first */
+   width:100%;
+}
+
 #footer {
    position:absolute;
    bottom:0;
@@ -101,12 +100,33 @@ table
 }
 
 #navBar {
-   padding:5px;
+   padding:0px;
    background:#CEC2ED;  /*#9E88DC;*/
+   height:50px;
+   overflow:hidden;
 }
 
 #navRow{
     width:100%;
+}
+
+#breadcrumbs{
+    width: 15%;
+}
+
+#middle{
+    width:70%;
+}
+
+#user{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: Black;
+    text-align: center;
+    width: 15%;
+}
+
+#menu-cell{
+    background-color: Fuchsia;
 }
 
 /*Footer list*/
@@ -121,6 +141,6 @@ ul li {
     background-image: url(sqpurple.gif);
     background-repeat: no-repeat;
     background-position: 0px center; 
-    padding-left: 15px; 
+    padding-left: 0px; 
     display:inline; 
 }

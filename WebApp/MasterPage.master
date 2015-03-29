@@ -23,7 +23,6 @@
             <table border="0" cellpadding="0" cellspacing="0">
             <tr id="navRow">
                 <td id="breadcrumbs" colspan="2" style="padding:10px">
-                    <asp:SiteMapDataSource ID="SiteMapDataSourceTree" runat="server" />
                     <asp:SiteMapDataSource ID="SiteMapDataSourceMenu" runat="server" 
                         ShowStartingNode="False" />
                     <asp:SiteMapPath ID="siteMapPath" runat="server" Font-Names="Verdana" 
@@ -35,7 +34,19 @@
                     </asp:SiteMapPath>
                 </td>
                 <td id="middle">
-                    &nbsp;</td>
+                    <asp:menu id="mnumain" runat="server" backcolor="#CEC2ED" 
+                        datasourceid="sitemapdatasourcemenu" dynamichorizontaloffset="2" 
+                        font-names="Tahoma" font-size="1em" forecolor="#E1EDC2" 
+                        orientation="horizontal" staticsubmenuindent="10px" style="text-align: center" 
+                        width="100%" renderingmode="table" font-bold="True" Font-Overline="False">
+                        <dynamichoverstyle backcolor="#7c6f57" forecolor="white" />
+                        <dynamicmenuitemstyle horizontalpadding="5px" itemspacing="5px" />
+                        <dynamicmenustyle backcolor="#f7f6f3" />
+                        <statichoverstyle forecolor="white" />
+                        <staticmenuitemstyle horizontalpadding="5px" verticalpadding="2px" />
+                        <staticselectedstyle backcolor="#99ccff" />
+                    </asp:menu>
+                </td>
                 <td id="user">
                     Welcome 
                     <asp:LoginName ID="LoginName1" runat="server" />
@@ -48,48 +59,39 @@
             </tr>
             </table>
         </div>
-                
+
         <div id="body">
-            
-            <table id="mainTable">
-            <tr id="mainRow">
-                <td id="menu-cell" width="200px">
-                    <asp:Menu ID="mnuMain" runat="server" BackColor="#F7F6F3" 
-                        DataSourceID="SiteMapDataSourceMenu" DynamicHorizontalOffset="2" 
-                        Font-Names="Verdana" Font-Size="0.9em" ForeColor="#7C6F57" 
-                        Orientation="Vertical" StaticSubMenuIndent="10px" style="text-align: center" 
-                        Width="100%" RenderingMode="Table" Font-Bold="True">
-                        <DynamicHoverStyle BackColor="#7C6F57" ForeColor="White" />
-                        <DynamicMenuItemStyle HorizontalPadding="5px" ItemSpacing="5px" />
-                        <DynamicMenuStyle BackColor="#F7F6F3" />
-                        <DynamicSelectedStyle BackColor="#5D7B9D" />
-                        <StaticHoverStyle BackColor="#7C6F57" ForeColor="White" />
-                        <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
-                        <StaticSelectedStyle BackColor="#99CCFF" />
-                    </asp:Menu>
-                </td>
-                <td colspan="3" id="content">
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                    </asp:ContentPlaceHolder>
-                </td>
-            </tr>
+            <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="width:33%">
+            <asp:ContentPlaceHolder ID="CellLeft" runat="server">
+            </asp:ContentPlaceHolder>
+                    </td>
+                    <td style="width:33%">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+                    </td>
+                    <td style="width:33%">
+            <asp:ContentPlaceHolder ID="CellRight" runat="server">
+            </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
             </table>
-            
-            
+ 
         </div> <!--Body End-->
+
         </form>
         <div id="footer">
             <ul>
-                <li><a href="/WebApp/Footer/About.aspx" class="headerLinks">About</a></li>|
-                <li><a href="/WebApp/Footer/ContactUs.aspx" class="headerLinks">Contact Us</a></li>|
-                <li><a href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feedback</a></li>|
-                <li><a href="/WebApp/Footer/Legal.aspx" class="headerLinks">Legal</a></li>|
+                <li><a href="/WebApp/Footer/About.aspx" class="headerLinks">About</a></li><li>|</li>
+                <li><a href="/WebApp/Footer/ContactUs.aspx" class="headerLinks">Contact Us</a></li><li>|</li>
+                <li><a href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feedback</a></li><li>|</li>
+                <li><a href="/WebApp/Footer/Legal.aspx" class="headerLinks">Legal</a></li><li>|</li>
                 <li><a href="/WebApp/Footer/SiteMap.aspx" class="headerLinks">Site Map</a></li>
             </ul><br />
             <span class="headerLinks" style="padding:0px;">ZomboCorp © 2015</span>
         </div>
     </div> <!--container End-->
 </body>
-
 
 </html>
