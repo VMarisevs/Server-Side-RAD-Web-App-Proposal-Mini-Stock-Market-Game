@@ -60,7 +60,7 @@
                 </td>
             </tr>
             <tr id="mainRow">
-                <td id="menu-tree" class="style2">
+                <td id="menu-tree" class="style2" width="200px">
                     <asp:TreeView ID="mnuTree" runat="server" 
                         DataSourceID="SiteMapDataSourceTree" ShowLines="True" Font-Size="Large" 
                         ImageSet="BulletedList" ShowExpandCollapse="False">
