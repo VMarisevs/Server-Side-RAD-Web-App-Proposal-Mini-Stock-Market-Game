@@ -27,7 +27,8 @@ p.MsoListParagraph
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <table class="style1">
+<div > <!--style="display:block;padding:20px 20px 50px 20px; overflow:hidden"-->
+    <table class="style1" style="height:100%;overflow:hidden">
         <tr>
             <td colspan="2">
                 <h1 class="style2">
@@ -133,5 +134,6 @@ mso-ansi-language:EN-IE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">&nbs
             </td>
         </tr>
     </table>
+</div>
 </asp:Content>
 

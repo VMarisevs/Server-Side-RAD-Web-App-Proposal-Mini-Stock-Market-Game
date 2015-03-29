@@ -63,15 +63,15 @@
         <div id="body">
             <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td style="width:33%">
+                    <td style="width:15%;display:block;padding:20px 20px 50px 20px; overflow:hidden">
             <asp:ContentPlaceHolder ID="CellLeft" runat="server">
             </asp:ContentPlaceHolder>
                     </td>
-                    <td style="width:33%">
+                    <td style="width:70%;display:block;padding:20px 20px 50px 20px; overflow:hidden">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
                     </td>
-                    <td style="width:33%">
+                    <td style="width:15%;display:block;padding:20px 20px 50px 20px; overflow:hidden">
             <asp:ContentPlaceHolder ID="CellRight" runat="server">
             </asp:ContentPlaceHolder>
                     </td>
@@ -82,14 +82,29 @@
 
         </form>
         <div id="footer">
-            <ul>
+            <table border="0" cellpadding="0" cellspacing="0" style="overflow:hidden">
+                <tr>
+                    <br />
+                    <td><a href="/WebApp/Footer/About.aspx" class="headerLinks">About</a></td><td>|</td>
+                    <td><a href="/WebApp/Footer/ContactUs.aspx" class="headerLinks">ContactUs</a></td><td>|</td>
+                    <td><a href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feedback</a></td><td>|</td>
+                    <td><a href="/WebApp/Footer/Legal.aspx" class="headerLinks">Legal</a></td><td>|</td>
+                    <td><a href="/WebApp/Footer/SiteMap.aspx" class="headerLinks">SiteMap</a></td>
+                </tr>
+                
+                <tr>
+            <td colspan="9">
+<%--            <ul style="overflow:hidden">
                 <li><a href="/WebApp/Footer/About.aspx" class="headerLinks">About</a></li><li>|</li>
                 <li><a href="/WebApp/Footer/ContactUs.aspx" class="headerLinks">Contact Us</a></li><li>|</li>
                 <li><a href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feedback</a></li><li>|</li>
                 <li><a href="/WebApp/Footer/Legal.aspx" class="headerLinks">Legal</a></li><li>|</li>
                 <li><a href="/WebApp/Footer/SiteMap.aspx" class="headerLinks">Site Map</a></li>
-            </ul><br />
-            <span class="headerLinks" style="padding:0px;">ZomboCorp © 2015</span>
+            </ul><br />--%>
+            <span class="headerLinks" style="padding:0px;"><br/>ZomboCorp © 2015</span>
+            </td>
+             </tr>
+            </table>
         </div>
     </div> <!--container End-->
 </body>
