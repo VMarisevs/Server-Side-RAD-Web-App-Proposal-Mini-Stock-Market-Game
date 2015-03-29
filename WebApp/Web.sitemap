@@ -2,7 +2,7 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <!--<siteMapNode url="root.aspx" title="Root">-->
     <!--All shared-->
-  <siteMapNode url="Index.aspx" title="Home"  description="">
+  <siteMapNode url="Default.aspx" title="Home"  description="">
     <siteMapNode url="ScoreBoard.aspx" title="Scoreboard"  description="" />
 
     <!-- Available to guest -->
