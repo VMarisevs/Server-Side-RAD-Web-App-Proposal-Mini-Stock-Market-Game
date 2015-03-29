@@ -12,11 +12,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <p>
         <asp:SqlDataSource ID="dsCompanies" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
-            SelectCommand="SELECT [Id], [Name], [curprice], [shareAmount], [shortDescription] FROM [Companies] WHERE ([Name] LIKE '%' + @Name + '%') ORDER BY [Name]"
+            SelectCommand="SELECT [Id], [Name], [curprice], [shareAmount], [shortDescription] FROM [Companies] WHERE ([Name] LIKE '%' + @Name + '%') AND categoryId = CASE  @categoryId 
+WHEN '-1'  THEN categoryId 
+ELSE @categoryId 
+END ORDER BY [Name]"
             OldValuesParameterFormatString="original_{0}">
             <SelectParameters>
                 <asp:ControlParameter ControlID="txtSearch" DefaultValue="%" Name="Name" 
                     PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="ddlCategories" DefaultValue="" 
+                    Name="categoryId" PropertyName="SelectedValue" />
             </SelectParameters>
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="dsCategories" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
@@ -85,6 +90,11 @@
                 <asp:TextBox ID="txtSearch"  runat="server"></asp:TextBox>
                 <asp:Button ID="btnSearch" runat="server" onclick="btnSearch_Click" 
                     Text="Button" />
+        <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" 
+            DataSourceID="dsCategories" DataTextField="longName" DataValueField="Id" 
+            AppendDataBoundItems="True">
+            <asp:ListItem Value="-1">All</asp:ListItem>
+        </asp:DropDownList>
             </td>
             <td>
                 &nbsp;

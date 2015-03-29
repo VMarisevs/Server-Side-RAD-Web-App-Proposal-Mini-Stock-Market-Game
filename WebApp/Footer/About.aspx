@@ -2,10 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">
-        .style1
-        {
-            width: 100%;
-        }
         .style2
         {
             text-align: center;
@@ -64,7 +60,6 @@
         }
         .style14
         {
-            text-align: left;
             vertical-align: top;
             font-family: "Times New Roman", Times, serif;
             color: #FFFFFF;
@@ -74,10 +69,10 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <table class="style1">
+    <table >
         <tr>
             <td class="style2" colspan="2">
-                <h1 class="style10">
+                <h1>
                     ZomboCorp Team</h1>
             </td>
         </tr>
@@ -88,9 +83,10 @@
             </td>
             <td class="style9">
                 <strong><span class="style7">&nbsp; <span class="style11">CEO/Designer</span></span></strong><span 
-                    class="style11"><span class="style7"> Ronan O Conghaile 
+                    class="style11"><span class="style7"><br />&nbsp;
+                        Ronan O Conghaile 
                 <br />
-&nbsp; (</span><em><span class="style7">The Brain)</span></em></span></td>
+&nbsp; </span><em><span class="style7">(The Brain)</span></em></span></td>
         </tr>
         <tr>
             <td class="style13" colspan="2">
@@ -108,9 +104,9 @@
                 <span class="style4">
                 <strong><span class="style5">&nbsp; </span><span class="style6">&nbsp;</span><span 
                     class="style12">DB/Managment</span></strong><span class="style11"><span 
-                    class="style7"> Vladislav Marshiev 
+                    class="style7"> <br />&nbsp;&nbsp;Vladislav Marshiev 
                 <br />
-&nbsp; (</span><em><span class="style7">The Enforcer)</span></em></span></span></td>
+&nbsp; </span><em><span class="style7">(The Enforcer)</span></em></span></span></td>
         </tr>
         <tr>
             <td class="style3" colspan="2">
@@ -126,8 +122,8 @@
             </td>
             <td style="text-align: left; vertical-align: top; background-color: #FFFFFF;">
                 <strong><span class="style8">&nbsp; </span><span class="style12">Logic/Grids</span></strong><span 
-                    class="style12">&nbsp; Finn Williams<br />
-&nbsp; (</span><em><span class="style12">The Problem Solver)</span></em><br />
+                    class="style12"><br />&nbsp;&nbsp;Finn Williams<br />
+&nbsp; </span><em><span class="style12">(The Problem Solver)</span></em><br />
                 <br />
             </td>
         </tr>
@@ -144,10 +140,10 @@
                     ImageUrl="~/Images/Vytas.png" Width="100px" />
             </td>
             <td style="text-align: left; vertical-align: top; background-color: #FFFFFF;">
-                <strong><span class="style8">&nbsp; </span><span class="style12">Buisiness Analyst</span></strong><span 
-                    class="style12"> Vytas Vaiciulis 
+                <strong><span class="style8">&nbsp; </span><span class="style12">Business Analyst</span></strong><span 
+                    class="style12"> <br />&nbsp;&nbsp;Vytas Vaiciulis 
                 <br />
-&nbsp; (</span><em><span class="style12">The Muscle )</span></em></td>
+&nbsp; </span><em><span class="style12">(The Muscle)</span></em></td>
         </tr>
     </table>
 </asp:Content>
