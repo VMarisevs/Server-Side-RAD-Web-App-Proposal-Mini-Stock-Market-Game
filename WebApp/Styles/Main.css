@@ -3,7 +3,7 @@
     margin:0;
 	padding:0;
 	height:100%;
-    background-color: gray;
+    background-color: white;
 }
 
 h1{
@@ -39,53 +39,96 @@ h1{
 }
 
 #menuRow{
-    background-color: Gray;
+
 }
 
 #mainRow{
-    height: 100%;
+    /*height: 100%;
     direction: inherit;
     elevation: below;
     float:inherit;
     min-height: 100%;
     vertical-align:bottom;
+    
+   padding:10px;
+   padding-bottom:60px;*/
 }
 
 #menu-tree{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: black;
-    background-color: gray;
     text-align: center;
     height: 100%;
     display: block;
-    min-height: 500px;
+    /*min-height: 500px;*/
 }
 
 #breadcrumbs{
-    background-color: Gray;   
     width: 30%;
 }
 
-#content{
-background-color: Gray;
+#content
+{
+
 }
 
-#footer{
+
+
+#wrapper {
+	min-height:100%;
+	position:relative;
+}
+
+.headerLinks{
+    padding: 50px;
+    font-family:@Batang;
+    color:White;
+    font-style:normal;
+    font-weight:normal;
+    font-variant:normal;
+    text-decoration:none;
+    
+}
+
+
+
+#container {
+   min-height:100%;
+   position:relative;
+}
+#header {
+   padding:0px;
+   background:#49D6BF;
+}
+#body {
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background:#D64960;
+   
+   padding: 30px;
+   text-align: center;
+   
+   color: White;  
+}
+
+/*#footer{
     font-family: Calibri;
     color: white;
     background-color: silver;
-    text-align: center;
+   
 
-	position:relative;
+	position:absolute;
 
 	width:100%;
 	height:30px;
 	
 	bottom:0;
 	left:0;
-}
-
-#wrapper {
-	min-height:100%;
-	position:relative;
-}
+	
+}*/
