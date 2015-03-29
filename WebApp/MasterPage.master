@@ -16,16 +16,13 @@
 <body>
     <div id="container">
         <div id="header">
-            <asp:Image ID="Image1" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" />
+            <asp:Image ID="imgStockSt" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" />
         </div>
-        
-        <div id="body">
-            <form id="mainForm" runat="server">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <table id="mainTable">
-            <tr>
-                <td colspan="4"></td>           </tr>
-            <tr id="menuRow">
-                <td id="breadcrumbs" colspan="2">
+        <form id="mainForm" runat="server">
+        <div id="navBar">
+            <table border="0" cellpadding="0" cellspacing="0">
+            <tr id="navRow">
+                <td id="breadcrumbs" colspan="2" style="padding:10px">
                     <asp:SiteMapDataSource ID="SiteMapDataSourceTree" runat="server" />
                     <asp:SiteMapDataSource ID="SiteMapDataSourceMenu" runat="server" 
                         ShowStartingNode="False" />
@@ -43,18 +40,24 @@
                     Welcome 
                     <asp:LoginName ID="LoginName1" runat="server" />
                     <br />
-                    <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="White" />
+                    <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" />
                     <br />
                     <asp:LoginView ID="LoginView1" runat="server">
                     </asp:LoginView>
                 </td>
             </tr>
-            <tr id="menu-bar">
-                <td colspan="4">
+            </table>
+        </div>
+                
+        <div id="body">
+            
+            <table id="mainTable">
+            <tr id="mainRow">
+                <td id="menu-cell" width="200px">
                     <asp:Menu ID="mnuMain" runat="server" BackColor="#F7F6F3" 
                         DataSourceID="SiteMapDataSourceMenu" DynamicHorizontalOffset="2" 
                         Font-Names="Verdana" Font-Size="0.9em" ForeColor="#7C6F57" 
-                        Orientation="Horizontal" StaticSubMenuIndent="10px" style="text-align: center" 
+                        Orientation="Vertical" StaticSubMenuIndent="10px" style="text-align: center" 
                         Width="100%" RenderingMode="Table" Font-Bold="True">
                         <DynamicHoverStyle BackColor="#7C6F57" ForeColor="White" />
                         <DynamicMenuItemStyle HorizontalPadding="5px" ItemSpacing="5px" />
@@ -65,43 +68,25 @@
                         <StaticSelectedStyle BackColor="#99CCFF" />
                     </asp:Menu>
                 </td>
-            </tr>
-            <tr id="mainRow">
-                <td id="menu-tree" class="style2" width="200px">
-                    <asp:TreeView ID="mnuTree" runat="server" 
-                        DataSourceID="SiteMapDataSourceTree" ShowLines="True" Font-Size="Large" 
-                        ImageSet="BulletedList" ShowExpandCollapse="False">
-                        <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
-                        <NodeStyle Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" 
-                            HorizontalPadding="0px" NodeSpacing="0px" VerticalPadding="0px" />
-                        <ParentNodeStyle Font-Bold="False" />
-                        <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" 
-                            HorizontalPadding="0px" VerticalPadding="0px" />
-                    </asp:TreeView>
-                </td>
                 <td colspan="3" id="content">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </td>
             </tr>
-            <tr>
-                <td colspan="4">
-                </td>
-            </tr>
-        </table>
-            </form>
+            </table>
+            
+            
         </div> <!--Body End-->
-
+        </form>
         <div id="footer">
-            <a href="/WebApp/Footer/About.aspx" class="headerLinks">About</a>|
-            <a href="/WebApp/Footer/ContactUs.aspx" class="headerLinks">Contact Us</a>|
-            <a href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feedback</a>|
-            <a href="/WebApp/Footer/Legal.aspx" class="headerLinks">Legal</a>|
-            <a href="/WebApp/Footer/Privacy.aspx" class="headerLinks">Privacy</a>|
-            <a href="/WebApp/Footer/Liability.aspx" class="headerLinks">Liability</a>|
-            <a href="/WebApp/Footer/Ownership.aspx" class="headerLinks">Ownership</a>
-            <br /><br /><br /><br />
-            <span class="headerLinks" style="padding:0px">ZomboCorp © 2015</span>
+            <ul>
+                <li><a href="/WebApp/Footer/About.aspx" class="headerLinks">About</a></li>|
+                <li><a href="/WebApp/Footer/ContactUs.aspx" class="headerLinks">Contact Us</a></li>|
+                <li><a href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feedback</a></li>|
+                <li><a href="/WebApp/Footer/Legal.aspx" class="headerLinks">Legal</a></li>|
+                <li><a href="/WebApp/Footer/SiteMap.aspx" class="headerLinks">Site Map</a></li>
+            </ul><br />
+            <span class="headerLinks" style="padding:0px;">ZomboCorp © 2015</span>
         </div>
     </div> <!--container End-->
 </body>
