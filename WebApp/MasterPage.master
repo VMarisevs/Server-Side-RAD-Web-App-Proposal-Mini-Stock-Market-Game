@@ -25,33 +25,33 @@
                 <td id="breadcrumbs" colspan="2" style="padding:10px">
                     <asp:SiteMapDataSource ID="SiteMapDataSourceMenu" runat="server" 
                         ShowStartingNode="False" />
-                    <asp:SiteMapPath ID="siteMapPath" runat="server" Font-Names="Verdana" 
+                    <asp:SiteMapPath ID="siteMapPath" runat="server" Font-Names="Tahoma" 
                         Font-Size="0.9em" PathSeparator=" : ">
                         <CurrentNodeStyle ForeColor="#333333" />
-                        <NodeStyle Font-Bold="True" ForeColor="#990000" />
+                        <NodeStyle Font-Bold="True" ForeColor="#B56100" Font-Underline="false" /> 
                         <PathSeparatorStyle Font-Bold="True" ForeColor="#990000" />
-                        <RootNodeStyle Font-Bold="True" ForeColor="#FF8000" />
+                        <RootNodeStyle Font-Bold="True" ForeColor="#DE7600" />
                     </asp:SiteMapPath>
                 </td>
                 <td id="middle">
                     <asp:menu id="mnumain" runat="server" backcolor="#CEC2ED" 
                         datasourceid="sitemapdatasourcemenu" dynamichorizontaloffset="2" 
-                        font-names="Tahoma" font-size="1em" forecolor="#E1EDC2" 
+                        font-names="Tahoma" font-size="1.1em" forecolor="#EDEDC2" 
                         orientation="horizontal" staticsubmenuindent="10px" style="text-align: center" 
                         width="100%" renderingmode="table" font-bold="True" Font-Overline="False">
-                        <dynamichoverstyle backcolor="#7c6f57" forecolor="white" />
-                        <dynamicmenuitemstyle horizontalpadding="5px" itemspacing="5px" />
-                        <dynamicmenustyle backcolor="#f7f6f3" />
+                        <dynamichoverstyle backcolor="" forecolor="white" />
+                        <dynamicmenuitemstyle horizontalpadding="15px" itemspacing="5px" />
+                        <dynamicmenustyle backcolor="#CEC2ED" />
                         <statichoverstyle forecolor="white" />
                         <staticmenuitemstyle horizontalpadding="5px" verticalpadding="2px" />
-                        <staticselectedstyle backcolor="#99ccff" />
+                        <staticselectedstyle backcolor="" ForeColor="" />
                     </asp:menu>
                 </td>
                 <td id="user">
                     Welcome 
-                    <asp:LoginName ID="LoginName1" runat="server" />
+                    <asp:LoginName ID="LoginName1" runat="server" Font-Names="Tahoma" />
                     <br />
-                    <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" />
+                    <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" Font-Names="Tahoma" Font-Bold="true" Font-Underline="false"/>
                     <br />
                     <asp:LoginView ID="LoginView1" runat="server">
                     </asp:LoginView>

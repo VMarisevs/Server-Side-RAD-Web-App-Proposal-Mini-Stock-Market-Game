@@ -57,7 +57,8 @@ table
 
 .headerLinks{
     padding: 50px;
-    font-family:@Batang;
+    font-family:Tahoma; /*@Batang*/
+    font-size:smaller;
     color:White;
     font-style:normal;
     font-weight:normal;

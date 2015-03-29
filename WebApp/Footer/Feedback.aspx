@@ -4,7 +4,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <table>
+    <table style="float:right;padding-left:50%">
         <tr>
             <td colspan="2">
                 <h1>Feedback Form</h1>
