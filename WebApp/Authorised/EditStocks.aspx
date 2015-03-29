@@ -69,7 +69,7 @@
                 <asp:Parameter Name="longDescription" Type="String" />
             </InsertParameters>
             <SelectParameters>
-                <asp:ControlParameter ControlID="gvCompanies" Name="Id" PropertyName="SelectedValue"
+                <asp:ControlParameter ControlID="gvwCompanies" Name="Id" PropertyName="SelectedValue"
                     Type="Int32" />
             </SelectParameters>
             <UpdateParameters>
@@ -88,21 +88,28 @@
         <asp:SqlDataSource ID="dsCat" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
             SelectCommand="SELECT [longName] FROM [Categories] WHERE ([Id] = @Id)">
             <SelectParameters>
-                <asp:ControlParameter ControlID="gvCompanies" Name="Id" PropertyName="SelectedValue"
+                <asp:ControlParameter ControlID="gvwCompanies" Name="Id" PropertyName="SelectedValue"
                     Type="Int32" />
             </SelectParameters>
         </asp:SqlDataSource>
     </p>
     <p>
-        <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" DataSourceID="dsCategories"
-            DataTextField="longName" DataValueField="Id" AppendDataBoundItems="True">
-            <asp:ListItem Value="-1">All</asp:ListItem>
-        </asp:DropDownList>
-    </p>
+        &nbsp;</p>
     <table class="style2">
+            <tr>
+            <td class="style3">
+                &nbsp;
+                <asp:Label ID="Label2" runat="server" Text="Search:"></asp:Label>
+                <asp:TextBox ID="TextBox1"  runat="server"></asp:TextBox>
+                <asp:Button ID="btnSearch" runat="server" Text="Button" />
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
         <tr>
             <td class="style3">
-                <asp:GridView ID="gvCompanies" runat="server" AllowPaging="True" AllowSorting="True"
+                <asp:GridView ID="gvwCompanies" runat="server" AllowPaging="True" AllowSorting="True"
                     AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="Black"
                     GridLines="Horizontal" DataKeyNames="Id" BackColor="White" BorderColor="#CCCCCC"
                     BorderStyle="None" BorderWidth="1px" Height="369px" PageSize="5" 
@@ -136,10 +143,10 @@
             </td>
             <td>
                 &nbsp;
-                <asp:DetailsView ID="dvCompanies" runat="server" AllowPaging="True" AutoGenerateRows="False"
+                <asp:DetailsView ID="dvwCompanies" runat="server" AllowPaging="True" AutoGenerateRows="False"
                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
                     CellPadding="4" DataKeyNames="Id" DataSourceID="dsCompaniesDetailed" ForeColor="Black"
-                    GridLines="Horizontal" Height="16px" OnItemUpdated="dvCompanies_ItemUpdated1"
+                    GridLines="Horizontal" Height="16px" OnItemUpdated="dvwCompanies_ItemUpdated1"
                     Width="538px">
                     <EditRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
                     <Fields>
