@@ -11,4 +11,21 @@ public partial class Authorised_AddStocks : System.Web.UI.Page
     {
 
     }
+    protected void dvCompanies_ItemUpdated1(object sender, DetailsViewUpdatedEventArgs e)
+    {
+
+        if (e.Exception != null)
+        {
+            lblError.Text = "A database error has occurred.<br /><br />" +
+                "Message: " + e.Exception.Message;
+            e.ExceptionHandled = true;
+            e.KeepInEditMode = true;
+        }
+        else if (e.AffectedRows == 0)
+            lblError.Text = "Another user may have updated that product."
+                + "<br />Please try again.";
+        else
+            gvCompanies.DataBind();
+    }
+    
 }

@@ -106,14 +106,18 @@
                     AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="Black"
                     GridLines="Horizontal" DataKeyNames="Id" BackColor="White" BorderColor="#CCCCCC"
                     BorderStyle="None" BorderWidth="1px" Height="369px" PageSize="5" 
-                    Width="614px">
+                    Width="482px">
                     <Columns>
-                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" >
+                        <HeaderStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="shareAmount" HeaderText="Available Shares" SortExpression="shareAmount">
+                        <HeaderStyle HorizontalAlign="Left" />
                         </asp:BoundField>
                         <asp:BoundField DataField="curprice" DataFormatString="{0:c}" HeaderText="curprice"
-                            SortExpression="curprice" />
-                        <asp:BoundField DataField="shortDescription" HeaderText="shortDescription" SortExpression="shortDescription" />
+                            SortExpression="curprice" >
+                        <HeaderStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                         <asp:CommandField ButtonType="Button" ShowSelectButton="True">
                             <ControlStyle Width="80px" />
                             <ItemStyle Width="200px" />
@@ -149,11 +153,12 @@
                         <asp:TemplateField HeaderText="Category">
 
                             <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("categoryId", "{0}") %>'></asp:Label>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("categoryId", "{0}") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="dsCategories" 
-                                    DataTextField="longName" DataValueField="Id">
+                                    DataTextField="longName" DataValueField="Id" 
+                                    SelectedValue='<%# Bind("categoryId", "{0}") %>'>
                                 </asp:DropDownList>
                             </EditItemTemplate>
                         </asp:TemplateField>
