@@ -16,7 +16,7 @@
 <body>
     <div id="container">
         <div id="header">
-            <asp:Image ID="imgStockSt" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" />
+            <a href="/WebApp/Default.aspx"><asp:Image ID="imgStockSt" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" /></a>
         </div>
         <form id="mainForm" runat="server">
         <div id="navBar">
@@ -67,9 +67,12 @@
             <asp:ContentPlaceHolder ID="CellLeft" runat="server">
             </asp:ContentPlaceHolder>
                     </td>
-                    <td style="width:70%;display:block;padding:5px; overflow:hidden">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+                    <td style="width:70%;display:block;padding:5px; overflow:hidden;float:left;padding-left:20%;">
+                    <div style="margin:20px;">
+                        
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
+                    </asp:ContentPlaceHolder>
+                    </div>
                     </td>
                     <td style="width:15%;display:block;padding:5px; overflow:hidden">
             <asp:ContentPlaceHolder ID="CellRight" runat="server">

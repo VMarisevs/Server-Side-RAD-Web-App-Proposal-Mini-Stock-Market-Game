@@ -4,7 +4,9 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <table style="float:right;padding-left:50%">
+    <!--style="float:right;padding-left:50%"-->
+
+    <table>
         <tr>
             <td colspan="2">
                 <h1>Feedback Form</h1>
@@ -108,6 +110,18 @@ mso-ansi-language:EN-IE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">&nbs
                 <asp:CheckBox ID="Yes" runat="server" />
             </td>
         </tr>
+        <tr>
+            <td colspan="2"><hr /></td>
+        </tr>
+        <tr>
+            <td>
+                <input id="Submit1" type="submit" value="submit" />
+            </td>
+            <td>
+                <input id="Reset1" type="reset" value="reset" />
+            </td>
+        </tr>
     </table>
+
 </asp:Content>
 

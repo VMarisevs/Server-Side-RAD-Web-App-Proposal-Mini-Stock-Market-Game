@@ -69,7 +69,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <table style="float:right;padding-left:50%">
+    <table >
         <tr>
             <td class="style2" colspan="2">
                 <h1>
@@ -140,7 +140,7 @@
                     ImageUrl="~/Images/Vytas.png" Width="100px" />
             </td>
             <td style="text-align: left; vertical-align: top; background-color: #FFFFFF;">
-                <strong><span class="style8">&nbsp; </span><span class="style12">Buisiness Analyst</span></strong><span 
+                <strong><span class="style8">&nbsp; </span><span class="style12">Business Analyst</span></strong><span 
                     class="style12"> <br />&nbsp;&nbsp;Vytas Vaiciulis 
                 <br />
 &nbsp; </span><em><span class="style12">(The Muscle)</span></em></td>
