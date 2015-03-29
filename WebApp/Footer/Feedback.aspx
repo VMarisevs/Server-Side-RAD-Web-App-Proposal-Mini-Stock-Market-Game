@@ -1,38 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Feedback.aspx.cs" Inherits="Footer_Feedback" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <style type="text/css">
-        .style1
-        {
-            width: 100%;
-        }
-        .style2
-        {
-            text-align: center;
-        }
-p.MsoListParagraph
-	{margin-top:0cm;
-	margin-right:0cm;
-	margin-bottom:10.0pt;
-	margin-left:36.0pt;
-	line-height:115%;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	}
-        .style3
-        {
-            width: 580px;
-            font-weight: 700;
-        }
-    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-<div > <!--style="display:block;padding:20px 20px 50px 20px; overflow:hidden"-->
-    <table class="style1" style="height:100%;overflow:hidden">
+    <table>
         <tr>
             <td colspan="2">
-                <h1 class="style2">
-                    Feedback Form</h1>
+                <h1>Feedback Form</h1>
             </td>
         </tr>
         <tr>
@@ -134,6 +109,5 @@ mso-ansi-language:EN-IE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">&nbs
             </td>
         </tr>
     </table>
-</div>
 </asp:Content>
 
