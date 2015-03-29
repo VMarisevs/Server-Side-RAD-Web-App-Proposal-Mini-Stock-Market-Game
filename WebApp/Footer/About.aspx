@@ -27,7 +27,7 @@
         <tr>
             <td class="style3">
                 <asp:Image ID="Image1" runat="server" Height="100px" 
-                    ImageUrl="~/Images/Ronan.png" Width="100px" />
+                    ImageUrl="~/Images/ronanCircle.png" Width="100px" />
             </td>
             <td style="text-align: justify">
                 <strong>CEO/Designer</strong> Ronan O Conghaile (<em>The Brain</em>)</td>
