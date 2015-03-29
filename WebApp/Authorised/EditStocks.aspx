@@ -12,30 +12,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <p>
         <asp:SqlDataSource ID="dsCompanies" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
-            SelectCommand="SELECT [Id],[Name], [shareAmount], [curprice], [shortDescription] FROM [Companies]"
-            ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Companies] WHERE [Id] = @original_Id AND [shareAmount] = @original_shareAmount AND [curprice] = @original_curprice AND (([shortDescription] = @original_shortDescription) OR ([shortDescription] IS NULL AND @original_shortDescription IS NULL))"
-            InsertCommand="INSERT INTO [Companies] ([shareAmount], [curprice], [shortDescription]) VALUES (@shareAmount, @curprice, @shortDescription)"
-            OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Companies] SET [shareAmount] = @shareAmount, [curprice] = @curprice, [shortDescription] = @shortDescription WHERE [Id] = @original_Id AND [shareAmount] = @original_shareAmount AND [curprice] = @original_curprice AND (([shortDescription] = @original_shortDescription) OR ([shortDescription] IS NULL AND @original_shortDescription IS NULL))">
-            <DeleteParameters>
-                <asp:Parameter Name="original_Id" Type="Int32" />
-                <asp:Parameter Name="original_shareAmount" Type="Int32" />
-                <asp:Parameter Name="original_curprice" Type="Decimal" />
-                <asp:Parameter Name="original_shortDescription" Type="String" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="shareAmount" Type="Int32" />
-                <asp:Parameter Name="curprice" Type="Decimal" />
-                <asp:Parameter Name="shortDescription" Type="String" />
-            </InsertParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="shareAmount" Type="Int32" />
-                <asp:Parameter Name="curprice" Type="Decimal" />
-                <asp:Parameter Name="shortDescription" Type="String" />
-                <asp:Parameter Name="original_Id" Type="Int32" />
-                <asp:Parameter Name="original_shareAmount" Type="Int32" />
-                <asp:Parameter Name="original_curprice" Type="Decimal" />
-                <asp:Parameter Name="original_shortDescription" Type="String" />
-            </UpdateParameters>
+            SelectCommand="SELECT [Id], [Name], [curprice], [shareAmount], [shortDescription] FROM [Companies] WHERE ([Name] LIKE '%' + @Name + '%') ORDER BY [Name]"
+            OldValuesParameterFormatString="original_{0}">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="txtSearch" DefaultValue="%" Name="Name" 
+                    PropertyName="Text" Type="String" />
+            </SelectParameters>
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="dsCategories" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
             SelectCommand="SELECT [Id], [longName] FROM [Categories] ORDER BY [longName]">
@@ -100,8 +82,9 @@
             <td class="style3">
                 &nbsp;
                 <asp:Label ID="Label2" runat="server" Text="Search:"></asp:Label>
-                <asp:TextBox ID="TextBox1"  runat="server"></asp:TextBox>
-                <asp:Button ID="btnSearch" runat="server" Text="Button" />
+                <asp:TextBox ID="txtSearch"  runat="server"></asp:TextBox>
+                <asp:Button ID="btnSearch" runat="server" onclick="btnSearch_Click" 
+                    Text="Button" />
             </td>
             <td>
                 &nbsp;
@@ -110,10 +93,10 @@
         <tr>
             <td class="style3">
                 <asp:GridView ID="gvwCompanies" runat="server" AllowPaging="True" AllowSorting="True"
-                    AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="Black"
-                    GridLines="Horizontal" DataKeyNames="Id" BackColor="White" BorderColor="#CCCCCC"
-                    BorderStyle="None" BorderWidth="1px" Height="369px" PageSize="5" 
+                    AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="#333333"
+                    GridLines="None" DataKeyNames="Id" Height="369px" PageSize="5" 
                     Width="482px">
+                    <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" >
                         <HeaderStyle HorizontalAlign="Left" />
@@ -130,25 +113,29 @@
                             <ItemStyle Width="200px" />
                         </asp:CommandField>
                     </Columns>
-                    <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
-                    <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
-                    <PagerSettings Mode="NextPrevious" />
-                    <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
-                    <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
-                    <SortedAscendingCellStyle BackColor="#F7F7F7" />
-                    <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
-                    <SortedDescendingCellStyle BackColor="#E5E5E5" />
-                    <SortedDescendingHeaderStyle BackColor="#242121" />
+                    <EditRowStyle BackColor="#2461BF" />
+                    <FooterStyle BackColor="#507CD1" ForeColor="White" Font-Bold="True" />
+                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" 
+                        Height="30px" />
+                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#EFF3FB" />
+                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                    <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                    <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                    <SortedDescendingHeaderStyle BackColor="#4870BE" />
                 </asp:GridView>
             </td>
             <td>
                 &nbsp;
                 <asp:DetailsView ID="dvwCompanies" runat="server" AllowPaging="True" AutoGenerateRows="False"
-                    BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
-                    CellPadding="4" DataKeyNames="Id" DataSourceID="dsCompaniesDetailed" ForeColor="Black"
-                    GridLines="Horizontal" Height="16px" OnItemUpdated="dvwCompanies_ItemUpdated1"
+                    CellPadding="4" DataKeyNames="Id" DataSourceID="dsCompaniesDetailed" ForeColor="#333333"
+                    GridLines="None" Height="16px" OnItemUpdated="dvwCompanies_ItemUpdated1"
                     Width="538px">
-                    <EditRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                    <AlternatingRowStyle BackColor="White" />
+                    <CommandRowStyle BackColor="#D1DDF1" Font-Bold="True" />
+                    <EditRowStyle BackColor="#2461BF" />
+                    <FieldHeaderStyle BackColor="#DEE8F5" Font-Bold="True" />
                     <Fields>
                         <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True"
                             SortExpression="Id" />
@@ -171,12 +158,22 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="volatility" HeaderText="volatility" SortExpression="volatility" />
                         <asp:BoundField DataField="shortDescription" HeaderText="shortDescription" SortExpression="shortDescription" />
-                        <asp:BoundField DataField="longDescription" HeaderText="longDescription" SortExpression="longDescription" />
+                        <asp:TemplateField HeaderText="Long Description">
+                            <ItemTemplate>
+                                <asp:Label ID="Label3" runat="server" 
+                                    Text='<%# Eval("longDescription", "{0}") %>'></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox2" runat="server" Columns="50" Height="85px" Rows="4" 
+                                    Text='<%# Bind("longDescription", "{0}") %>' TextMode="MultiLine" Width="398px"></asp:TextBox>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
                         <asp:CommandField ButtonType="Button" ShowEditButton="True" />
                     </Fields>
-                    <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
-                    <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                    <FooterStyle BackColor="#507CD1" ForeColor="White" Font-Bold="True" />
+                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#EFF3FB" />
                 </asp:DetailsView>
             </td>
         </tr>
