@@ -1,0 +1,8 @@
+D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\bin\Debug\StockPriceGenerator.exe
+D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\bin\Debug\StockPriceGenerator.pdb
+D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.Form1.resources
+D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.Properties.Resources.resources
+D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.csproj.GenerateResource.Cache
+D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.exe
+D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.pdb
+D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.csprojResolveAssemblyReference.cache
