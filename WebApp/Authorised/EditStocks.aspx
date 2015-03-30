@@ -5,16 +5,25 @@
     <style type="text/css">
         .style3
         {
-            width: 345px;
+            width: 290px;
         }
         .style4
         {
-            width: 345px;
+            width: 290px;
             height: 36px;
         }
         .style5
         {
             height: 36px;
+        }
+        .style6
+        {
+            text-align: center;
+        }
+        .style7
+        {
+            width: 290px;
+            text-align: right;
         }
     </style>
 </asp:Content>
@@ -126,7 +135,7 @@ END ORDER BY [Name]"
                 <asp:GridView ID="gvwCompanies" runat="server" AllowPaging="True" AllowSorting="True"
                     AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="#333333"
                     GridLines="None" DataKeyNames="Id" PageSize="5" 
-                    Width="537px" Font-Names="Tahoma">
+                    Width="600px" Font-Names="Tahoma" Height="268px">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
                         <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" >
@@ -166,24 +175,40 @@ END ORDER BY [Name]"
                 </td>
         </tr>
         <tr>
-            <td class="style3">
+            <td class="style7">
                 &nbsp;
                 <asp:DetailsView ID="dvwCompanies" runat="server" AllowPaging="True" AutoGenerateRows="False"
                     CellPadding="4" DataKeyNames="Id" DataSourceID="dsCompaniesDetailed" ForeColor="#333333"
                     GridLines="None" Height="16px" OnItemUpdated="dvwCompanies_ItemUpdated1"
-                    Width="538px" Font-Names="Tahoma">
+                    Width="600px" Font-Names="Tahoma">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
                     <EditRowStyle BackColor="#999999" />
                     <FieldHeaderStyle BackColor="#E9ECF1" Font-Bold="True" />
                     <Fields>
                         <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True"
-                            SortExpression="Id" />
-                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-                        <asp:BoundField DataField="Abbreviation" HeaderText="Abbreviation" SortExpression="Abbreviation" />
-                        <asp:BoundField DataField="logo" HeaderText="logo" SortExpression="logo" />
-                        <asp:BoundField DataField="curprice" HeaderText="curprice" SortExpression="curprice" />
-                        <asp:BoundField DataField="shareAmount" HeaderText="shareAmount" SortExpression="shareAmount" />
+                            SortExpression="Id" >
+                        <HeaderStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" >
+                        <HeaderStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Abbreviation" HeaderText="Abbreviation" 
+                            SortExpression="Abbreviation" >
+                        <HeaderStyle HorizontalAlign="Left" Width="60px" />
+                        <ItemStyle Width="900px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="logo" HeaderText="logo" SortExpression="logo" >
+                        <HeaderStyle HorizontalAlign="Left" VerticalAlign="Middle" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="curprice" HeaderText="curprice" 
+                            SortExpression="curprice" >
+                        <HeaderStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="shareAmount" HeaderText="shareAmount" 
+                            SortExpression="shareAmount" >
+                        <HeaderStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                         <asp:TemplateField HeaderText="Category">
 
                             <ItemTemplate>
@@ -195,9 +220,16 @@ END ORDER BY [Name]"
                                     SelectedValue='<%# Bind("categoryId", "{0}") %>'>
                                 </asp:DropDownList>
                             </EditItemTemplate>
+                            <HeaderStyle HorizontalAlign="Left" />
                         </asp:TemplateField>
-                        <asp:BoundField DataField="volatility" HeaderText="volatility" SortExpression="volatility" />
-                        <asp:BoundField DataField="shortDescription" HeaderText="shortDescription" SortExpression="shortDescription" />
+                        <asp:BoundField DataField="volatility" HeaderText="volatility" 
+                            SortExpression="volatility" >
+                        <HeaderStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="shortDescription" HeaderText="shortDescription" 
+                            SortExpression="shortDescription" >
+                        <HeaderStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
                         <asp:TemplateField HeaderText="Long Description">
                             <ItemTemplate>
                                 <asp:Label ID="Label3" runat="server" 
@@ -207,6 +239,8 @@ END ORDER BY [Name]"
                                 <asp:TextBox ID="TextBox2" runat="server" Columns="50" Height="85px" Rows="4" 
                                     Text='<%# Bind("longDescription", "{0}") %>' TextMode="MultiLine" Width="398px"></asp:TextBox>
                             </EditItemTemplate>
+                            <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" />
+                            <ItemStyle Width="400px" />
                         </asp:TemplateField>
                         <asp:CommandField ButtonType="Button" ShowEditButton="True" />
                     </Fields>
@@ -216,12 +250,12 @@ END ORDER BY [Name]"
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                 </asp:DetailsView>
             </td>
-            <td>
+            <td class="style6">
                 &nbsp;
             </td>
         </tr>
     </table>
-        <p>
+        <p class="style6">
             <asp:Label ID="lblError" runat="server"></asp:Label>
         </p>
     </div>

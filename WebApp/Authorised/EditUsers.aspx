@@ -8,8 +8,7 @@
         OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllUsers" 
         TypeName="UserDB"></asp:ObjectDataSource>
     <asp:GridView ID="gvwUsers" runat="server" AutoGenerateColumns="False" 
-        CellPadding="4" DataSourceID="dsUser" ForeColor="#333333" GridLines="None" 
-        AllowPaging="True">
+        CellPadding="4" DataSourceID="dsUser" ForeColor="#333333" GridLines="None">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="UserName" HeaderText="User Name" />
