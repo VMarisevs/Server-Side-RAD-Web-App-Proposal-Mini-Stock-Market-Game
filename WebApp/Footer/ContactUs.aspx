@@ -50,7 +50,7 @@
                 </em>
                 <span class="style6"><em>Dublin Road, Galway</em></span></td>
             <td class="style6">
-                hi@ronanconnolly.ie</td>
+                <a href="mailto:hi@ronanconnolly.ie">hi@ronanconnolly.ie</a></td>
         </tr>
         <tr>
             <td class="style2" colspan="2">

@@ -3,6 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <h1>View Stocks
+    </h1>
     <p>
         <asp:SqlDataSource ID="dsCompanies" runat="server" 
             ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
