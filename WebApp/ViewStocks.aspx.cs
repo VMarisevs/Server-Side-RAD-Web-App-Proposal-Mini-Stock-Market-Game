@@ -1,21 +1,4 @@
-<<<<<<< HEAD:WebApp/ViewStocks.aspx.cs
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
-public partial class Guest_ViewStocks : System.Web.UI.Page
-{
-    protected void Page_Load(object sender, EventArgs e)
-    {
-
-    }
-
-
-=======
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -34,5 +17,4 @@ public partial class Guest_ViewStocks : System.Web.UI.Page
     {
 
     }
->>>>>>> origin/master:WebApp/Guest/ViewStocks.aspx.cs
 }

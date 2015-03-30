@@ -19,15 +19,10 @@
     <siteMapNode url="Authenticated/PassChange.aspx" title="Password Change"  description=""/>
 
     <!-- Available to Admin(authorised) -->
-<<<<<<< HEAD
     <siteMapNode url="Authorised/EditStocks.aspx" title="Edit Stocks"  description="">
       <siteMapNode url="Authorised/CreateStock.aspx" title="Create a Stock"  description="" />
+      <siteMapNode url="Authorised/EditUsers.aspx" title="Edit a User"  description="" />
     </siteMapNode>
-=======
-    <siteMapNode url="Authorised/EditStocks.aspx" title="Edit Stocks"  description="" />
-    <siteMapNode url="Authorised/CreateStock.aspx" title="Create a Stock"  description="" />
-    <siteMapNode url="Authorised/EditUsers.aspx" title="Edit a User"  description="" />
->>>>>>> origin/master
 
   </siteMapNode>
 </siteMap>
