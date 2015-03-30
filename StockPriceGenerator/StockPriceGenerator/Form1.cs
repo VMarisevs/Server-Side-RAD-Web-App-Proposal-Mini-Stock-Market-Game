@@ -184,7 +184,7 @@ namespace StockPriceGenerator
                 ////////////////////////////////////////////////////////////////////////////Company Velotility
                 //range = new Random().Next(-(Int32.Parse(company.CompanyVolatility)), Int32.Parse(company.CategoryVolatility));
                 //range = new Random();
-                varationPercentage = varation.Next(-100,100);
+                varationPercentage = varation.Next(-10,100);
 
 
                 priceUpdate = ( ( Int32.Parse( company.CategoryVolatility )* categoryIndex ) + ( Int32.Parse(company.CategoryVolatility ) * ( varationPercentage)/100 ) );
