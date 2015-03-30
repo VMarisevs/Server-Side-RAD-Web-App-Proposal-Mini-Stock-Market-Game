@@ -37,7 +37,7 @@ public static class UserDB
                 user.UserName = rdr["UserName"].ToString();
                 user.UserRole = rdr["RoleName"].ToString();
                 user.UserLastActivity = Convert.ToDateTime(rdr["LastActivityDate"]);
-
+                 
                 listUsers.Add(user);
             }
         }
