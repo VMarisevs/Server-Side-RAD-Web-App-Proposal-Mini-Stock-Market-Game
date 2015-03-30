@@ -68,7 +68,7 @@
                 <td class="style3" align="center" >
                     <asp:GridView ID="gvwCompanies0" runat="server" AllowPaging="True" AllowSorting="True"
                         AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="#333333"
-                        GridLines="None" PageSize="5" Width="1000px" Font-Names="Tahoma">
+                        GridLines="None" PageSize="5" Width="800px" Font-Names="Tahoma">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:BoundField DataField="Abbreviation" HeaderText="Name" 

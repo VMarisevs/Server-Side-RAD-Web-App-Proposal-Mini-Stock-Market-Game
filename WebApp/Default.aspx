@@ -50,7 +50,8 @@
         </tr>
         <tr>
              <td class="style5">
-            <asp:ListView ID="lvwNews" runat="server" DataSourceID="dsNews">
+            <asp:ListView ID="lvwNews" runat="server" DataSourceID="dsNews" 
+                     style="text-align: left">
                 <EmptyDataTemplate>
                     <span>No data was returned.</span>
                 </EmptyDataTemplate>
@@ -74,7 +75,7 @@
                     <br /><br /><br />
                 </ItemTemplate>
                 <LayoutTemplate>
-                    <div ID="itemPlaceholderContainer" runat="server" style="">
+                    <div ID="itemPlaceholderContainer" runat="server" style="text-align:left">
                         <span runat="server" id="itemPlaceholder" />
                     </div>
                     <div style="">
