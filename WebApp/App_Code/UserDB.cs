@@ -13,19 +13,23 @@ using System.Data;
 public static class UserDB
 {
     [DataObjectMethod(DataObjectMethodType.Select)]
-    public static IEnumerable GetAllUsers()
+    public static DataSet GetAllUsers()
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
         string sel = "SELECT aspnet_Users.UserName, aspnet_Roles.RoleName, aspnet_Users.Cash, aspnet_Users.LastActivityDate FROM " +
             "aspnet_Roles INNER JOIN " +
             " aspnet_UsersInRoles ON aspnet_Roles.RoleId = aspnet_UsersInRoles.RoleId " +
             "INNER JOIN  aspnet_Users ON aspnet_UsersInRoles.UserId = aspnet_Users.UserId";
-        SqlCommand cmd = new SqlCommand(sel, con);
-        con.Open();
-        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-        return dr;
-    }
 
+        SqlDataAdapter da = new SqlDataAdapter(sel, con);
+        DataSet ds = new DataSet();
+        da.Fill(ds);
+
+        return ds;
+    }
+    //SqlCommand cmd = new SqlCommand(sel, con);
+    //con.Open();
+    //SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
     //public static IEnumerable GetUserStocks()
     //{
     //    SqlConnection con = new SqlConnection(GetConnectionString());

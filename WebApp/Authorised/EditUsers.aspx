@@ -12,6 +12,7 @@
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="UserName" HeaderText="User Name" />
+            <asp:BoundField DataField="Cash" HeaderText="Cash" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
