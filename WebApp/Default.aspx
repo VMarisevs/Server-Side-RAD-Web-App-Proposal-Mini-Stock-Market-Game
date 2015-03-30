@@ -111,7 +111,7 @@
             &nbsp;</td>
         </tr>
         <tr>
-        <td class="style1">Oversupply of graduates causes the GMIT EDU stock price to 
+        <td class="style1">Oversupply of graduates is causing the GMIT EDU stock price to 
             plumment, sell while you can!</td>
         <td class="style2">&nbsp;</td>
         </tr>
