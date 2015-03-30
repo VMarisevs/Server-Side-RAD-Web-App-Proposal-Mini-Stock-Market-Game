@@ -26,7 +26,7 @@
                     <asp:SiteMapDataSource ID="SiteMapDataSourceMenu" runat="server" 
                         ShowStartingNode="False" />
                     <asp:SiteMapPath ID="siteMapPath" runat="server" Font-Names="Tahoma" 
-                        Font-Size="0.9em" PathSeparator=" : ">
+                        Font-Size="0.8em" PathSeparator=" : ">
                         <CurrentNodeStyle ForeColor="#333333" />
                         <NodeStyle Font-Bold="True" ForeColor="#B56100" Font-Underline="false" /> 
                         <PathSeparatorStyle Font-Bold="True" ForeColor="#990000" />
@@ -36,7 +36,7 @@
                 <td id="middle">
                     <asp:menu id="mnumain" runat="server" backcolor="#CEC2ED" 
                         datasourceid="sitemapdatasourcemenu" dynamichorizontaloffset="2" 
-                        font-names="Tahoma" font-size="1.1em" forecolor="#EDEDC2" 
+                        font-names="Tahoma" font-size="1em" forecolor="#EDEDC2" 
                         orientation="horizontal" staticsubmenuindent="10px" style="text-align: center" 
                         width="100%" renderingmode="table" font-bold="True" Font-Overline="False">
                         <dynamichoverstyle backcolor="" forecolor="white" />
@@ -48,12 +48,12 @@
                     </asp:menu>
                 </td>
                 <td id="user">
-                    Welcome 
-                    <asp:LoginName ID="LoginName1" runat="server" Font-Names="Tahoma" />
+                    <span style="font-weight:lighter">Welcome </span>
+                    <asp:LoginName ID="LoginName1" runat="server" Font-Names="Tahoma" Font-Size="1em" Font-Bold="false" />
                     <br />
-                    <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" Font-Names="Tahoma" Font-Bold="true" Font-Underline="false"/>
+                    <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="#07A2D9" Font-Names="Tahoma" Font-Bold="true" Font-Underline="false" Font-Size="0.9em"/>
                     <br />
-                    <asp:LoginView ID="LoginView1" runat="server">
+                    <asp:LoginView ID="LoginView1" runat="server" >
                     </asp:LoginView>
                 </td>
             </tr>
@@ -67,7 +67,7 @@
             <asp:ContentPlaceHolder ID="CellLeft" runat="server">
             </asp:ContentPlaceHolder>
                     </td>--%>
-                    <td style="width:70%;display:block;padding:5px; overflow: visible;margin:0% 15% 0% 15%">
+                    <td style="width:70%;display:block;padding:5px; overflow: hidden;margin:0% 15% 0% 15%">
                     <!--float:left;padding-left:20%;-->
                     <div style="margin:20px;">
                         
@@ -86,9 +86,8 @@
 
         </form>
         <div id="footer">
-            <table border="0" cellpadding="0" cellspacing="0" style="overflow:hidden">
+            <table >
                 <tr>
-                    <br />
                     <!--added access keys below-->
                     <td><a accesskey="a" href="/WebApp/Footer/About.aspx" class="headerLinks"><u>A</u>bout</a></td><td>|</td>
                     <td><a accesskey="c" href="/WebApp/Footer/ContactUs.aspx" class="headerLinks"><u>C</u>ontactUs</a></td><td>|</td>
@@ -96,12 +95,13 @@
                     <td><a accesskey="l" href="/WebApp/Footer/Legal.aspx" class="headerLinks"><u>L</u>egal</a></td><td>|</td>
                     <td><a accesskey="s" href="/WebApp/Footer/SiteMap.aspx" class="headerLinks"><u>S</u>iteMap</a></td>
                 </tr>
-                
-                <tr>
-            <td colspan="9">
-            <span class="headerLinks" style="padding:0px;"><br/>ZomboCorp © 2015</span>
-            </td>
+             <tr>
+                <td colspan="9" style="">
+                <span class="headerLinks" style="padding:0px;text-align:right;"><br/>
+                    <a>ZomboCorp © 2015</a></span>
+                </td>
              </tr>
+
             </table>
         </div>
     </div> <!--container End-->
