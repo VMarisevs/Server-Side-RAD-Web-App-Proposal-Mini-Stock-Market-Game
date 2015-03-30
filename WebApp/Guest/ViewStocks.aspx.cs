@@ -13,4 +13,8 @@ public partial class Guest_ViewStocks : System.Web.UI.Page
     }
 
 
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+
+    }
 }

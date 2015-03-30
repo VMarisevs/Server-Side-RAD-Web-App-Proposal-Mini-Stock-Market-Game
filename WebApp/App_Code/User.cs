@@ -9,4 +9,9 @@ using System.Web;
 public class User
 {
     public string UserName { get; set; }
+
+    public string UserRole { get; set; }
+
+    public string UserCash { get; set; }
+
 }
