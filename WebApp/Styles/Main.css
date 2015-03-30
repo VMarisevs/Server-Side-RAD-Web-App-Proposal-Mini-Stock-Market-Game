@@ -130,6 +130,7 @@ table
    background:#CEC2ED;  /*#9E88DC;*/
    height:50px;
    overflow:hidden;
+   width:100%;
 }
 
 #navRow{
@@ -169,4 +170,13 @@ ul li {
     background-position: 0px center; 
     padding-left: 0px; 
     display:inline; 
+}
+
+.buttonStyle
+{
+    font-size: 1em;
+    background-color:#E8E8E8;
+    Font-Family:Tahoma;
+    Width:100px;
+    border: 2px Solid #00BFFF;
 }

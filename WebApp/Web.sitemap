@@ -4,24 +4,30 @@
     <!--All shared-->
   <siteMapNode url="Default.aspx" title="Home"  description="">
     <siteMapNode url="ScoreBoard.aspx" title="Scoreboard"  description="" />
-
+    <siteMapNode url="ViewStocks.aspx" title="Stocks"  description="" />
     <!-- Available to guest -->
-    <siteMapNode url="Guest/ViewStocks.aspx" title="Stocks"  description="" />
     <siteMapNode url="Guest/Login.aspx" title="Login"  description="">
       <siteMapNode url="Guest/CreateUser.aspx" title="Create User Profile"  description="" />
       <siteMapNode url="Guest/PassRecovery.aspx" title="Password Recovery"  description="" />
     </siteMapNode>
 
     <!-- Available to User(authenticated) -->
-    <siteMapNode url="Authenticated/SellStocks.aspx" title="Sell Stocks"  description="" />
-    <siteMapNode url="Authenticated/BuyStocks.aspx" title="Buy Stocks"  description=""/>
+    <siteMapNode url="Authenticated/BuyStocks.aspx" title="Buy Stocks"  description="">
+      <siteMapNode url="Authenticated/SellStocks.aspx" title="Sell Stocks"  description="" />
+    </siteMapNode>
     <siteMapNode url="Authenticated/History.aspx" title="History"  description=""/>
     <siteMapNode url="Authenticated/PassChange.aspx" title="Password Change"  description=""/>
 
     <!-- Available to Admin(authorised) -->
+<<<<<<< HEAD
+    <siteMapNode url="Authorised/EditStocks.aspx" title="Edit Stocks"  description="">
+      <siteMapNode url="Authorised/CreateStock.aspx" title="Create a Stock"  description="" />
+    </siteMapNode>
+=======
     <siteMapNode url="Authorised/EditStocks.aspx" title="Edit Stocks"  description="" />
     <siteMapNode url="Authorised/CreateStock.aspx" title="Create a Stock"  description="" />
     <siteMapNode url="Authorised/EditUsers.aspx" title="Edit a User"  description="" />
+>>>>>>> origin/master
 
   </siteMapNode>
 </siteMap>

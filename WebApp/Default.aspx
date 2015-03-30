@@ -17,12 +17,10 @@
         .style4
         {
             width: 35%;
-            height: 2586px;
         }
         .style5
         {
             width: 47%;
-            height: 340px;
         }
         .style6
         {
@@ -64,9 +62,10 @@
                         <div>
                             <div style="font-size:10pt;text-align:right;font-weight:bold;">
                                 <br />
-                                PostDate:
+                                Posted:
                                 <asp:Label ID="PostDateLabel" runat="server" Text='<%# Eval("PostDate") %>' />
-                                 UpdateDate:
+                                <br />
+                                 Updated:
                                 <asp:Label ID="UpdateDateLabel" runat="server" Text='<%# Eval("UpdateDate") %>' />
                             </div>
                             <hr />
@@ -85,7 +84,7 @@
             </td>
              <td class="style6">
                  </td>
-            <td class="style7">
+            <td class="style7" style="vertical-align:top;">
                  <asp:GridView ID="gwActivity" runat="server" AllowPaging="True" 
                      AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsUsers" 
                      ForeColor="#333333" GridLines="None">

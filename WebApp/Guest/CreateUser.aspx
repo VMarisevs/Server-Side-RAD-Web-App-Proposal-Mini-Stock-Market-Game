@@ -13,11 +13,15 @@
         <ContinueButtonStyle BackColor="White" BorderColor="#507CD1" 
             BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" 
             ForeColor="#284E98" />
-        <CreateUserButtonStyle BackColor="White" BorderColor="#0066FF" 
-            BorderStyle="Solid" BorderWidth="2px" Font-Names="Tahoma" 
-            Font-Size="1.1em" Width="180px" />
+        <CreateUserButtonStyle     font-size="1em" 
+    BackColor="#E8E8E8"
+    Font-Names="Tahoma"
+    Width="150px"
+    BorderColor="#00BFFF"
+    BorderStyle="Solid"
+    BorderWidth="2px" />
         <TextBoxStyle Font-Size="1.1em" />
-        <TitleTextStyle Font-Bold="True" Font-Size="1.1em" ForeColor="#0066FF" 
+        <TitleTextStyle Font-Bold="True" Font-Size="1.1em" ForeColor="DeepSkyBlue" 
             Height="20px" Width="350px" Wrap="True" />
         <WizardSteps>
             <asp:CreateUserWizardStep runat="server" />

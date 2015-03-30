@@ -13,11 +13,15 @@
             <InstructionTextStyle Font-Italic="True" ForeColor="Black" Width="200px" />
             <LabelStyle Width="250px" />
             <FailureTextStyle Width="200px" />
-            <LoginButtonStyle BackColor="White" BorderColor="#0066FF" BorderStyle="Solid" 
-                Font-Names="Tahoma" Font-Size="1em" 
-                Width="125px" />
+            <LoginButtonStyle     font-size="1em" 
+    BackColor="#E8E8E8"
+    Font-Names="Tahoma"
+    Width="150px"
+    BorderColor="#00BFFF"
+    BorderStyle="Solid"
+    BorderWidth="2px" />
             <TextBoxStyle BackColor="White" Font-Size="0.8em" Width="200px" />
-            <TitleTextStyle Font-Bold="True" Font-Size="1.1em" ForeColor="#0066FF" 
+            <TitleTextStyle Font-Bold="True" Font-Size="1.1em" ForeColor="#00BFFF" 
                 HorizontalAlign="Center" Width="200px" />
             <ValidatorTextStyle Width="200px" />
         </asp:Login>

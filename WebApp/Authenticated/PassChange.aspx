@@ -8,11 +8,23 @@
     <asp:ChangePassword ID="ChangePassword1" runat="server" 
         CancelDestinationPageUrl="~/Default.aspx" 
         ContinueDestinationPageUrl="~/Default.aspx">
-        <CancelButtonStyle BackColor="White" BorderColor="#0066FF" BorderStyle="Solid" 
-            Font-Names="Tahoma" Font-Size="1em" />
-        <ChangePasswordButtonStyle BackColor="White" BorderColor="#0066FF" 
-            BorderStyle="Solid" Font-Names="Tahoma" Font-Size="1em" />
-        <TitleTextStyle Font-Bold="True" ForeColor="#0066FF" />
+        <CancelButtonStyle     font-size="1em" 
+    BackColor="#E8E8E8"
+    Font-Names="Tahoma"
+    Width="150px"
+    BorderColor="#00BFFF"
+    BorderStyle="Solid"
+    BorderWidth="2px"
+     />
+        <ChangePasswordButtonStyle 
+    font-size="1em" 
+    BackColor="#E8E8E8"
+    Font-Names="Tahoma"
+    Width="150px"
+    BorderColor="#00BFFF"
+    BorderStyle="Solid"
+    BorderWidth="2px" />
+        <TitleTextStyle Font-Bold="True" ForeColor="#00BFFF" />
     </asp:ChangePassword>
     </div>
 </asp:Content>
