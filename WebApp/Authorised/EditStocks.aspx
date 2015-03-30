@@ -10,7 +10,9 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <p>
+    <h1>Edit Stocks
+    </h1>
+    <div>                                                                                                                                                                                                                                                     <p>
         <asp:SqlDataSource ID="dsCompanies" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
             SelectCommand="SELECT [Id], [Name], [curprice], [shareAmount], [shortDescription] FROM [Companies] WHERE ([Name] LIKE '%' + @Name + '%') AND categoryId = CASE  @categoryId 
 WHEN '-1'  THEN categoryId 
@@ -80,9 +82,9 @@ END ORDER BY [Name]"
             </SelectParameters>
         </asp:SqlDataSource>
     </p>
-    <p>
-        &nbsp;</p>
-    <table class="style2">
+        <p>
+            &nbsp;</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <table class="style2">
             <tr>
             <td class="style3">
                 &nbsp;
@@ -196,7 +198,8 @@ END ORDER BY [Name]"
             </td>
         </tr>
     </table>
-    <p>
-        <asp:Label ID="lblError" runat="server"></asp:Label>
-    </p>
+        <p>
+            <asp:Label ID="lblError" runat="server"></asp:Label>
+        </p>
+    </div>
 </asp:Content>

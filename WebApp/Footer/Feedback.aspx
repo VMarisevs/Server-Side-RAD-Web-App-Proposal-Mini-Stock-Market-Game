@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Feedback.aspx.cs" Inherits="Footer_Feedback" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-<<<<<<< HEAD
 
     <style type="text/css">
         .style3
@@ -10,7 +9,7 @@
         }
     </style>
 
-=======
+
     <style type="text/css">
         .style1
         {
@@ -20,26 +19,24 @@
         {
             text-align: center;
         }
-p.MsoListParagraph
-	{margin-top:0cm;
-	margin-right:0cm;
-	margin-bottom:10.0pt;
-	margin-left:36.0pt;
-	line-height:115%;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";
-	}
+
         .style3
         {
             width: 580px;
             font-weight: 700;
         }
     </style>
->>>>>>> origin/master
+    <style type="text/css">
+        .style3
+        {
+            text-align: left;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div > <!--style="display:block;padding:20px 20px 50px 20px; overflow:hidden"-->
-    <table class="style1" style="height:100%;overflow:hidden">
+    <div style="border:3px dashed #b5c7de;padding:10px;background-color:#FDFFCC;"> <!--style="display:block;padding:20px 20px 50px 20px; overflow:hidden"-->
+    <table class="style1" 
+            style="height:100%;overflow:hidden; font-family: Tahoma; font-size: 0.9em; font-weight: normal;">
         <tr>
             <td colspan="2">
                 <h1 class="style2">
@@ -48,7 +45,7 @@ p.MsoListParagraph
         </tr>
         <tr>
             <td class="style3">
-&nbsp;&nbsp; 1.&nbsp; On which devices did you access the website ? (can tick more than one)</td>
+&nbsp;&nbsp; 1.&nbsp; On which devices did you access the website ? <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (can tick more than one)</td>
             <td>
                 <asp:CheckBoxList ID="CheckBoxList1" runat="server">
                     <asp:ListItem Value="0">Mobile</asp:ListItem>
@@ -143,6 +140,18 @@ mso-ansi-language:EN-IE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">&nbs
             <td>
                 <asp:CheckBox ID="Yes" runat="server" />
             </td>
+        </tr>
+        <tr>
+            <td class="style3" colspan="2">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                <input id="Submit1" type="submit" value="Submit" 
+                    style="font-family: Tahoma; font-size: 1em;width:150px;" /></td>
+            <td style="text-align: center">
+                <input id="Reset1" type="reset" value="Reset" style="font-family: Tahoma; font-size: 1em;width:150px;" /></td>
         </tr>
     </table>
 </div>

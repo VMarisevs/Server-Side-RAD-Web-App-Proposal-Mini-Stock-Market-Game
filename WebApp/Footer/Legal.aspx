@@ -12,9 +12,11 @@ p
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <h1>
+        Legal</h1>
     <p>
-        <u><span style="color:black">Statements below cover legal, privacy, liability, 
-        ownership issues.<o:p></o:p></span></u></p>
+        <u><span style="color:black">The following statements cover legal, liability, 
+        ownership and<span style="color:black"> privacy</span> issues.<o:p></o:p></span></u></p>
     <p>
         <span style="color:black">The information on this site is intended to provide 
         users with resources and information which they may find useful and of interest.&nbsp; 
@@ -32,21 +34,29 @@ p
         ZomboCorp Inc. does not endorse the information provided at these links and does 
         not provide any warranty regarding the accuracy or any other aspect of the 
         information provided at these other sites.<o:p></o:p></span></p>
+    <br />
+    <h3>
+        <o:p>
+        <o:p>Liability</o:p></o:p></h3>
     <p>
-        <b><span style="color:black">ZomboCorp Inc. shall not be liable to any party as 
+        <span style="color:black">ZomboCorp Inc. shall not be liable to any party as 
         a result of any information, services or resources made available through this 
-        Web site.</span></b><span style="color:black"><o:p></o:p></span></p>
+        Web site.<o:p></o:p></span></p>
     <p>
-        <strong><u><span style="color:black">Intellectual Property Notice (ownership)</span></u></strong><b><u><span 
-            style="color:black"><br />
-        </span></u></b><span style="color:black">All trademarks appearing on this site 
+        <br />
+    <h3>
+        <strong><span style="color:black">I</span></strong><span style="color:black">ntellectual 
+        Property Notice (ownership)</span></h3>
+    <p>
+        <span style="color:black">All trademarks appearing on this site 
         are the properties of their respective owners with all rights reserved.&nbsp; No 
         portion of the text or graphics on this site may be reproduced or used in any 
         way without the written permission of the owner.<o:p></o:p></span></p>
+<br />
+    <h3>
+        <o:p>Privacy Statement</o:p></h3>
     <p>
-        <strong><u><span style="color:black">Privacy Statement</span></u></strong><b><u><span 
-            style="color:black"><br />
-        </span></u></b><span style="color:black">Any personally identifiable information 
+        <span style="color:black">Any personally identifiable information 
         supplied by persons or organizations at this site will be used by ZomboCorp Inc. 
         for contacting purposes only, and will not be sold or otherwise transferred to 
         unaffiliated third parties.<o:p></o:p></span></p>

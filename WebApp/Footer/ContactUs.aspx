@@ -2,41 +2,25 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">
-        .style1
-        {
-            width: 100%;
-        }
         .style2
-        {
+        {            text-align: center;
         }
         .style3
         {
             height: 23px;
         }
-        .style4
-        {
-            height: 23px;
-        }
-p
+        p
 	{margin-right:0cm;
 	margin-left:0cm;
 	font-size:12.0pt;
 	font-family:"Times New Roman","serif";
 	}
-        .style5
-        {
-            font-size: xx-large;
-        }
         .style6
         {
             font-size: large;
+            text-align: center;
         }
-        .style7
-        {
-            font-size: xx-large;
-            width: 340px;
-        }
-    </style>
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <table>
@@ -59,11 +43,12 @@ p
         </tr>
         <tr>
             <td class="style2">
-                <span class="style6">Main HeadQuartes of ZomboCorp Lcd.</span><br 
+                <span class="style6"><strong>ZomboCorp Inc. Main Headquarters:</strong></span><br 
                     class="style6" />
-                <span class="style6">Galway - Mayo Institute of Technology</span><br 
+                <span class="style6"><em>Galway Mayo Institute of Technology</em></span><em><br 
                     class="style6" />
-                <span class="style6">Dublin Road, Galway</span></td>
+                </em>
+                <span class="style6"><em>Dublin Road, Galway</em></span></td>
             <td class="style6">
                 hi@ronanconnolly.ie</td>
         </tr>
@@ -73,15 +58,13 @@ p
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style2" colspan="2">
                 <br />
                 <br />
-                <span class="style6">Click to go to Google maps</span><br />
+                <span class="style6">Click below to view on map:</span><br />
                 <asp:ImageButton ID="ImageButton1" runat="server" Height="55px" 
                     ImageUrl="~/Images/btnStock.png" onclick="ImageButton1_Click" Width="199px" />
             </td>
-            <td>
-                &nbsp;</td>
         </tr>
         <tr>
             <td class="style2" colspan="2">

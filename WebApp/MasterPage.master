@@ -16,7 +16,7 @@
 <body>
     <div id="container">
         <div id="header">
-            <a href="/WebApp/Default.aspx"><asp:Image ID="imgStockSt" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" /></a>
+            <a accesskey="h" href="/WebApp/Default.aspx"><asp:Image ID="imgStockSt" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" /></a>
         </div>
         <form id="mainForm" runat="server">
         <div id="navBar">
@@ -63,21 +63,22 @@
         <div id="body">
             <table border="0" cellpadding="0" cellspacing="0" style="margin:0px 0px 60px 0px">
                 <tr>
-                    <td style="width:15%;display:block;padding:5px; overflow:hidden">
+<%--                    <td style="width:15%;display:block;padding:5px; overflow:hidden">
             <asp:ContentPlaceHolder ID="CellLeft" runat="server">
             </asp:ContentPlaceHolder>
-                    </td>
-                    <td style="width:70%;display:block;padding:5px; overflow:hidden;float:left;padding-left:20%;">
+                    </td>--%>
+                    <td style="width:70%;display:block;padding:5px; overflow: visible;margin:0% 15% 0% 15%">
+                    <!--float:left;padding-left:20%;-->
                     <div style="margin:20px;">
                         
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
                     </asp:ContentPlaceHolder>
                     </div>
                     </td>
-                    <td style="width:15%;display:block;padding:5px; overflow:hidden">
+<%--                    <td style="width:15%;display:block;padding:5px; overflow:hidden">
             <asp:ContentPlaceHolder ID="CellRight" runat="server">
             </asp:ContentPlaceHolder>
-                    </td>
+                    </td>--%>
                 </tr>
             </table>
  
@@ -88,22 +89,16 @@
             <table border="0" cellpadding="0" cellspacing="0" style="overflow:hidden">
                 <tr>
                     <br />
-                    <td style=""><a href="/WebApp/Footer/About.aspx" class="headerLinks">About</a></td><td>|</td>
-                    <td><a href="/WebApp/Footer/ContactUs.aspx" class="headerLinks">ContactUs</a></td><td>|</td>
-                    <td><a href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feedback</a></td><td>|</td>
-                    <td><a href="/WebApp/Footer/Legal.aspx" class="headerLinks">Legal</a></td><td>|</td>
-                    <td><a href="/WebApp/Footer/SiteMap.aspx" class="headerLinks">SiteMap</a></td>
+                    <!--access keys below-->
+                    <td><a accesskey="a" href="/WebApp/Footer/About.aspx" class="headerLinks"><u>A</u>bout</a></td><td>|</td>
+                    <td><a accesskey="c" href="/WebApp/Footer/ContactUs.aspx" class="headerLinks"><u>C</u>ontactUs</a></td><td>|</td>
+                    <td><a accesskey="b" href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feed<u>b</u>ack</a></td><td>|</td>
+                    <td><a accesskey="l" href="/WebApp/Footer/Legal.aspx" class="headerLinks"><u>L</u>egal</a></td><td>|</td>
+                    <td><a accesskey="s" href="/WebApp/Footer/SiteMap.aspx" class="headerLinks"><u>S</u>iteMap</a></td>
                 </tr>
                 
                 <tr>
             <td colspan="9">
-<%--            <ul style="overflow:hidden">
-                <li><a href="/WebApp/Footer/About.aspx" class="headerLinks">About</a></li><li>|</li>
-                <li><a href="/WebApp/Footer/ContactUs.aspx" class="headerLinks">Contact Us</a></li><li>|</li>
-                <li><a href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feedback</a></li><li>|</li>
-                <li><a href="/WebApp/Footer/Legal.aspx" class="headerLinks">Legal</a></li><li>|</li>
-                <li><a href="/WebApp/Footer/SiteMap.aspx" class="headerLinks">Site Map</a></li>
-            </ul><br />--%>
             <span class="headerLinks" style="padding:0px;"><br/>ZomboCorp © 2015</span>
             </td>
              </tr>
