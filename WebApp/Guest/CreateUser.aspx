@@ -6,16 +6,16 @@
     <div style="width:200px">
     
     <asp:CreateUserWizard ID="cuwCreateUserAccount" runat="server" 
-        ContinueDestinationPageUrl="~/Authenticated/BuyStocks.aspx" 
+        ContinueDestinationPageUrl="~/Default.aspx" 
         oncreateduser="cuwCreateUserAccount_CreatedUser" BackColor="#FDFFCC" 
         BorderColor="#B5C7DE" CellPadding="10" Font-Names="Tahoma" Font-Size="1.1em" 
         Width="400px" BorderStyle="Dashed">
         <ContinueButtonStyle BackColor="White" BorderColor="#507CD1" 
             BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" 
             ForeColor="#284E98" />
-        <CreateUserButtonStyle BackColor="White" BorderColor="#507CD1" 
-            BorderStyle="Solid" BorderWidth="1px" Font-Names="Tahoma" Font-Size="1.1em" 
-            ForeColor="#284E98" />
+        <CreateUserButtonStyle BackColor="White" BorderColor="#0066FF" 
+            BorderStyle="Solid" BorderWidth="2px" Font-Names="Tahoma" 
+            Font-Size="1.1em" Width="180px" />
         <TextBoxStyle Font-Size="1.1em" />
         <TitleTextStyle Font-Bold="True" Font-Size="1.1em" ForeColor="#0066FF" 
             Height="20px" Width="350px" Wrap="True" />

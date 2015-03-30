@@ -8,7 +8,7 @@
             BorderPadding="20" BorderStyle="Dashed" BorderWidth="3px" Font-Size="1em" 
             Width="200px" Font-Names="Tahoma">
             <SubmitButtonStyle BackColor="White" BorderStyle="Solid" Font-Size="1em" 
-                Width="120px" />
+                Width="150px" BorderColor="#0066FF" />
             <LabelStyle HorizontalAlign="Center" VerticalAlign="Top" Width="150px" 
                 Wrap="False" />
             <MailDefinition From="hi@ronanconnolly.ie" BodyFileName="StockSt" 

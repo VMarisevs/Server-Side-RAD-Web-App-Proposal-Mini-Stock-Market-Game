@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td class="style3">
-&nbsp;&nbsp; 1.&nbsp; On which devices did you access the website ? <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (can tick more than one)</td>
+&nbsp;&nbsp; 1.&nbsp; On which devices did you access the website ? <br /></td>
             <td>
                 <asp:CheckBoxList ID="CheckBoxList1" runat="server">
                     <asp:ListItem Value="0">Mobile</asp:ListItem>
@@ -56,12 +56,7 @@
             </td>
         </tr>
         <tr>
-            <td class="style3">
-                <span style="font-size:11.0pt;line-height:115%;
-font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:
-Calibri;mso-fareast-theme-font:minor-latin;mso-hansi-theme-font:minor-latin;
-mso-bidi-font-family:&quot;Times New Roman&quot;;mso-bidi-theme-font:minor-bidi;
-mso-ansi-language:EN-IE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">&nbsp;</span></td>
+            <td class="style3"></td>
             <td>
                 &nbsp;</td>
         </tr>
@@ -85,14 +80,14 @@ mso-ansi-language:EN-IE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">&nbs
         </tr>
         <tr>
             <td class="style3">
-&nbsp;&nbsp; 2.&nbsp; Whats your access media to Internet ?</td>
+&nbsp;&nbsp; 2.&nbsp; What's your access medium to Internet?</td>
             <td>
                 <asp:ListBox ID="ListBox1" runat="server">
                     <asp:ListItem Value="0">Dial-Up</asp:ListItem>
                     <asp:ListItem Value="1">Cable</asp:ListItem>
                     <asp:ListItem Value="2">DSL</asp:ListItem>
                     <asp:ListItem Value="3">Wireless</asp:ListItem>
-                    <asp:ListItem Value="4">Dont now</asp:ListItem>
+                    <asp:ListItem Value="4">Don't know</asp:ListItem>
                 </asp:ListBox>
             </td>
         </tr>
@@ -104,11 +99,11 @@ mso-ansi-language:EN-IE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">&nbs
         </tr>
         <tr>
             <td class="style3">
-                &nbsp;&nbsp; 4.&nbsp; Whats main reason for visitin website ?</td>
+                &nbsp;&nbsp; 4.&nbsp; What's the main reason for visiting our website?</td>
             <td>
                 <asp:RadioButtonList ID="RadioButtonList1" runat="server">
-                    <asp:ListItem Value="0">Curiuos</asp:ListItem>
-                    <asp:ListItem Value="1">Gather Information</asp:ListItem>
+                    <asp:ListItem Value="0">Curious</asp:ListItem>
+                    <asp:ListItem Value="1">Gathering Information</asp:ListItem>
                     <asp:ListItem Value="2">Other Reasons</asp:ListItem>
                 </asp:RadioButtonList>
             </td>
@@ -121,7 +116,7 @@ mso-ansi-language:EN-IE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">&nbs
         </tr>
         <tr>
             <td class="style3">
-                &nbsp;&nbsp; 5.&nbsp; &nbsp;Describe your experiance in few words on this website
+                &nbsp;&nbsp; 5.&nbsp; &nbsp;Describe your experience of this website in a few words:
             </td>
             <td>
                 <asp:TextBox ID="TextBox1" runat="server" Height="53px" TextMode="MultiLine" 
@@ -136,7 +131,7 @@ mso-ansi-language:EN-IE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">&nbs
         </tr>
         <tr>
             <td class="style3">
-                &nbsp;&nbsp; 6.&nbsp; Would you come back to Stock st ?&nbsp;(Tick if yes)</td>
+                &nbsp;&nbsp; 6.&nbsp; Would you come back to Stock St?</td>
             <td>
                 <asp:CheckBox ID="Yes" runat="server" />
             </td>

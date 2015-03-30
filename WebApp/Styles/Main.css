@@ -4,6 +4,12 @@
 	padding:0;
 	height:100%;
     background-color: white;
+    font-family:Tahoma;
+}
+
+p
+{
+    font-family:Tahoma;
 }
 
 h1{
@@ -16,6 +22,11 @@ h1{
   text-align:center;
 }
 
+h3
+{
+    /*color: #A097B8;*/
+    color: #817896;
+}
 table
 {
     width:100%

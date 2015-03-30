@@ -8,24 +8,42 @@
     <asp:SqlDataSource ID="dsUsers" runat="server" 
         ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
         
-        SelectCommand="SELECT aspnet_Users.UserName, aspnet_Users.Cash, UserShares.shares, UserShares.shares * UserShares.price AS [Share Worth], UserShares.shares * UserShares.price + aspnet_Users.Cash AS [Net Worth], aspnet_Users.LastActivityDate FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id GROUP BY aspnet_Users.UserId ORDER BY [Net Worth] DESC">
+        SelectCommand="SELECT aspnet_Users.UserName, AVG(aspnet_Users.Cash) AS Cash, SUM(UserShares.shares) AS Shares, SUM(UserShares.shares * UserShares.price) AS [Share Worth], SUM(UserShares.shares * UserShares.price) + AVG(aspnet_Users.Cash) AS [Net Worth] FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId GROUP BY aspnet_Users.UserName ORDER BY [Net Worth] DESC">
     </asp:SqlDataSource>
     <asp:GridView ID="gwScores" runat="server" AllowPaging="True" 
-        AllowSorting="True" AutoGenerateColumns="False" DataSourceID="dsUsers">
+        AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
+        DataSourceID="dsUsers" Font-Names="Tahoma" ForeColor="#333333" GridLines="None">
+        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
-            <asp:BoundField DataField="UserName" HeaderText="UserName" 
-                SortExpression="UserName" />
-            <asp:BoundField DataField="Cash" HeaderText="Cash" SortExpression="Cash" />
-            <asp:BoundField DataField="shares" HeaderText="shares" 
-                SortExpression="shares" />
-            <asp:BoundField DataField="Share Worth" HeaderText="Share Worth" 
-                ReadOnly="True" SortExpression="Share Worth" />
-            <asp:BoundField DataField="Net Worth" HeaderText="Net Worth" ReadOnly="True" 
-                SortExpression="Net Worth" />
-            <asp:BoundField DataField="LastActivityDate" HeaderText="LastActivityDate" 
-                SortExpression="LastActivityDate" />
+            <asp:BoundField DataField="UserName" HeaderText="User Name" >
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField DataField="Cash" DataFormatString="{0:c}" HeaderText="Cash" 
+                SortExpression="Cash">
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField DataField="shares" HeaderText="Shares" SortExpression="shares">
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField DataField="Share Worth" DataFormatString="{0:c}" 
+                HeaderText="Share Worth" ReadOnly="True">
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField DataField="Net Worth" DataFormatString="{0:c}" 
+                HeaderText="Net Worth" ReadOnly="True" SortExpression="Net Worth">
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
         </Columns>
-        <PagerSettings Mode="NumericFirstLast" />
+        <EditRowStyle BackColor="#999999" />
+        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
     <br />
 

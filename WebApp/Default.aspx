@@ -39,14 +39,14 @@
                      SelectCommand="SELECT [UserName], [LastActivityDate] FROM [vw_aspnet_Users] ORDER BY [LastActivityDate] DESC"></asp:SqlDataSource>
                  <asp:GridView ID="gwActivity" runat="server" AllowPaging="True" 
                      AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsUsers" 
-                     ForeColor="#333333" GridLines="None">
+                     ForeColor="#333333" GridLines="None" Font-Names="Tahoma">
                      <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                      <Columns>
                          <asp:BoundField DataField="UserName" HeaderText="User Name" 
                              SortExpression="UserName" >
                          <ItemStyle HorizontalAlign="Center" />
                          </asp:BoundField>
-                         <asp:BoundField DataField="LastActivityDate" HeaderText="Last Activity Date" 
+                         <asp:BoundField DataField="LastActivityDate" HeaderText="Last Online" 
                              SortExpression="LastActivityDate" >
                          <ItemStyle HorizontalAlign="Center" />
                          </asp:BoundField>
