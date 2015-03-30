@@ -8,10 +8,14 @@ using System.Web;
 /// </summary>
 public class User
 {
+
     public string UserName { get; set; }
 
     public string UserRole { get; set; }
 
     public string UserCash { get; set; }
 
+    public DateTime UserLastActivity { get; set; }
+
+    
 }

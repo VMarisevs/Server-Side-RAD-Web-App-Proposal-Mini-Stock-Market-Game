@@ -8,11 +8,16 @@
         OldValuesParameterFormatString="original_{0}" SelectMethod="GetAllUsers" 
         TypeName="UserDB"></asp:ObjectDataSource>
     <asp:GridView ID="gvwUsers" runat="server" AutoGenerateColumns="False" 
-        CellPadding="4" DataSourceID="dsUser" ForeColor="#333333" GridLines="None">
+        CellPadding="4" DataSourceID="dsUser" ForeColor="#333333" GridLines="None" 
+        AllowPaging="True">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
-            <asp:BoundField DataField="UserName" HeaderText="User Name" />
-            <asp:BoundField DataField="Cash" HeaderText="Cash" />
+            <asp:BoundField DataField="UserName" HeaderText="UserName" 
+                SortExpression="UserName" />
+            <asp:BoundField DataField="UserRole" HeaderText="UserRole" 
+                SortExpression="UserRole" />
+            <asp:BoundField DataField="UserLastActivity" HeaderText="UserLastActivity" 
+                SortExpression="UserLastActivity" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

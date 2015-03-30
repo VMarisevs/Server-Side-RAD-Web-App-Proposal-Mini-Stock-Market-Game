@@ -9,23 +9,40 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
+
+
+
 [DataObject(true)]
 public static class UserDB
 {
     [DataObjectMethod(DataObjectMethodType.Select)]
-    public static DataSet GetAllUsers()
+    public static List<User> GetAllUsers()
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        List<User> listUsers = new List<User>();
+     
         string sel = "SELECT aspnet_Users.UserName, aspnet_Roles.RoleName, aspnet_Users.Cash, aspnet_Users.LastActivityDate FROM " +
             "aspnet_Roles INNER JOIN " +
             " aspnet_UsersInRoles ON aspnet_Roles.RoleId = aspnet_UsersInRoles.RoleId " +
-            "INNER JOIN  aspnet_Users ON aspnet_UsersInRoles.UserId = aspnet_Users.UserId";
+            "INNER JOIN  aspnet_Users ON aspnet_UsersInRoles.UserId = aspnet_Users.UserId ORDER BY aspnet_Users.UserName";
 
-        SqlDataAdapter da = new SqlDataAdapter(sel, con);
-        DataSet ds = new DataSet();
-        da.Fill(ds);
+        using (SqlConnection con = new SqlConnection(GetConnectionString()))
+        {
+            SqlCommand cmd = new SqlCommand(sel, con);
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
 
-        return ds;
+            while (rdr.Read())
+            {
+                User user = new User();
+                user.UserName = rdr["UserName"].ToString();
+                user.UserRole = rdr["RoleName"].ToString();
+                user.UserLastActivity = Convert.ToDateTime(rdr["LastActivityDate"]);
+
+                listUsers.Add(user);
+            }
+        }
+    
+        return listUsers;
     }
     //SqlCommand cmd = new SqlCommand(sel, con);
     //con.Open();
