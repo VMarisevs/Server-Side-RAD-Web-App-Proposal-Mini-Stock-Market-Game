@@ -14,9 +14,29 @@
         {
             width:35%;
         }
+        .style4
+        {
+            width: 35%;
+            height: 2586px;
+        }
+        .style5
+        {
+            width: 47%;
+            height: 340px;
+        }
+        .style6
+        {
+            width: 8%;
+            height: 340px;
+        }
+        .style7
+        {
+            width: 35%;
+            height: 340px;
+        }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">    
     <table border="0" cellpadding="5" frame="void">
         <tr>
              <td class="style1">
@@ -31,22 +51,51 @@
             </td>
         </tr>
         <tr>
-        <td class="style1">ZomboCorp Inc. stock price reaches record high of $800.</td>
-        <td class="style2" >&nbsp;</td>
-             <td rowspan="4" class="style3">
-                 <asp:SqlDataSource ID="dsUsers" runat="server" 
-                     ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
-                     SelectCommand="SELECT [UserName], [LastActivityDate] FROM [vw_aspnet_Users] ORDER BY [LastActivityDate] DESC"></asp:SqlDataSource>
+             <td class="style5">
+            <asp:ListView ID="lvwNews" runat="server" DataSourceID="dsNews">
+                <EmptyDataTemplate>
+                    <span>No data was returned.</span>
+                </EmptyDataTemplate>
+                <ItemTemplate>
+                    <div>
+                        <div>
+                            <asp:Label ID="NewsTextLabel" runat="server" Text='<%# Eval("NewsText") %>' />                            
+                        </div>
+                        <div>
+                            <div style="font-size:10pt;text-align:right;font-weight:bold;">
+                                <br />
+                                PostDate:
+                                <asp:Label ID="PostDateLabel" runat="server" Text='<%# Eval("PostDate") %>' />
+                                 UpdateDate:
+                                <asp:Label ID="UpdateDateLabel" runat="server" Text='<%# Eval("UpdateDate") %>' />
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                    <br /><br /><br />
+                </ItemTemplate>
+                <LayoutTemplate>
+                    <div ID="itemPlaceholderContainer" runat="server" style="">
+                        <span runat="server" id="itemPlaceholder" />
+                    </div>
+                    <div style="">
+                    </div>
+                </LayoutTemplate>               
+            </asp:ListView>
+            </td>
+             <td class="style6">
+                 </td>
+            <td class="style7">
                  <asp:GridView ID="gwActivity" runat="server" AllowPaging="True" 
                      AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsUsers" 
-                     ForeColor="#333333" GridLines="None" Font-Names="Tahoma">
+                     ForeColor="#333333" GridLines="None">
                      <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                      <Columns>
                          <asp:BoundField DataField="UserName" HeaderText="User Name" 
                              SortExpression="UserName" >
                          <ItemStyle HorizontalAlign="Center" />
                          </asp:BoundField>
-                         <asp:BoundField DataField="LastActivityDate" HeaderText="Last Online" 
+                         <asp:BoundField DataField="LastActivityDate" HeaderText="Last Activity Date" 
                              SortExpression="LastActivityDate" >
                          <ItemStyle HorizontalAlign="Center" />
                          </asp:BoundField>
@@ -66,54 +115,30 @@
             </td>
         </tr>
         <tr>
-        <td class="style1">
-            <hr />
+        <td class="style1" rowspan="2">
+            <asp:SqlDataSource ID="dsNews" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+                DataSourceMode="DataReader" 
+                SelectCommand="SELECT [NewsText], [PostDate], [UpdateDate] FROM [News]">
+            </asp:SqlDataSource>
             </td>
-        <td class="style2">
-            &nbsp;</td>
-        </tr>
-        <tr>
-        <td class="style1">Vladislavs &quot;The Enforcer&quot; Marisevs reaches spiritual 
-            enlightenment through normalizing rows. This DBA cares about each and every row 
-            and nevers leaves them orphaned.</td>
-        <td class="style2">&nbsp;</td>
-        </tr>
-        <tr>
-        <td class="style1">
-            <hr />
+        <td class="style2" rowspan="2" >&nbsp;</td>
+             <td class="style4">
+                 <asp:SqlDataSource ID="dsUsers" runat="server" 
+                     ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+                     SelectCommand="SELECT [UserName], [LastActivityDate] FROM [vw_aspnet_Users] ORDER BY [LastActivityDate] DESC"></asp:SqlDataSource>
             </td>
-        <td class="style2">
-            &nbsp;</td>
         </tr>
         <tr>
-        <td class="style1">Forest fire in the Leitrim district causes the Wood Material 
-            stock to sky rocket!</td>
-        <td class="style2">&nbsp;</td>
+             <td class="style3">
+                 &nbsp;</td>
         </tr>
         <tr>
         <td class="style1">
-            <hr />
-            </td>
-        <td class="style2">
             &nbsp;</td>
-        </tr>
-        <tr>
-        <td class="style1">New theme park &quot;Fingtasia&quot; opens up in the Galway district, 
-            only 9 bucks for entry, could this theme park possibly make it onto the stock 
-            street?</td>
-        <td class="style2">&nbsp;</td>
-        </tr>
-        <tr>
-        <td class="style1">
-            <hr />
-            </td>
-        <td class="style2">
-            &nbsp;</td>
-        </tr>
-        <tr>
-        <td class="style1">Oversupply of graduates is causing the GMIT EDU stock price to 
-            plumment, sell while you can!</td>
-        <td class="style2">&nbsp;</td>
+        <td class="style2" >&nbsp;</td>
+             <td class="style3">
+                 &nbsp;</td>
         </tr>
         </table>
 </asp:Content>
