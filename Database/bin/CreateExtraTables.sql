@@ -1,3 +1,4 @@
+USE [StockMarketGame]
 GO
 CREATE TABLE [dbo].[News] (
     [Id]       UNIQUEIDENTIFIER DEFAULT (newid()) NOT NULL,
