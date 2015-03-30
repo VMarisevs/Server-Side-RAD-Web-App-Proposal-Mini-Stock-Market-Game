@@ -8,7 +8,9 @@
 :: the StockMarketGame database.
 
 ECHO Attempting to create the StockMarketGame database . . . 
-sqlcmd -S localhost\SQLExpress -E /i create_database.sql
+sqlcmd -S localhost\SQLExpress -E /i CreateAdministration.sql
+ECHO.
+sqlcmd -S localhost\SQLExpress -E /i CreateSupportTables.sql
 ECHO.
 ECHO If no error message is shown, then the database was created successfully.
 ECHO.
