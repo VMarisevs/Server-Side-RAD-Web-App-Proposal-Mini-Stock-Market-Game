@@ -13,10 +13,10 @@ using System.Data;
 public static class UserDB
 {
     [DataObjectMethod(DataObjectMethodType.Select)]
-    public static IEnumerable GetAllCategories()
+    public static IEnumerable GetAllUsers()
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
-        string sel = "SELECT aspnet_Users.UserName, aspnet_Roles.RoleName FROM " +
+        string sel = "SELECT aspnet_Users.UserName, aspnet_Roles.RoleName, aspnet_Users.Cash, aspnet_Users.LastActivityDate FROM " +
             "aspnet_Roles INNER JOIN " +
             " aspnet_UsersInRoles ON aspnet_Roles.RoleId = aspnet_UsersInRoles.RoleId " +
             "INNER JOIN  aspnet_Users ON aspnet_UsersInRoles.UserId = aspnet_Users.UserId";
@@ -26,6 +26,20 @@ public static class UserDB
         return dr;
     }
 
+    //public static IEnumerable GetUserStocks()
+    //{
+    //    SqlConnection con = new SqlConnection(GetConnectionString());
+    //    string sel = "SELECT  UserShares.companyId, UserShares.shares, UserShares.price " +
+    //                 "FROM UserShares INNER JOIN " +
+    //                 "aspnet_Users ON UserShares.userId = aspnet_Users.UserId"
+    //    SqlCommand cmd = new SqlCommand(sel, con);
+    //    con.Open();
+    //    SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+    //    return dr;
+    //}
+
+
+    
     private static string GetConnectionString()
     {
         return ConfigurationManager.ConnectionStrings["GameConnectionString"].ConnectionString;
