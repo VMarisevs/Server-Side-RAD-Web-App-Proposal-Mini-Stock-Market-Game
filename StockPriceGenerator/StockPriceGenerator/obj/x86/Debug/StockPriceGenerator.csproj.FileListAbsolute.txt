@@ -6,3 +6,11 @@ D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\St
 D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.exe
 D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.pdb
 D:\VS2013\ssr-project\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.csprojResolveAssemblyReference.cache
+C:\Users\Vytas\Desktop\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.exe
+C:\Users\Vytas\Desktop\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.pdb
+C:\Users\Vytas\Desktop\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\bin\Debug\StockPriceGenerator.exe
+C:\Users\Vytas\Desktop\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\bin\Debug\StockPriceGenerator.pdb
+C:\Users\Vytas\Desktop\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.csprojResolveAssemblyReference.cache
+C:\Users\Vytas\Desktop\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.Form1.resources
+C:\Users\Vytas\Desktop\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.Properties.Resources.resources
+C:\Users\Vytas\Desktop\Server-Side-RAD-Web-App-Proposal-Mini-Stock-Market-Game\StockPriceGenerator\StockPriceGenerator\obj\x86\Debug\StockPriceGenerator.csproj.GenerateResource.Cache

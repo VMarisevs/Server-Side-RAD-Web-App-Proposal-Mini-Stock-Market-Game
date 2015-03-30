@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.lvOfCompanies = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSwitch = new System.Windows.Forms.Button();
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lvOfCompanies
@@ -51,6 +51,11 @@
             this.lvOfCompanies.TabIndex = 0;
             this.lvOfCompanies.UseCompatibleStateImageBehavior = false;
             this.lvOfCompanies.View = System.Windows.Forms.View.Details;
+            this.lvOfCompanies.SelectedIndexChanged += new System.EventHandler(this.lvOfCompanies_SelectedIndexChanged);
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Id";
             // 
             // columnHeader1
             // 
@@ -81,10 +86,6 @@
             this.btnSwitch.Text = "Start";
             this.btnSwitch.UseVisualStyleBackColor = true;
             this.btnSwitch.Click += new System.EventHandler(this.btnSwitch_Click);
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Id";
             // 
             // Form1
             // 
