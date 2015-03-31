@@ -24,7 +24,8 @@
         <p>
             <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px">
                 <Series>
-                    <asp:Series ChartType="Area" Name="Series1" YValueMembers="price">
+                    <asp:Series ChartType="Area" Name="Series1" YValueMembers="price" 
+                        YValuesPerPoint="4">
                     </asp:Series>
                 </Series>
                 <ChartAreas>
