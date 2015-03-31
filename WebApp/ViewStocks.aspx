@@ -7,10 +7,6 @@
         {
             height: 36px;
         }
-        .style5
-        {
-            height: 36px;
-        }
         .style3
         {
         }
@@ -20,11 +16,43 @@
     <h1>
         View Stocks
     </h1>
+
+    <div>
+        <h3>
+        Graph
+        </h3>
+        <p>
+            <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px">
+                <Series>
+                    <asp:Series ChartType="Area" Name="Series1" YValueMembers="price">
+                    </asp:Series>
+                </Series>
+                <ChartAreas>
+                    <asp:ChartArea Name="ChartArea1">
+                    </asp:ChartArea>
+                </ChartAreas>
+            </asp:Chart>
+        </p>
+        <p>
+            <asp:SqlDataSource ID="dsGraphs" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+                
+                SelectCommand="SELECT [price] FROM [StockHistory] WHERE ([companyId] = @companyId)">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="gvwCompanies0" DefaultValue="10001" 
+                        Name="companyId" PropertyName="SelectedValue" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+        </p>
+        <p>
+            &nbsp;</p>
+
+    </div>
+
     <div style="float:left;width:70%;margin:0px;padding:0px">
-    
     <p>
         <asp:SqlDataSource ID="dsCompanies" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
-            SelectCommand="SELECT   Companies.Name, Companies.Abbreviation, Companies.curprice, Companies.shareAmount, Categories.longName 
+            SelectCommand="SELECT Companies.Id, Companies.Name, Companies.Abbreviation, Companies.curprice, Companies.shareAmount, Categories.longName 
                             FROM Companies INNER JOIN Categories 
                             ON Companies.categoryId = Categories.Id 
                             WHERE ([Name] LIKE '%' + @Name + '%')
@@ -68,7 +96,8 @@
                 <td class="style3" align="center" >
                     <asp:GridView ID="gvwCompanies0" runat="server" AllowPaging="True" AllowSorting="True"
                         AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="#333333"
-                        GridLines="None" PageSize="5" Width="800px" Font-Names="Tahoma">
+                        GridLines="None" PageSize="5" Width="800px" Font-Names="Tahoma" 
+                        DataKeyNames="Id">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:BoundField DataField="Abbreviation" HeaderText="Name" 
@@ -90,6 +119,7 @@
                                 SortExpression="longName" >
                             <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
+                            <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
