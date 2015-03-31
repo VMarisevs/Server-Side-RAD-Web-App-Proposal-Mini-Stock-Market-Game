@@ -36,7 +36,19 @@
 WHEN '-1'  THEN categoryId 
 ELSE @categoryId 
 END ORDER BY [Name]"
-            OldValuesParameterFormatString="original_{0}">
+            OldValuesParameterFormatString="original_{0}" 
+            InsertCommand="INSERT INTO [Companies] ([Name], [Abbreviation], [logo], [curprice], [shareAmount], [categoryId], [volatility], [shortDescription], [longDescription]) VALUES (@Name, @Abbreviation, @logo, @curprice, @shareAmount, @categoryId, @volatility, @shortDescription, @longDescription)">
+            <InsertParameters>
+                <asp:Parameter Name="Name" />
+                <asp:Parameter Name="Abbreviation" />
+                <asp:Parameter Name="logo" />
+                <asp:Parameter Name="curprice" />
+                <asp:Parameter Name="shareAmount" />
+                <asp:Parameter Name="categoryId" />
+                <asp:Parameter Name="volatility" />
+                <asp:Parameter Name="shortDescription" />
+                <asp:Parameter Name="longDescription" />
+            </InsertParameters>
             <SelectParameters>
                 <asp:ControlParameter ControlID="txtSearch" DefaultValue="%" Name="Name" 
                     PropertyName="Text" Type="String" />
@@ -78,7 +90,7 @@ END ORDER BY [Name]"
             </InsertParameters>
             <SelectParameters>
                 <asp:ControlParameter ControlID="gvwCompanies" Name="Id" PropertyName="SelectedValue"
-                    Type="Int32" />
+                    Type="Int32" DefaultValue="10003" />
             </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="Name" Type="String" />
@@ -217,25 +229,91 @@ style="margin:2px;">
                             SortExpression="Id" >
                         <HeaderStyle HorizontalAlign="Left" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" >
-                        <HeaderStyle HorizontalAlign="Left" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="Abbreviation" HeaderText="Abbreviation" 
-                            SortExpression="Abbreviation" >
-                        <HeaderStyle HorizontalAlign="Left" Width="60px" />
-                        <ItemStyle Width="900px" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="logo" HeaderText="logo" SortExpression="logo" >
-                        <HeaderStyle HorizontalAlign="Left" VerticalAlign="Middle" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="curprice" HeaderText="curprice" 
-                            SortExpression="curprice" >
-                        <HeaderStyle HorizontalAlign="Left" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="shareAmount" HeaderText="shareAmount" 
-                            SortExpression="shareAmount" >
-                        <HeaderStyle HorizontalAlign="Left" />
-                        </asp:BoundField>
+                        <asp:TemplateField HeaderText="Name" SortExpression="Name">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValName" runat="server" 
+                                    ControlToValidate="TextBox3" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Name required">*</asp:RequiredFieldValidator>
+                            </EditItemTemplate>
+                            <InsertItemTemplate>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValName" runat="server" 
+                                    ControlToValidate="TextBox3" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Name required">*</asp:RequiredFieldValidator>
+                            </InsertItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+                            </ItemTemplate>
+                            <HeaderStyle HorizontalAlign="Left" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Abbreviation" SortExpression="Abbreviation">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Abbreviation") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValAbrev" runat="server" 
+                                    ControlToValidate="TextBox4" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Abbreviation required">*</asp:RequiredFieldValidator>
+                            </EditItemTemplate>
+                            <InsertItemTemplate>
+                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Abbreviation") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValAbrev" runat="server" 
+                                    ControlToValidate="TextBox4" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Abbreviation required">*</asp:RequiredFieldValidator>
+                            </InsertItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label5" runat="server" Text='<%# Bind("Abbreviation") %>'></asp:Label>
+                            </ItemTemplate>
+                            <HeaderStyle HorizontalAlign="Left" Width="60px" />
+                            <ItemStyle Width="900px" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="logo" SortExpression="logo">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("logo") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <InsertItemTemplate>
+                                <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("logo") %>'></asp:TextBox>
+                            </InsertItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label6" runat="server" Text='<%# Bind("logo") %>'></asp:Label>
+                            </ItemTemplate>
+                            <HeaderStyle HorizontalAlign="Left" VerticalAlign="Middle" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="curprice" SortExpression="curprice">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("curprice") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValPrice" runat="server" 
+                                    ControlToValidate="TextBox6" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Price required">*</asp:RequiredFieldValidator>
+                            </EditItemTemplate>
+                            <InsertItemTemplate>
+                                <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("curprice") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValPrice" runat="server" 
+                                    ControlToValidate="TextBox6" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Price required">*</asp:RequiredFieldValidator>
+                            </InsertItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label7" runat="server" Text='<%# Bind("curprice") %>'></asp:Label>
+                            </ItemTemplate>
+                            <HeaderStyle HorizontalAlign="Left" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="shareAmount" SortExpression="shareAmount">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("shareAmount") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValShareAmount" runat="server" 
+                                    ControlToValidate="TextBox7" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Amount of shares required">*</asp:RequiredFieldValidator>
+                            </EditItemTemplate>
+                            <InsertItemTemplate>
+                                <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("shareAmount") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValShareAmount" runat="server" 
+                                    ControlToValidate="TextBox7" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Amount of shares required">*</asp:RequiredFieldValidator>
+                            </InsertItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label8" runat="server" Text='<%# Bind("shareAmount") %>'></asp:Label>
+                            </ItemTemplate>
+                            <HeaderStyle HorizontalAlign="Left" />
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Category">
 
                             <ItemTemplate>
@@ -244,20 +322,68 @@ style="margin:2px;">
                             <EditItemTemplate>
                                 <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="dsCategories" 
                                     DataTextField="longName" DataValueField="Id" 
-                                    SelectedValue='<%# Bind("categoryId", "{0}") %>'>
+                                    SelectedValue='<%# Bind("categoryId", "{0}") %>' CssClass="buttonStyle">
                                 </asp:DropDownList>
                             </EditItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" />
                         </asp:TemplateField>
-                        <asp:BoundField DataField="volatility" HeaderText="volatility" 
-                            SortExpression="volatility" >
-                        <HeaderStyle HorizontalAlign="Left" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="shortDescription" HeaderText="shortDescription" 
-                            SortExpression="shortDescription" >
-                        <HeaderStyle HorizontalAlign="Left" />
-                        </asp:BoundField>
+                        <asp:TemplateField HeaderText="volatility" SortExpression="volatility">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("volatility") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValShareVolitility" runat="server" 
+                                    ControlToValidate="TextBox1" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Volitility required">*</asp:RequiredFieldValidator>
+                                <asp:RangeValidator ID="valRanVolitility" runat="server" 
+                                    ControlToValidate="TextBox1" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Volitility must be between 1 &amp; 4" MaximumValue="4" 
+                                    MinimumValue="1" Type="Integer">*</asp:RangeValidator>
+                                <br />
+                            </EditItemTemplate>
+                            <InsertItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("volatility") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValShareVolitility" runat="server" 
+                                    ControlToValidate="TextBox1" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Volitility required">*</asp:RequiredFieldValidator>
+                                <asp:RangeValidator ID="valRanVolitility" runat="server" 
+                                    ControlToValidate="TextBox1" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Volitility must be between 1 &amp; 4" MaximumValue="4" 
+                                    MinimumValue="1" Type="Integer">*</asp:RangeValidator>
+                                <br />
+                            </InsertItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("volatility") %>'></asp:Label>
+                            </ItemTemplate>
+                            <HeaderStyle HorizontalAlign="Left" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="shortDescription" 
+                            SortExpression="shortDescription">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox8" runat="server" 
+                                    Text='<%# Bind("shortDescription") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValShortDescrip" runat="server" 
+                                    ControlToValidate="TextBox8" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Short description required">*</asp:RequiredFieldValidator>
+                            </EditItemTemplate>
+                            <InsertItemTemplate>
+                                <asp:TextBox ID="TextBox8" runat="server" 
+                                    Text='<%# Bind("shortDescription") %>'></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValShortDescrip" runat="server" 
+                                    ControlToValidate="TextBox8" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Short description required">*</asp:RequiredFieldValidator>
+                            </InsertItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label9" runat="server" Text='<%# Bind("shortDescription") %>'></asp:Label>
+                            </ItemTemplate>
+                            <HeaderStyle HorizontalAlign="Left" />
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Long Description" >
+                            <InsertItemTemplate>
+                                <asp:TextBox ID="TextBox2" runat="server" Columns="50" Height="85px" Rows="4" 
+                                    Text='<%# Bind("longDescription", "{0}") %>' TextMode="MultiLine" Width="398px"></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValLongDesc" runat="server" 
+                                    ControlToValidate="TextBox2" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Long description required">*</asp:RequiredFieldValidator>
+                            </InsertItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label3" runat="server" 
                                     Text='<%# Eval("longDescription", "{0}") %>'></asp:Label>
@@ -265,11 +391,17 @@ style="margin:2px;">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox2" runat="server" Columns="50" Height="85px" Rows="4" 
                                     Text='<%# Bind("longDescription", "{0}") %>' TextMode="MultiLine" Width="398px"></asp:TextBox>
+                                &nbsp;<asp:RequiredFieldValidator ID="rfValLongDesc" runat="server" 
+                                    ControlToValidate="TextBox2" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="Long description required">*</asp:RequiredFieldValidator>
                             </EditItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" />
                             <ItemStyle Width="400px" />
                         </asp:TemplateField>
-                        <asp:CommandField ButtonType="Button" ShowEditButton="True" ControlStyle-CssClass="buttonStyle" />
+                        <asp:CommandField ButtonType="Button" ShowEditButton="True" 
+                            ControlStyle-CssClass="buttonStyle" ShowInsertButton="True" >
+<ControlStyle CssClass="buttonStyle"></ControlStyle>
+                        </asp:CommandField>
                     </Fields>
                     <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
                     <HeaderStyle BackColor="DeepSkyBlue" Font-Bold="True" ForeColor="White" />
@@ -282,8 +414,15 @@ style="margin:2px;">
             </td>
         </tr>
     </table>
+
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" Width="80%"
+            CssClass="validatorStyle" DisplayMode="List" />
+
         <p class="style6">
             <asp:Label ID="lblError" runat="server"></asp:Label>
+        </p>
+        
+        <p>
         </p>
     </div>
 </asp:Content>
