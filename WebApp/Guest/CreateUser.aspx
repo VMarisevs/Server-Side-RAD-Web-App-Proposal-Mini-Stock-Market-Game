@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div style="width:200px">
+    <div style="width:200px;margin-left:30%;">
     
     <asp:CreateUserWizard ID="cuwCreateUserAccount" runat="server" 
         ContinueDestinationPageUrl="~/Default.aspx" 
@@ -13,7 +13,9 @@
         <ContinueButtonStyle BackColor="White" BorderColor="#507CD1" 
             BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" 
             ForeColor="#284E98" />
-        <CreateUserButtonStyle     font-size="1em" 
+        <CreateUserButtonStyle  
+    ForeColor="black" 
+    font-size="1em" 
     BackColor="#E8E8E8"
     Font-Names="Tahoma"
     Width="150px"

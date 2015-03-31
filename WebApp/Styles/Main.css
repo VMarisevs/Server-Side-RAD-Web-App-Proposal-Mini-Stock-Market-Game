@@ -132,6 +132,7 @@ table
    height:50px;
    overflow:hidden;
    width:100%;
+   display:inline-table;
 }
 
 #navRow{
@@ -178,6 +179,45 @@ ul li {
     font-size: 1em;
     background-color:#E8E8E8;
     Font-Family:Tahoma;
-    Width:100px;
+    Width:120px;
     border: 2px Solid #00BFFF;
+    Color:black;
+    font-size:1em;
+    Font-family:Tahoma;
+    margin:2px;
+    text-align:center;
 }
+
+.pagerButtonStyle
+{
+    font-size: 1em;
+    background-color:#E8E8E8;
+    Font-Family:Tahoma;
+    Width:75px;
+    border: 2px Solid #00BFFF;
+    Color:black;
+    font-size:1em;
+    Font-family:Tahoma;
+    margin:2px;
+    text-align:center;
+}
+
+/*
+Button style:
+
+ForeColor="black" 
+font-size="1em" 
+BackColor="#E8E8E8"
+Font-Names="Tahoma"
+Width="120px"
+BorderColor="#00BFFF"
+BorderStyle="Solid"
+BorderWidth="2px"
+style="margin:2px;"
+
+Width:
+150px
+
+pager: 
+    background-color: #008FBF;
+*/

@@ -3,12 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div style="border:3px dashed #b5c7de;padding:10px;background-color:#FDFFCC;width:450px"> <!--style="display:block;padding:20px 20px 50px 20px; overflow:hidden"-->
+    <div style="border:3px dashed #b5c7de;padding:10px;background-color:#FDFFCC;width:450px;margin-left:30%;"> <!--style="display:block;padding:20px 20px 50px 20px; overflow:hidden"-->
     
     <asp:ChangePassword ID="ChangePassword1" runat="server" 
         CancelDestinationPageUrl="~/Default.aspx" 
         ContinueDestinationPageUrl="~/Default.aspx">
-        <CancelButtonStyle     font-size="1em" 
+        <CancelButtonStyle         ForeColor="black" 
+    font-size="1em" 
     BackColor="#E8E8E8"
     Font-Names="Tahoma"
     Width="150px"
@@ -17,6 +18,7 @@
     BorderWidth="2px"
      />
         <ChangePasswordButtonStyle 
+    ForeColor="black" 
     font-size="1em" 
     BackColor="#E8E8E8"
     Font-Names="Tahoma"

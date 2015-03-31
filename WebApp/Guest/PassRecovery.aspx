@@ -3,11 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div style="width:300px">
+    <div style="width:300px;margin-left:30%">
         <asp:PasswordRecovery ID="PasswordRecovery1" runat="server" BackColor="#FDFFCC" 
             BorderPadding="20" BorderStyle="Dashed" BorderWidth="3px" Font-Size="1em" 
             Width="200px" Font-Names="Tahoma">
-            <SubmitButtonStyle     font-size="1em" 
+            <SubmitButtonStyle         ForeColor="black" 
+    font-size="1em" 
     BackColor="#E8E8E8"
     Font-Names="Tahoma"
     Width="150px"

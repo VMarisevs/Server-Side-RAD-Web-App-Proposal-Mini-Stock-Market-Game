@@ -51,7 +51,15 @@
                     &nbsp;&nbsp;
                     <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
                     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search"
-                        Font-Names="Tahoma" Font-Size="Medium" Style="margin-top: 4px" Width="66px" />
+                        Style="margin-top: 4px" 
+                        ForeColor="black" 
+    font-size="1em" 
+    BackColor="#E8E8E8"
+    Font-Names="Tahoma"
+    Width="150px"
+    BorderColor="#00BFFF"
+    BorderStyle="Solid"
+    BorderWidth="2px" />
                     </td>
             </tr>
             <tr>

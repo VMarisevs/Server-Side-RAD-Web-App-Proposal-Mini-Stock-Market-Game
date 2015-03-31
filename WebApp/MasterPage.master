@@ -67,7 +67,7 @@
             <asp:ContentPlaceHolder ID="CellLeft" runat="server">
             </asp:ContentPlaceHolder>
                     </td>--%>
-                    <td style="width:70%;display:block;padding:5px; overflow: hidden;margin:0% 15% 0% 15%">
+                    <td style="width:80%;display:block;padding:5px; overflow: auto;margin:0% 10% 0% 10%" >
                     <!--float:left;padding-left:20%;-->
                     <div style="margin:20px;">
                         
