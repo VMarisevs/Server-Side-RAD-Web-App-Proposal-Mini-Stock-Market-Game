@@ -71,7 +71,27 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <table >
         <tr>
+            <td class="style3">
+                <asp:Image ID="Image3" runat="server" Height="100px" 
+                    ImageUrl="~/Images/ZomboCorpLogo.png" Width="100px" />
+            </td>
+            <td class="style9" style="padding-left:13px">
+                <strong><span class="style7"><span class="style11">ZomboCorp Inc. </span></span></strong>
+                <span class="style11"><span class="style7"><br />
+                        We are a team of highly experienced software developers and website designers with a wide range of skills and a keen eye for perfection.
+                <br />
+</span><em><span class="style7" style="color:#00BFFF">Be inspired</span></em></span></td>
+        </tr>
+    <tr>
+        <br />
+        <br />
+    </tr>
+        <tr>
             <td class="style2" colspan="2">
+                <br />
+                <br />
+                <br />
+                <br />
                 <h1>
                     ZomboCorp Team</h1>
             </td>
