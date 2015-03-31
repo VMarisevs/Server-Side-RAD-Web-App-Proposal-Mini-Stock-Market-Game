@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">
         .style1
@@ -13,16 +15,13 @@
         {
             width:35%;
         }
-        .style5
-        {
-        }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">    
     <table border="0" cellpadding="5" frame="void">
         <tr>
              <td class="style1" >
-                              <h1>Welcome
+                <h1>Welcome
                  </h1>
                  <p>
                      Welcome to Stock Street! The fast paced stock trading game.<br />
@@ -39,7 +38,7 @@
 
                  <td></td>
 
-                 <td>
+                 <td valign="top">
                                   <h1>Latest Activity
                  </h1>
                  <asp:GridView ID="gwActivity" runat="server" AllowPaging="True" 
@@ -47,13 +46,11 @@
                      ForeColor="#333333" GridLines="None">
                      <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                      <Columns>
-                         <asp:BoundField DataField="UserName" HeaderText="User Name" 
+                         <asp:BoundField DataField="UserName" HeaderText="UserName" 
                              SortExpression="UserName" >
-                         <ItemStyle HorizontalAlign="Center" />
                          </asp:BoundField>
-                         <asp:BoundField DataField="LastActivityDate" HeaderText="Last Activity Date" 
+                         <asp:BoundField DataField="LastActivityDate" HeaderText="LastActivityDate" 
                              SortExpression="LastActivityDate" >
-                         <ItemStyle HorizontalAlign="Center" />
                          </asp:BoundField>
                      </Columns>
                      <EditRowStyle BackColor="#999999" />
@@ -83,7 +80,7 @@
 
         </tr>
         <tr>
-             <td class="style1">
+             <td class="style1" valign="top">
                 <h1>News
                 </h1>
                 <asp:ListView ID="lvwNews" runat="server" DataSourceID="dsNews" 

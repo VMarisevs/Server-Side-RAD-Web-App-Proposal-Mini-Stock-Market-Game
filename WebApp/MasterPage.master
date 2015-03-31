@@ -9,6 +9,10 @@
 	<meta name="keywords" content="buy, sell, stocks, shares, virtual, business"/>
     
     <title>Stock Street - Buy and sell virtual stocks!</title>
+    <link rel="icon" 
+      type="image/png" 
+      href="Images/favicon.ico" />
+
     <link href="Styles/Main.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -19,6 +23,10 @@
             <a accesskey="h" href="/WebApp/Default.aspx"><asp:Image ID="imgStockSt" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" /></a>
         </div>
         <form id="mainForm" runat="server">
+            <%--Enables the use of AJAX controls--%>
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
+
         <div id="navBar">
             <table border="0" cellpadding="0" cellspacing="0">
             <tr id="navRow">

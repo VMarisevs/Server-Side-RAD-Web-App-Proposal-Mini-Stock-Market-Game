@@ -22,7 +22,9 @@
         Graph
         </h3>
         <p>
-            <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px">
+        
+            <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px" 
+                AlternateText="No data to display">
                 <Series>
                     <asp:Series ChartType="Area" Name="Series1" YValueMembers="price" 
                         YValuesPerPoint="4">
@@ -33,6 +35,23 @@
                     </asp:ChartArea>
                 </ChartAreas>
             </asp:Chart>
+
+         <%--  AJAX--%>
+
+             
+<%--             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            </asp:UpdatePanel>--%>
+
+<%--            <asp:Timer ID="Timer1" runat="server" Interval="30000">
+            </asp:Timer>--%>
+            
+            
+
+            
+        </p>
+        
+        
+        <p>
         </p>
         <p>
             <asp:SqlDataSource ID="dsGraphs" runat="server" 
@@ -49,8 +68,10 @@
             &nbsp;</p>
 
     </div>
+  
 
     <div style="float:left;width:70%;margin:0px;padding:0px">
+      
     <p>
         <asp:SqlDataSource ID="dsCompanies" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
             SelectCommand="SELECT Companies.Id, Companies.Name, Companies.Abbreviation, Companies.curprice, Companies.shareAmount, Categories.longName 
@@ -73,12 +94,16 @@
             SelectCommand="SELECT [longName], [Id] FROM [Categories] ORDER BY [longName]">
         </asp:SqlDataSource>
     </p>
+    
         <table width ="80%"  class="style2">
+        
             <tr>
                 <td class="style4" align="right">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;
+                 
                     <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
+
                     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search"
                         Style="margin-top: 4px" 
                         ForeColor="black" 
@@ -89,6 +114,7 @@
     BorderColor="#00BFFF"
     BorderStyle="Solid"
     BorderWidth="2px" />
+
                     </td>
             </tr>
             <tr>
@@ -133,6 +159,7 @@
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#008FBF" ForeColor="White" Font-Bold="True" />
                         <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" Height="30px" />
+                        <PagerSettings Mode="NextPreviousFirstLast" />
                         <PagerStyle BackColor="#008FBF" ForeColor="White" HorizontalAlign="Center" Height="20px" />
                         <RowStyle BackColor="#F7F6F3" ForeColor="#333333" Height="40px" />
                         <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
@@ -143,6 +170,8 @@
                     </asp:GridView>
                 </td>
             </tr>
+            
         </table>
-        </div>
+            
+      </div>
 </asp:Content>
