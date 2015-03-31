@@ -30,7 +30,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <h1>Edit Stocks
     </h1>
-    <div>                                                                                                                                                                                                                                                     <p>
+    <div style="margin-left:13%">                                                                                                                                                                                                                                                     <p>
         <asp:SqlDataSource ID="dsCompanies" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
             SelectCommand="SELECT [Id], [Name], [curprice], [shareAmount], [shortDescription] FROM [Companies] WHERE ([Name] LIKE '%' + @Name + '%') AND categoryId = CASE  @categoryId 
 WHEN '-1'  THEN categoryId 
@@ -108,11 +108,29 @@ END ORDER BY [Name]"
             <tr>
             <td class="style4"  align ="right">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:TextBox ID="txtSearch"  runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtSearch"  runat="server" 
+                ForeColor="black" 
+font-size="1em" 
+BackColor="White"
+Font-Names="Tahoma"
+Width="150px"
+BorderColor="#00BFFF"
+BorderStyle="Solid"
+BorderWidth="2px"
+style="margin:2px;"
+                ></asp:TextBox>
                 &nbsp;&nbsp;
                 <asp:Button ID="btnSearch" runat="server" onclick="btnSearch_Click" 
-                    Text="Search" Font-Names="Tahoma" Font-Size="Medium" 
-                    style="margin-top: 4px" Width="66px" />
+                    Text="Search" 
+                    ForeColor="black" 
+font-size="1em" 
+BackColor="#E8E8E8"
+Font-Names="Tahoma"
+Width="120px"
+BorderColor="#00BFFF"
+BorderStyle="Solid"
+BorderWidth="2px"
+style="margin:2px;" />
             </td>
             <td class="style5">
             </td>
@@ -122,7 +140,16 @@ END ORDER BY [Name]"
                 &nbsp;
                 <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" 
             DataSourceID="dsCategories" DataTextField="longName" DataValueField="Id" 
-            AppendDataBoundItems="True" Width="255px" Height="16px" style="margin-left: 89px">
+            AppendDataBoundItems="True" 
+            ForeColor="black" 
+font-size="1em" 
+BackColor="White"
+Font-Names="Tahoma"
+Width="120px"
+BorderColor="#00BFFF"
+BorderStyle="Solid"
+BorderWidth="2px"
+style="margin:2px;">
             <asp:ListItem Value="-1">All</asp:ListItem>
         </asp:DropDownList>
             </td>
@@ -151,16 +178,16 @@ END ORDER BY [Name]"
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                        <asp:CommandField ButtonType="Button" ShowSelectButton="True">
+                        <asp:CommandField ButtonType="Button" ShowSelectButton="True" ControlStyle-CssClass="buttonStyle">
                             <ControlStyle Width="80px" />
                             <ItemStyle Width="100px" />
                         </asp:CommandField>
                     </Columns>
                     <EditRowStyle BackColor="#999999" />
-                    <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
-                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" 
+                    <FooterStyle BackColor="#008FBF" ForeColor="White" Font-Bold="True" />
+                    <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" 
                         Height="30px" />
-                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" 
+                    <PagerStyle BackColor="#008FBF" ForeColor="White" HorizontalAlign="Center" 
                         Height="20px" />
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" Height="40px" />
                     <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
@@ -230,7 +257,7 @@ END ORDER BY [Name]"
                             SortExpression="shortDescription" >
                         <HeaderStyle HorizontalAlign="Left" />
                         </asp:BoundField>
-                        <asp:TemplateField HeaderText="Long Description">
+                        <asp:TemplateField HeaderText="Long Description" >
                             <ItemTemplate>
                                 <asp:Label ID="Label3" runat="server" 
                                     Text='<%# Eval("longDescription", "{0}") %>'></asp:Label>
@@ -242,11 +269,11 @@ END ORDER BY [Name]"
                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" />
                             <ItemStyle Width="400px" />
                         </asp:TemplateField>
-                        <asp:CommandField ButtonType="Button" ShowEditButton="True" />
+                        <asp:CommandField ButtonType="Button" ShowEditButton="True" ControlStyle-CssClass="buttonStyle" />
                     </Fields>
                     <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
-                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                    <HeaderStyle BackColor="DeepSkyBlue" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#008FBF" ForeColor="White" HorizontalAlign="Center" />
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                 </asp:DetailsView>
             </td>
