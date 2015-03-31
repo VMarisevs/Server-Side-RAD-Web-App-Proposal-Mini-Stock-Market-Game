@@ -40,7 +40,7 @@
                 
                 SelectCommand="SELECT [price] FROM [StockHistory] WHERE ([companyId] = @companyId)">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="gvwCompanies0" DefaultValue="10001" 
+                    <asp:ControlParameter ControlID="gvwCompanies0" DefaultValue="10003" 
                         Name="companyId" PropertyName="SelectedValue" Type="Int32" />
                 </SelectParameters>
             </asp:SqlDataSource>
