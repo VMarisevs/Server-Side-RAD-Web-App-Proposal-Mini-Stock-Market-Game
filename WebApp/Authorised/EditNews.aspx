@@ -32,7 +32,8 @@
         </asp:SqlDataSource>
 
         <asp:ListView ID="lvwNews" runat="server" DataKeyNames="Id" 
-            DataSourceID="dsNews" InsertItemPosition="LastItem">
+            DataSourceID="dsNews" InsertItemPosition="LastItem" 
+            oniteminserted="lvwNews_ItemInserted" oniteminserting="lvwNews_ItemInserting">
             <AlternatingItemTemplate>
                 <tr style="background-color: #FFFFFF; color: #284775;">
 <%--                    <td>
@@ -81,12 +82,15 @@ style="margin:2px;"/>
                   <td style="width:400px;">
                         <asp:TextBox ID="NewsTextTextBox" runat="server" Width="97%" Height="75px" Wrap="true" TextMode="MultiLine"  Text='<%# Bind("NewsText") %>' />
                     </td>
+                        <asp:RequiredFieldValidator ID="rfValContent" runat="server" 
+                            ControlToValidate="NewsTextTextBox" CssClass="validatorStyle" Display="Dynamic" 
+                            ErrorMessage="Content required">*</asp:RequiredFieldValidator>
                     <td>
-                         <asp:Label ID="PostDateLabel" runat="server" Text='<%# Eval("PostDate") %>' />
+                         <asp:Label ID="PostDateLabel" runat="server" Text='<%# Bind("PostDate") %>' />
                     </td>
                                         <td>
                          <asp:Label ID="UpdateDateLabel" runat="server" 
-                             Text='<%# Eval("UpdateDate") %>' />
+                             Text='<%# Bind("UpdateDate") %>' />
                     </td>
                                        <td>
                         <asp:Button ID="UpdateButton" runat="server" CommandName="Update" 
@@ -126,6 +130,10 @@ style="margin:2px;" />
                     <td>
                         <asp:TextBox ID="NewsTextTextBox" runat="server" 
                             Text='<%# Bind("NewsText") %>' width="90%" Height="75px" Wrap="true" TextMode="MultiLine"/>
+
+                                                    <asp:RequiredFieldValidator ID="rfValContent" runat="server" 
+                            ControlToValidate="NewsTextTextBox" CssClass="validatorStyle" Display="Dynamic" 
+                            ErrorMessage="Content required">*</asp:RequiredFieldValidator>
                     </td>
                  <td>
                                        <asp:Button ID="InsertButton" runat="server" CommandName="Insert" 
@@ -139,7 +147,7 @@ BorderColor="#00BFFF"
 BorderStyle="Solid"
 BorderWidth="2px"
 style="margin:2px;" />
-                        <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" 
+                        <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" CausesValidation="false"
                             Text="Clear"         
 ForeColor="black" 
 font-size="1em" 
@@ -175,7 +183,7 @@ style="margin:2px;"/>
                              Text='<%# Eval("UpdateDate") %>' />
                     </td>
                                       <td>
-                        <asp:Button ID="DeleteButton" runat="server" CommandName="Delete"
+                        <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" CausesValidation="false"
                             Text="Delete" ForeColor="black" 
     font-size="1em" 
     BackColor="#E8E8E8"
@@ -186,7 +194,7 @@ style="margin:2px;"/>
     BorderWidth="2px"
     style="margin:2px;"
      />
-                        <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" 
+                        <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" CausesValidation="false"
 ForeColor="black" 
 font-size="1em" 
 BackColor="#E8E8E8"
@@ -227,10 +235,10 @@ style="margin:2px;"/>
                     <tr runat="server">
                         <td runat="server" 
                             style="text-align: center;background-color: #008FBF; font-family: Verdana, Arial, Helvetica, sans-serif;color: #FFFFFF" font-size="1em" >
-                            <asp:DataPager ID="DataPager1" runat="server">
+                            <asp:DataPager ID="DataPager1" runat="server" CausesValidation="false">
                                 <Fields>
                                     <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" 
-                                        ShowLastPageButton="True"  ButtonCssClass="pagerButtonStyle" />
+                                        ShowLastPageButton="True"  ButtonCssClass="pagerButtonStyle"  />
                                 </Fields>
                             </asp:DataPager>
                         </td>
@@ -261,6 +269,10 @@ style="margin:2px;"/>
             </SelectedItemTemplate>
         </asp:ListView>
         <br />
+
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+            CssClass="validatorStyle" DisplayMode="List" />
+
         <br />
 <%--        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
             AutoGenerateColumns="False" DataSourceID="dsNews">

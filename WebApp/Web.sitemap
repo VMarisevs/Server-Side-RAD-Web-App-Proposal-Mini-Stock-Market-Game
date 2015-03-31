@@ -20,9 +20,8 @@
 
     <!-- Available to Admin(authorised) -->
     <siteMapNode url="Authorised/EditStocks.aspx" title="Edit Stocks"  description="">
-      <siteMapNode url="Authorised/CreateStock.aspx" title="Create a Stock"  description="" />
-      <siteMapNode url="Authorised/EditUsers.aspx" title="Edit Users"  description="" />
       <siteMapNode url="Authorised/EditNews.aspx" title="Edit News"  description="" />
+      <siteMapNode url="Authorised/EditUsers.aspx" title="Edit Users"  description="" />
     </siteMapNode>
 
   </siteMapNode>

@@ -11,4 +11,12 @@ public partial class Authorised_EditNews : System.Web.UI.Page
     {
 
     }
+    protected void lvwNews_ItemInserting(object sender, ListViewInsertEventArgs e)
+    {
+
+    }
+    protected void lvwNews_ItemInserted(object sender, ListViewInsertedEventArgs e)
+    {
+ 
+    }
 }
