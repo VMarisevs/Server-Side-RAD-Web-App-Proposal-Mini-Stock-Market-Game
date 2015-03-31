@@ -13,29 +13,15 @@
         {
             width:35%;
         }
-        .style4
-        {
-            width: 35%;
-        }
         .style5
         {
         }
-        .style6
-        {
-            width: 8%;
-            height: 340px;
-        }
-        .style7
-        {
-            width: 35%;
-            height: 340px;
-        }
-    </style>
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">    
     <table border="0" cellpadding="5" frame="void">
         <tr>
-             <td class="style1" colspan="3">
+             <td class="style1" >
                               <h1>Welcome
                  </h1>
                  <p>
@@ -50,6 +36,51 @@
                      So what Are you waiting for? Get trading!
                  </p>
                  </td>
+
+                 <td></td>
+
+                 <td>
+                                  <h1>Latest Activity
+                 </h1>
+                 <asp:GridView ID="gwActivity" runat="server" AllowPaging="True" 
+                     AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsUsers" 
+                     ForeColor="#333333" GridLines="None">
+                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                     <Columns>
+                         <asp:BoundField DataField="UserName" HeaderText="User Name" 
+                             SortExpression="UserName" >
+                         <ItemStyle HorizontalAlign="Center" />
+                         </asp:BoundField>
+                         <asp:BoundField DataField="LastActivityDate" HeaderText="Last Activity Date" 
+                             SortExpression="LastActivityDate" >
+                         <ItemStyle HorizontalAlign="Center" />
+                         </asp:BoundField>
+                     </Columns>
+                     <EditRowStyle BackColor="#999999" />
+                     <FooterStyle BackColor="#008FBF" Font-Bold="True" ForeColor="White" />
+                     <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" />
+                     <PagerSettings Mode="NextPreviousFirstLast" />
+                     <PagerStyle BackColor="#008FBF" ForeColor="White" HorizontalAlign="Center" />
+                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                     <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                     <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                     <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                 </asp:GridView>
+
+                 
+
+            <asp:SqlDataSource ID="dsUsers" runat="server" 
+                     ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+                     SelectCommand="SELECT [UserName], [LastActivityDate] FROM [vw_aspnet_Users] ORDER BY [LastActivityDate] DESC"></asp:SqlDataSource>
+                 </td>
+        </tr>
+        <tr>
+             <td class="style1" colspan="3" >
+                              <hr />
+                 </td>
+
         </tr>
         <tr>
              <td class="style1">
@@ -97,51 +128,22 @@
             </td>
              <td class="style2">
                  &nbsp;</td>
-            <td class="style3">
-                 <h1>Latest Activity
-                 </h1>
-                 <asp:GridView ID="gwActivity" runat="server" AllowPaging="True" 
-                     AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsUsers" 
-                     ForeColor="#333333" GridLines="None">
-                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                     <Columns>
-                         <asp:BoundField DataField="UserName" HeaderText="User Name" 
-                             SortExpression="UserName" >
-                         <ItemStyle HorizontalAlign="Center" />
-                         </asp:BoundField>
-                         <asp:BoundField DataField="LastActivityDate" HeaderText="Last Activity Date" 
-                             SortExpression="LastActivityDate" >
-                         <ItemStyle HorizontalAlign="Center" />
-                         </asp:BoundField>
-                     </Columns>
-                     <EditRowStyle BackColor="#999999" />
-                     <FooterStyle BackColor="#008FBF" Font-Bold="True" ForeColor="White" />
-                     <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" />
-                     <PagerSettings Mode="NextPreviousFirstLast" />
-                     <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                     <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                     <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                     <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-                 </asp:GridView>
-
-                 
-
-            <asp:SqlDataSource ID="dsUsers" runat="server" 
-                     ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
-                     SelectCommand="SELECT [UserName], [LastActivityDate] FROM [vw_aspnet_Users] ORDER BY [LastActivityDate] DESC"></asp:SqlDataSource>
-            </td>
-        </tr>
-        <tr>
-             <td class="style5" colspan="3">
-                 <h1>Graph
-                 </h1>
+            <td class="style3" valign="top">
+                 <h1>&nbsp;User Distribution</h1>
 
                  <div>
                  <!--Graph here Vytas-->
-                 </div>
+                     <asp:Chart ID="Chart1" runat="server" DataSourceID="dsUsers">
+                         <Series>
+                             <asp:Series ChartType="Doughnut" Name="Series1" 
+                                 YValueMembers="LastActivityDate" YValuesPerPoint="6">
+                             </asp:Series>
+                         </Series>
+                         <ChartAreas>
+                             <asp:ChartArea Name="ChartArea1">
+                             </asp:ChartArea>
+                         </ChartAreas>
+                     </asp:Chart>
             </td>
         </tr>
         </table>
