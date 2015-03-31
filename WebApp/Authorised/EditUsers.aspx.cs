@@ -12,11 +12,25 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 
     }
 
-    private void LoadData()
+    private void getNetWorth()
     {
-        //List<User> Users = new List<User>();
-        //IEnumerable<> enumerable = UserDB.GetAllUsers();
-        //grdRows.DataSource = lines.Where(t => t.ProductID.StartsWith(tbSearch.Text)).ToList();
-        //grdRows.DataBind();
+        
+    }
+    protected void gvwUserShares_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        
+    }
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        fvwUserShares.ChangeMode(FormViewMode.Edit);
+        
+    }
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        fvwUserShares.ChangeMode(FormViewMode.ReadOnly);
+    }
+    protected void gvwUserShares_SelectedIndexChanged1(object sender, EventArgs e)
+    {
+
     }
 }
