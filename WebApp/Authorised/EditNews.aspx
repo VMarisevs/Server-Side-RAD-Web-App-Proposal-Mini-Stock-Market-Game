@@ -53,7 +53,7 @@
                                                 Text='<%# Eval("UpdateDate") %>' />
                     </td>
                     <td >
-                        <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" 
+                        <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" CausesValidation="false"
                             Text="Delete" 
                             ForeColor="black" 
 font-size="1em" 
@@ -64,7 +64,10 @@ BorderColor="#00BFFF"
 BorderStyle="Solid"
 BorderWidth="2px"
 style="margin:2px;"/>
-                        <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" ForeColor="black" 
+
+        <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender2" runat="server"  TargetControlID="DeleteButton" ConfirmText="Are you sure you want to delete this News item?" />
+
+                        <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" ForeColor="black" CausesValidation="false"
 font-size="1em" 
 BackColor="#E8E8E8"
 Font-Names="Tahoma"

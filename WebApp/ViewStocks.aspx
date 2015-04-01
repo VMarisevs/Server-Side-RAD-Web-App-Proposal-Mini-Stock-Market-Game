@@ -25,8 +25,6 @@
         </h3>
         <p>
                <%--  AJAX--%>
-
-
              <asp:UpdatePanel ID="UpdatePanel1" runat="server">
              <ContentTemplate>
                 <asp:Timer ID="Timer1" runat="server" Interval="6000" />
@@ -146,7 +144,7 @@ ORDER BY [updated] DESC">
                 <td class="style3" align="center" >
                  <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                  <ContentTemplate>
-                 <asp:Timer ID="Timer2" runat="server" Interval="6000" />
+<%--                 <asp:Timer ID="Timer2" runat="server" Interval="6000" />--%>
 
                     <asp:GridView ID="gvwCompanies0" runat="server" AllowPaging="True" AllowSorting="True"
                         AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="#333333"

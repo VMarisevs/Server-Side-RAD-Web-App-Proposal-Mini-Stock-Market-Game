@@ -161,11 +161,11 @@
                           <asp:FormView ID="FormView2" runat="server" DataSourceID="dsCash" >
               <ItemTemplate>
 <%--                    <asp:Label ID="lblTest" runat="server" Text='<%# Bind("Email") %>'></asp:Label>--%>
-                       <cc1:Gravatar ID="Gravatar1" runat="server" CssClass="buttonStyle" Width="55px"  DefaultImageBehavior="Retro" Email='<%# Bind("Email") %>'/>  
-             <%-- Click your gravatar image to view your email (that is associated with it)--%>
-               <cc1:BalloonPopupExtender ID="BalloonPopupExtender1" runat="server" TargetControlID="Gravatar1" BalloonPopupControlID="txtBalloon" 
-          BalloonStyle="Custom" CustomClassName="balloonStyle" CustomCssUrl="balloonStyle" UseShadow="True" Position="BottomLeft" BalloonSize="Small" OffsetX="25" OffsetY="5" DisplayOnMouseOver="False" DisplayOnClick="True">         </cc1:BalloonPopupExtender>
-               </ItemTemplate>
+                    <cc1:Gravatar ID="Gravatar1" runat="server" CssClass="buttonStyle" Width="55px"  DefaultImageBehavior="Retro" Email='rolo45@gmail.com>'/>    <!--<%# Eval("Email") %>-->
+           <%-- Click your gravatar image to view your email (that is associated with it)--%>
+<%--               <cc1:BalloonPopupExtender ID="BalloonPopupExtender1" runat="server" TargetControlID="Gravatar1" BalloonPopupControlID="txtBalloon" 
+          BalloonStyle="Custom" CustomClassName="balloonStyle" CustomCssUrl="balloonStyle" UseShadow="True" Position="BottomLeft" BalloonSize="Small" OffsetX="25" OffsetY="5" DisplayOnMouseOver="False" DisplayOnClick="True">         </cc1:BalloonPopupExtender> --%>  
+            </ItemTemplate>
                 </asp:FormView>
  
                         </div>
@@ -230,7 +230,6 @@
                     <%-- <div style="display:table-caption">--%>
                 </tr>
             </table>
-            <asp:SqlDataSource ID="dsEmail" runat="server"></asp:SqlDataSource>
 
         <asp:SqlDataSource ID="dsCash" runat="server" 
                         ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 

@@ -62,7 +62,8 @@ END ORDER BY [Name]"
         <asp:SqlDataSource ID="dsCompaniesDetailed" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
             
             
-            SelectCommand="SELECT Companies.Id, Companies.Name, Companies.Abbreviation, Companies.logo, Companies.curprice, Companies.shareAmount, Companies.categoryId, Companies.volatility, Companies.shortDescription, Companies.longDescription, Categories.longName FROM Companies INNER JOIN Categories ON Companies.categoryId = Categories.Id WHERE (Companies.Id = @Id) " UpdateCommand="UPDATE [Companies] SET [Name] = @Name, [Abbreviation] = @Abbreviation, [logo] = @logo, [curprice] = @curprice, [shareAmount] = @shareAmount, [categoryId] = @categoryId, [volatility] = @volatility, [shortDescription] = @shortDescription, [longDescription] = @longDescription WHERE [Id] = @original_Id AND [Name] = @original_Name AND [Abbreviation] = @original_Abbreviation AND (([logo] = @original_logo) OR ([logo] IS NULL AND @original_logo IS NULL)) AND [curprice] = @original_curprice AND [shareAmount] = @original_shareAmount AND [categoryId] = @original_categoryId AND [volatility] = @original_volatility"
+            
+            SelectCommand="SELECT Companies.Id, Companies.Name, Companies.Abbreviation, Companies.logo, Companies.curprice, Companies.shareAmount, Companies.categoryId, Companies.volatility, Companies.shortDescription, Companies.longDescription, Categories.longName FROM Companies INNER JOIN Categories ON Companies.categoryId = Categories.Id WHERE (Companies.Id = @Id) " UpdateCommand="UPDATE [Companies] SET [Name] = @Name, [Abbreviation] = @Abbreviation, [logo] = @logo, [curprice] = @curprice, [shareAmount] = @shareAmount, [categoryId] = @categoryId, [volatility] = @volatility, [shortDescription] = @shortDescription, [longDescription] = @longDescription WHERE [Id] = @original_Id AND [Name] = @original_Name AND [Abbreviation] = @original_Abbreviation AND [categoryId] = @original_categoryId AND [volatility] = @original_volatility"
             ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Companies] WHERE [Id] = @original_Id AND [Name] = @original_Name AND [Abbreviation] = @original_Abbreviation AND (([logo] = @original_logo) OR ([logo] IS NULL AND @original_logo IS NULL)) AND [curprice] = @original_curprice AND [shareAmount] = @original_shareAmount AND [categoryId] = @original_categoryId AND [volatility] = @original_volatility AND (([shortDescription] = @original_shortDescription) OR ([shortDescription] IS NULL AND @original_shortDescription IS NULL)) AND (([longDescription] = @original_longDescription) OR ([longDescription] IS NULL AND @original_longDescription IS NULL))"
             InsertCommand="INSERT INTO [Companies] ([Name], [Abbreviation], [logo], [curprice], [shareAmount], [categoryId], [volatility], [shortDescription], [longDescription]) VALUES (@Name, @Abbreviation, @logo, @curprice, @shareAmount, @categoryId, @volatility, @shortDescription, @longDescription)"
             OldValuesParameterFormatString="original_{0}">
@@ -106,9 +107,6 @@ END ORDER BY [Name]"
                 <asp:Parameter Name="original_Id" Type="Int32" />
                 <asp:Parameter Name="original_Name" Type="String" />
                 <asp:Parameter Name="original_Abbreviation" Type="String" />
-                <asp:Parameter Name="original_logo" />
-                <asp:Parameter Name="original_curprice" Type="Decimal" />
-                <asp:Parameter Name="original_shareAmount" Type="Int32" />
                 <asp:Parameter Name="original_categoryId" Type="Int32" />
                 <asp:Parameter Name="original_volatility" Type="Int32" />
             </UpdateParameters>
@@ -296,7 +294,7 @@ style="margin:2px;">
                                     ErrorMessage="Price required">*</asp:RequiredFieldValidator>
                             </InsertItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label7" runat="server" Text='<%# Bind("curprice") %>'></asp:Label>
+                                <asp:Label ID="Label7" runat="server" Text='<%# Bind("curprice", "{0:C}") %>'></asp:Label>
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" />
                         </asp:TemplateField>
@@ -314,7 +312,8 @@ style="margin:2px;">
                                     ErrorMessage="Amount of shares required">*</asp:RequiredFieldValidator>
                             </InsertItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label8" runat="server" Text='<%# Bind("shareAmount") %>'></asp:Label>
+                                <asp:Label ID="Label8" runat="server" 
+                                    Text='<%# Bind("shareAmount") %>'></asp:Label>
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" />
                         </asp:TemplateField>
@@ -402,10 +401,27 @@ style="margin:2px;">
                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" />
                             <ItemStyle Width="400px" />
                         </asp:TemplateField>
-                        <asp:CommandField ButtonType="Button" ShowEditButton="True" 
-                            ControlStyle-CssClass="buttonStyle" ShowInsertButton="True" >
-<ControlStyle CssClass="buttonStyle"></ControlStyle>
-                        </asp:CommandField>
+                        <asp:TemplateField ShowHeader="False">
+                            <EditItemTemplate>
+                                <asp:Button ID="Button1" runat="server" CausesValidation="True" 
+                                    CommandName="Update" Text="Update" />
+                                &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" 
+                                    CommandName="Cancel" Text="Cancel" />
+                            </EditItemTemplate>
+                            <InsertItemTemplate>
+                                <asp:Button ID="Button1" runat="server" CausesValidation="True" 
+                                    CommandName="Insert" Text="Insert" />
+                                &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" 
+                                    CommandName="Cancel" Text="Cancel" />
+                            </InsertItemTemplate>
+                            <ItemTemplate>
+                                <asp:Button ID="Button1" runat="server" CausesValidation="False" 
+                                    CommandName="Edit" Text="Edit" />
+                                &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" 
+                                    CommandName="New" Text="New" />
+                            </ItemTemplate>
+                            <ControlStyle CssClass="buttonStyle" />
+                        </asp:TemplateField>
                     </Fields>
                     <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
                     <HeaderStyle BackColor="DeepSkyBlue" Font-Bold="True" ForeColor="White"  />
