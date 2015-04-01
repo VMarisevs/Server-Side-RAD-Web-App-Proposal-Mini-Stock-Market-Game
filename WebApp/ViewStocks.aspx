@@ -25,7 +25,7 @@
             <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px">
                 <Series>
                     <asp:Series ChartType="Area" Name="Series1" YValueMembers="price" 
-                        YValuesPerPoint="4">
+                        YValuesPerPoint="4" XValueMember="updated">
                     </asp:Series>
                 </Series>
                 <ChartAreas>
@@ -38,10 +38,17 @@
             <asp:SqlDataSource ID="dsGraphs" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
                 
-                SelectCommand="SELECT [price] FROM [StockHistory] WHERE ([companyId] = @companyId)">
+                SelectCommand="SELECT TOP(20) [price],[updated] 
+FROM [StockHistory] 
+WHERE [companyId] = 
+CASE @companyId
+	WHEN 'topCompany' THEN (SELECT TOP (1) Id FROM Companies ORDER BY curprice DESC)
+	ELSE @companyId
+END
+ORDER BY [updated] DESC">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="gvwCompanies0" DefaultValue="10003" 
-                        Name="companyId" PropertyName="SelectedValue" Type="Int32" />
+                    <asp:ControlParameter ControlID="gvwCompanies0" DefaultValue="topCompany" 
+                        Name="companyId" PropertyName="SelectedValue" Type="String" />
                 </SelectParameters>
             </asp:SqlDataSource>
         </p>
