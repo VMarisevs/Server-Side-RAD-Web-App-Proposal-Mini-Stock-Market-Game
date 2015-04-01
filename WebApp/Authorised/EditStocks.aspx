@@ -275,6 +275,9 @@ style="margin:2px;">
                             </InsertItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label6" runat="server" Text='<%# Bind("logo") %>'></asp:Label>
+                                <br />
+                                <asp:Image ID="Image1" runat="server" 
+                                    ImageUrl='<%# Bind("Imagefile", "Images/Logos/{0}") %>' />
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Middle" />
                         </asp:TemplateField>
