@@ -46,15 +46,21 @@ public static class UserDB
         return listUsers;
     }
 
+
+
+
     [DataObjectMethod(DataObjectMethodType.Select)]
     public static IEnumerable GetUserInformation(Guid UserId)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
-        string sel = "SELECT aspnet_Users.UserId,aspnet_Users.UserName,aspnet_Users.UserName, aspnet_Users.Cash, UserShares.companyId, UserShares.shares, UserShares.price, Companies.Name " +
-         "FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId " +
-         "INNER JOIN Companies ON UserShares.companyId = Companies.Id " +
-         "WHERE (aspnet_Users.UserId = @UserId)";
-
+        string sel = "SELECT aspnet_Roles.RoleName, aspnet_Users.UserName, aspnet_Users.Cash, UserShares.price, " +
+                     "UserShares.shares, Companies.Name, aspnet_Users.UserId, aspnet_Roles.RoleId, UserShares.companyId " +
+                     "FROM aspnet_Roles INNER JOIN " +
+                     "aspnet_UsersInRoles ON aspnet_Roles.RoleId = aspnet_UsersInRoles.RoleId INNER JOIN " +
+                     "aspnet_Users ON aspnet_UsersInRoles.UserId = aspnet_Users.UserId INNER JOIN " +
+                     "UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN " +
+                     "Companies ON UserShares.companyId = Companies.Id " +
+                     "WHERE (aspnet_Users.UserId = @UserId)";
         SqlCommand cmd = new SqlCommand(sel, con);     
         cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier).Value = UserId;
         con.Open();
@@ -64,16 +70,16 @@ public static class UserDB
 
 
     [DataObjectMethod(DataObjectMethodType.Insert)]
-    public static int InsertCategory(string UserName, double cash )
+    public static int InsertUser(string UserName, string Cash, Guid ApplicationId )
     {
         SqlConnection con = new SqlConnection(GetConnectionString());           
-        string ins = "INSERT INTO Categories "
-            + "(CategoryID, ShortName, LongName) "
-            + "VALUES(@CategoryID, @ShortName, @LongName)";
+        string ins = "INSERT INTO aspnet_Users "+
+                         "(UserName, Cash, ApplicationId) " 
+            + "VALUES(@UserName, @Cash, @ApplicationId)";
         SqlCommand cmd = new SqlCommand(ins, con);
-        //cmd.Parameters.AddWithValue("CategoryID", CategoryID);
-        //cmd.Parameters.AddWithValue("ShortName", ShortName);
-        //cmd.Parameters.AddWithValue("LongName", LongName);
+        cmd.Parameters.AddWithValue("UserName", UserName);
+        cmd.Parameters.AddWithValue("Cash", Cash);
+        cmd.Parameters.AddWithValue("ApplicationId", ApplicationId);
         con.Open();
         int i = cmd.ExecuteNonQuery();
         return i;

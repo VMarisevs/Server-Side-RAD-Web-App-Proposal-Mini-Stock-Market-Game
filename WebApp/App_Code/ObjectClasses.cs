@@ -16,7 +16,12 @@ public class User
 
     public string UserCash { get; set; }
 
-    public DateTime UserLastActivity { get; set; }
+    public DateTime UserLastActivity { get; set; }   
+}
 
-    
+public class Role
+{
+    public string RoleId { get; set; }
+
+    public string RoleName { get; set; }
 }

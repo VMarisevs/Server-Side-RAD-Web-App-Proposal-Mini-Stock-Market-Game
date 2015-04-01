@@ -7,6 +7,10 @@
         {
             width: 100%;
         }
+        .style2
+        {
+            height: 26px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -14,8 +18,9 @@
 
     <asp:ObjectDataSource ID="dsUserShares" runat="server" OldValuesParameterFormatString="original_{0}"
         SelectMethod="GetUserInformation" TypeName="UserDB" 
-        UpdateMethod="UpdateUser" onupdated="dsUserShares_Updated" 
-        onupdating="dsUserShares_Updating">
+        UpdateMethod="UpdateUser" 
+        onupdated="dsUserShares_Updated" onupdating="dsUserShares_Updating" 
+        onselected="dsUserShares_Selected">
         <SelectParameters>
             <asp:ControlParameter ControlID="gvwUsers" DbType="Guid" DefaultValue="" Name="userId"
                 PropertyName="SelectedValue" />
@@ -33,13 +38,26 @@
 
     <asp:ObjectDataSource ID="dsUser" runat="server" OldValuesParameterFormatString="original_{0}"
         SelectMethod="GetAllUsers" TypeName="UserDB"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="dsRoles" runat="server" 
+        onselected="dsRoles_Selected" 
+        SelectMethod="GetUserRoles" TypeName="RoleDB" 
+        OldValuesParameterFormatString="original_{0}" InsertMethod="InsertRole" 
+        oninserting="dsRoles_Inserting">
+        <InsertParameters>
+            <asp:Parameter Name="UserId" Type="String" />
+            <asp:Parameter Name="RoleId" Type="String" />
+        </InsertParameters>
+        <SelectParameters>
+            <asp:ControlParameter ControlID="gvwUsers" DbType="Guid" Name="UserId" 
+                PropertyName="SelectedValue" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
     <asp:GridView ID="gvwUsers" runat="server" AutoGenerateColumns="False" CellPadding="4"
         DataSourceID="dsUser" ForeColor="#333333" GridLines="None" AllowPaging="True"
         Width="540px" DataKeyNames="userId">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="UserName" HeaderText="UserName" SortExpression="UserName" />
-            <asp:BoundField DataField="UserRole" HeaderText="UserRole" SortExpression="UserRole" />
             <asp:BoundField DataField="UserLastActivity" HeaderText="UserLastActivity" SortExpression="UserLastActivity" />
             <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
         </Columns>
@@ -62,8 +80,7 @@
             <table class="style1">
                 <tr>
                     <td>
-                        Name:
-                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("UserName", "{0}") %>'></asp:TextBox>
+                        Name:&nbsp;<asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("UserName", "{0}") %>'></asp:TextBox>
                     </td>
                     <td>
                         <asp:DropDownList runat="server" DataSourceID="dsUserShares" 
@@ -89,24 +106,24 @@
                         &nbsp;</td>
                 </tr>
                 <tr>
-                    <td>
-                        <asp:Label ID="lblUserId" runat="server" Text='<%# Bind("userID", "{0}") %>' 
-                            Visible="False"></asp:Label>
-                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("companyId", "{0}") %>' 
-                            Visible="False"></asp:Label>
+                    <td class="style2">
+                        <asp:CheckBox ID="cbEditAdmin" runat="server" Text="Admin" />
+                        <asp:CheckBox ID="cbEditUser" runat="server" Text="User" />
                     </td>
-                    <td>
+                    <td class="style2">
                         &nbsp;</td>
-                    <td>
-                        &nbsp;</td>
-                    <td>
-                        &nbsp;</td>
+                    <td class="style2">
+                        </td>
+                    <td class="style2">
+                        </td>
                 </tr>
                 <tr>
                     <td>
-                        &nbsp;</td>
+                       
+                    </td>
                     <td>
-                        <asp:Button ID="btnUpdate" runat="server" CommandName="Update" Text="Update" />
+                        <asp:Button ID="btnUpdate" runat="server" CommandName="Update" Text="Update" 
+                            onclick="btnUpdate_Click" />
                         &nbsp;
                         <asp:Button ID="btnCancel" runat="server" onclick="btnCancel_Click" 
                             Text="Cancel" />
@@ -119,7 +136,10 @@
             </table>
 
             <br />
-            <br />
+            <asp:Label ID="lblUserId" runat="server" Text='<%# Bind("userID", "{0}") %>' 
+                Visible="False"></asp:Label>
+            <asp:Label ID="Label4" runat="server" Text='<%# Bind("companyId", "{0}") %>' 
+                Visible="False"></asp:Label>
             <br />
             <br />
             <br />
@@ -127,11 +147,23 @@
 
 
         </EditItemTemplate>
+        <InsertItemTemplate>
+            Name:
+            <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("UserName", "{0}") %>'></asp:TextBox>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
+            Cash:
+            <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Cash", "{0}") %>'></asp:TextBox>
+            <br />
+            <br />
+            <asp:Button ID="btnCreate" runat="server" 
+                Text="Create"  CommandName="Insert"  />
+        </InsertItemTemplate>
         <ItemTemplate>
             <table class="style1">
                 <tr>
                     <td>
-                        Name:&nbsp;<asp:Label ID="Label1" runat="server" 
+                        &nbsp;Name:&nbsp;<asp:Label ID="Label1" runat="server" 
                             Text='<%# Eval("UserName", "{0}") %>'></asp:Label>
                         &nbsp;&nbsp;</td>
                     <td>
@@ -148,7 +180,17 @@
                     <td>
                         <asp:Button ID="btnEdit" runat="server" onclick="btnEdit_Click" 
                             Text="Edit User" />
+                        <asp:Button ID="btnCreateUser" runat="server" onclick="btnCreateUser_Click" 
+                            Text="Create User" />
                     </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:CheckBox ID="cbViewAdmin" runat="server" Enabled="False" Text="Admin" />
+                        <asp:CheckBox ID="cbViewUser" runat="server" Enabled="False" Text="User" />
+                    </td>
+                    <td>
+                        &nbsp;</td>
                 </tr>
             </table>
             <br />
