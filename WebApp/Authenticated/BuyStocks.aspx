@@ -84,7 +84,9 @@
             ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
             onselected="dsCompany_Selected" 
             SelectCommand="SELECT [shareAmount], [curprice] FROM [Companies] WHERE ([Id] = @Id)" 
-            UpdateCommand="UPDATE Companies SET shareAmount = shareAmount - 1 WHERE (Id = @id)">
+            
+            UpdateCommand="UPDATE Companies SET shareAmount = shareAmount - 1 WHERE (Id = @id)" 
+            onselecting="dsCompany_Selecting">
             <SelectParameters>
                 <asp:ControlParameter ControlID="gwBuyStocks" DefaultValue="" Name="Id" 
                     PropertyName="SelectedValue" Type="Int32" />
