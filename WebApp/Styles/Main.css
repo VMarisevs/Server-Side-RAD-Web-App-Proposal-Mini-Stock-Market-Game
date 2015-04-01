@@ -186,26 +186,44 @@ ul li {
     Width:120px;
     border: 2px Solid #00BFFF;
     Color:black;
-    font-size:1em;
-    Font-family:Tahoma;
     margin:2px;
     text-align:center;
 }
 
 .pagerButtonStyle
 {
-    font-size: 1em;
     background-color:#E8E8E8;
     Font-Family:Tahoma;
     Width:75px;
     border: 2px Solid #00BFFF;
     Color:black;
     font-size:1em;
-    Font-family:Tahoma;
     margin:2px;
     text-align:center;
 }
 
+.profileBox{
+    font-size: 1em;
+    background-color:#E8E8E8;
+    Font-Family:Tahoma;
+    Width:120px;
+    border: 2px Solid #00BFFF;
+    Color:black;
+    margin:2px;
+    text-align:center;
+}
+
+.balloonStyle{
+    Font-Family:Tahoma;
+    Width:200px;
+    height:40px;
+    Color:black;
+    font-size:1em;
+    margin-left:50px;
+    padding-left:50px;
+    float:right;
+    text-align:right;
+}
 /*
 Button style:
 

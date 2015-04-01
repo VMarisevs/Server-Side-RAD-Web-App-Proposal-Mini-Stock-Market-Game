@@ -128,7 +128,7 @@
             <td class="style3" valign="top">
                  <h1>&nbsp;User Distribution</h1>
 
-                 <div>
+                 
                  <!--Graph here Vytas-->
                      <asp:Chart ID="Chart1" runat="server" DataSourceID="dsUsers">
                          <Series>

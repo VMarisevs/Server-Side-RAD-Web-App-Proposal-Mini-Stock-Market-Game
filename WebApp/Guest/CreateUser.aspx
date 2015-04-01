@@ -1,10 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="CreateUser.aspx.cs" Inherits="Guest_CreateUser" %>
 
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div style="width:200px;margin-left:30%;">
     
+    <asp:Panel runat="server" ID="createUserPanel" style="width:200px;">
+    <div style="width:200px;">
     <asp:CreateUserWizard ID="cuwCreateUserAccount" runat="server" 
         ContinueDestinationPageUrl="~/Default.aspx" 
         oncreateduser="cuwCreateUserAccount_CreatedUser" BackColor="#FDFFCC" 
@@ -42,5 +45,11 @@
        
     </asp:CreateUserWizard>
      </div>
+     </asp:Panel>
+    <cc1:AlwaysVisibleControlExtender ID="createUserPanel_AlwaysVisibleControlExtender" 
+        runat="server" BehaviorID="createUserPanel_AlwaysVisibleControlExtender" 
+        HorizontalSide="Center" TargetControlID="createUserPanel" UseAnimation="false" 
+        VerticalSide="Middle">
+    </cc1:AlwaysVisibleControlExtender>
 </asp:Content>
 

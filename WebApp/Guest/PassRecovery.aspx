@@ -1,9 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="PassRecovery.aspx.cs" Inherits="Guest_PassRecovery" %>
 
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div style="width:300px;margin-left:30%">
+    
+    <asp:Panel runat="server" ID="passRecoverPanel">
+
+    <div style="width:300px;">
         <asp:PasswordRecovery ID="PasswordRecovery1" runat="server" BackColor="#FDFFCC" 
             BorderPadding="20" BorderStyle="Dashed" BorderWidth="3px" Font-Size="1em" 
             Width="200px" Font-Names="Tahoma">
@@ -25,5 +30,11 @@
                 HorizontalAlign="Center" />
         </asp:PasswordRecovery>
     </div>
+        </asp:Panel>
+    <cc1:AlwaysVisibleControlExtender ID="passRecoverPanel_AlwaysVisibleControlExtender" 
+        runat="server" BehaviorID="passRecoverPanel_AlwaysVisibleControlExtender" 
+        HorizontalSide="Center" TargetControlID="passRecoverPanel" UseAnimation="false  " 
+        VerticalSide="Middle">
+    </cc1:AlwaysVisibleControlExtender>
 </asp:Content>
 
