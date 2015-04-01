@@ -16,21 +16,25 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
     {
         
     }
-    protected void gvwUserShares_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        
-    }
+
     protected void btnEdit_Click(object sender, EventArgs e)
     {
         fvwUserShares.ChangeMode(FormViewMode.Edit);
-        
+           
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         fvwUserShares.ChangeMode(FormViewMode.ReadOnly);
     }
-    protected void gvwUserShares_SelectedIndexChanged1(object sender, EventArgs e)
-    {
 
+    protected void dsUserShares_Updating(object sender, ObjectDataSourceMethodEventArgs e)
+    {
+        DropDownList list = fvwUserShares.FindControl("ddlCompanies") as DropDownList;
+        e.InputParameters["companyId"] = list.SelectedValue;
+    }
+    protected void dsUserShares_Updated(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        dsUser.Select();
+        gvwUsers.DataBind();
     }
 }

@@ -50,7 +50,7 @@ public static class UserDB
     public static IEnumerable GetUserInformation(Guid UserId)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
-        string sel = "SELECT aspnet_Users.UserName,aspnet_Users.UserName, aspnet_Users.Cash, UserShares.companyId, UserShares.shares, UserShares.price, Companies.Name " +
+        string sel = "SELECT aspnet_Users.UserId,aspnet_Users.UserName,aspnet_Users.UserName, aspnet_Users.Cash, UserShares.companyId, UserShares.shares, UserShares.price, Companies.Name " +
          "FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId " +
          "INNER JOIN Companies ON UserShares.companyId = Companies.Id " +
          "WHERE (aspnet_Users.UserId = @UserId)";
@@ -66,10 +66,7 @@ public static class UserDB
     [DataObjectMethod(DataObjectMethodType.Insert)]
     public static int InsertCategory(string UserName, double cash )
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
-
-
-              
+        SqlConnection con = new SqlConnection(GetConnectionString());           
         string ins = "INSERT INTO Categories "
             + "(CategoryID, ShortName, LongName) "
             + "VALUES(@CategoryID, @ShortName, @LongName)";
@@ -84,18 +81,25 @@ public static class UserDB
 
 
     [DataObjectMethod(DataObjectMethodType.Update)]
-    public static void UpdateUser(string UserName, string Cash)
+    public static void UpdateUser(Guid UserId, string companyId, string UserName, string Cash, string shares)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
         string up = " UPDATE aspnet_Users "
             + "SET UserName = @UserName, "
-            + "Cash = @Cash ";
-            //+ "WHERE CategoryID = @original_CategoryID "
-            //+ "AND ShortName = @original_ShortName "
-            //+ "AND LongName = @original_LongName";
+            + "Cash = @Cash " +
+            "WHERE (UserId = @UserId)" +
+            "UPDATE UserShares " +
+            "SET shares = @shares " +
+            "WHERE (UserId = @UserId) AND (companyId = @companyId)";
+            
+
         SqlCommand cmd = new SqlCommand(up, con);
+        cmd.Parameters.AddWithValue("UserId", UserId);
+        cmd.Parameters.AddWithValue("companyId", companyId);
         cmd.Parameters.AddWithValue("UserName", UserName);
         cmd.Parameters.AddWithValue("Cash", Cash);
+        cmd.Parameters.AddWithValue("shares", shares);
+
         con.Open();
         //int i = 
         cmd.ExecuteNonQuery();

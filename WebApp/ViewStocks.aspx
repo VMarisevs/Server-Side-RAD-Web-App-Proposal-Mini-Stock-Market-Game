@@ -22,7 +22,9 @@
         Graph
         </h3>
         <p>
-            <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px">
+        
+            <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px" 
+                AlternateText="No data to display">
                 <Series>
                     <asp:Series ChartType="Area" Name="Series1" YValueMembers="price" 
                         YValuesPerPoint="4" XValueMember="updated">
@@ -33,6 +35,23 @@
                     </asp:ChartArea>
                 </ChartAreas>
             </asp:Chart>
+
+         <%--  AJAX--%>
+
+             
+<%--             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            </asp:UpdatePanel>--%>
+
+<%--            <asp:Timer ID="Timer1" runat="server" Interval="30000">
+            </asp:Timer>--%>
+            
+            
+
+            
+        </p>
+        
+        
+        <p>
         </p>
         <p>
             <asp:SqlDataSource ID="dsGraphs" runat="server" 
@@ -56,11 +75,13 @@ ORDER BY [updated] DESC">
             &nbsp;</p>
 
     </div>
+  
 
     <div style="float:left;width:70%;margin:0px;padding:0px">
+      
     <p>
         <asp:SqlDataSource ID="dsCompanies" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
-            SelectCommand="SELECT Companies.Id, Companies.Name, Companies.Abbreviation, Companies.curprice, Companies.shareAmount, Categories.longName 
+            SelectCommand="SELECT Companies.Id, Companies.Name, Companies.logo, Companies.Abbreviation, Companies.curprice, Companies.shareAmount, Categories.longName 
                             FROM Companies INNER JOIN Categories 
                             ON Companies.categoryId = Categories.Id 
                             WHERE ([Name] LIKE '%' + @Name + '%')
@@ -80,12 +101,16 @@ ORDER BY [updated] DESC">
             SelectCommand="SELECT [longName], [Id] FROM [Categories] ORDER BY [longName]">
         </asp:SqlDataSource>
     </p>
+    
         <table width ="80%"  class="style2">
+        
             <tr>
                 <td class="style4" align="right">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;
+                 
                     <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
+
                     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search"
                         Style="margin-top: 4px" 
                         ForeColor="black" 
@@ -96,6 +121,7 @@ ORDER BY [updated] DESC">
     BorderColor="#00BFFF"
     BorderStyle="Solid"
     BorderWidth="2px" />
+
                     </td>
             </tr>
             <tr>
@@ -116,30 +142,39 @@ ORDER BY [updated] DESC">
                         DataKeyNames="Id">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
-                            <asp:BoundField DataField="Abbreviation" HeaderText="Name" 
+                            <asp:BoundField DataField="Id" HeaderText="Id" Visible="false"
+                                SortExpression="Id" InsertVisible="False" ReadOnly="True">
+                            </asp:BoundField>
+                            <asp:TemplateField HeaderText="Logo" SortExpression="logo">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("logo") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Image ID="Image1" runat="server" ImageAlign="Middle" 
+                                        ImageUrl='<%# Bind("logo","/WebApp/Images/Logos/{0}") %>' Width="150px" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="Name" SortExpression="Name" HeaderText="Name">
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Abbreviation" HeaderText="Abbreviation" 
                                 SortExpression="Abbreviation">
-                            <HeaderStyle HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Name" SortExpression="Name">
-                            <ItemStyle HorizontalAlign="Center" />
+                            <asp:BoundField DataField="curprice" HeaderText="Current Price" 
+                                SortExpression="curprice" DataFormatString="{0:c}" >
                             </asp:BoundField>
-                            <asp:BoundField DataField="curprice" HeaderText="Share Price" 
-                                SortExpression="curprice">
-                            <ItemStyle HorizontalAlign="Center" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="shareAmount" HeaderText="shareAmount" SortExpression="shareAmount">
-                            <ItemStyle HorizontalAlign="Center" />
-                            </asp:BoundField>
+                            <asp:BoundField DataField="shareAmount" HeaderText="Shares Available" 
+                                SortExpression="shareAmount" />
                             <asp:BoundField DataField="longName" HeaderText="Category" 
-                                SortExpression="longName" >
-                            <ItemStyle HorizontalAlign="Center" />
-                            </asp:BoundField>
-                            <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
+                                SortExpression="longName" />
+                            <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="buttonStyle" 
+                                ControlStyle-Width="100px" ControlStyle-Font-Underline="false">
+<ControlStyle CssClass="buttonStyle" Font-Underline="False" Width="100px"></ControlStyle>
+                            </asp:CommandField>
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#008FBF" ForeColor="White" Font-Bold="True" />
                         <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" Height="30px" />
+                        <PagerSettings Mode="NextPreviousFirstLast" />
                         <PagerStyle BackColor="#008FBF" ForeColor="White" HorizontalAlign="Center" Height="20px" />
                         <RowStyle BackColor="#F7F6F3" ForeColor="#333333" Height="40px" />
                         <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
@@ -150,6 +185,8 @@ ORDER BY [updated] DESC">
                     </asp:GridView>
                 </td>
             </tr>
+            
         </table>
-        </div>
+            
+      </div>
 </asp:Content>
