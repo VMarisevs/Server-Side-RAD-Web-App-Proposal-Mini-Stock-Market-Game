@@ -61,7 +61,8 @@ END ORDER BY [Name]"
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="dsCompaniesDetailed" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
             
-            SelectCommand="SELECT Companies.Id, Companies.Name, Companies.Abbreviation, Companies.logo, Companies.curprice, Companies.shareAmount, Companies.categoryId, Companies.volatility, Companies.shortDescription, Companies.longDescription, Categories.longName FROM Companies INNER JOIN Categories ON Companies.categoryId = Categories.Id WHERE (Companies.Id = @Id)" UpdateCommand="UPDATE [Companies] SET [Name] = @Name, [Abbreviation] = @Abbreviation, [logo] = @logo, [curprice] = @curprice, [shareAmount] = @shareAmount, [categoryId] = @categoryId, [volatility] = @volatility, [shortDescription] = @shortDescription, [longDescription] = @longDescription WHERE [Id] = @original_Id AND [Name] = @original_Name AND [Abbreviation] = @original_Abbreviation AND (([logo] = @original_logo) OR ([logo] IS NULL AND @original_logo IS NULL)) AND [curprice] = @original_curprice AND [shareAmount] = @original_shareAmount AND [categoryId] = @original_categoryId AND [volatility] = @original_volatility AND (([shortDescription] = @original_shortDescription) OR ([shortDescription] IS NULL AND @original_shortDescription IS NULL))"
+            
+            SelectCommand="SELECT Companies.Id, Companies.Name, Companies.Abbreviation, Companies.logo, Companies.curprice, Companies.shareAmount, Companies.categoryId, Companies.volatility, Companies.shortDescription, Companies.longDescription, Categories.longName FROM Companies INNER JOIN Categories ON Companies.categoryId = Categories.Id WHERE (Companies.Id = @Id) " UpdateCommand="UPDATE [Companies] SET [Name] = @Name, [Abbreviation] = @Abbreviation, [logo] = @logo, [curprice] = @curprice, [shareAmount] = @shareAmount, [categoryId] = @categoryId, [volatility] = @volatility, [shortDescription] = @shortDescription, [longDescription] = @longDescription WHERE [Id] = @original_Id AND [Name] = @original_Name AND [Abbreviation] = @original_Abbreviation AND (([logo] = @original_logo) OR ([logo] IS NULL AND @original_logo IS NULL)) AND [curprice] = @original_curprice AND [shareAmount] = @original_shareAmount AND [categoryId] = @original_categoryId AND [volatility] = @original_volatility"
             ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Companies] WHERE [Id] = @original_Id AND [Name] = @original_Name AND [Abbreviation] = @original_Abbreviation AND (([logo] = @original_logo) OR ([logo] IS NULL AND @original_logo IS NULL)) AND [curprice] = @original_curprice AND [shareAmount] = @original_shareAmount AND [categoryId] = @original_categoryId AND [volatility] = @original_volatility AND (([shortDescription] = @original_shortDescription) OR ([shortDescription] IS NULL AND @original_shortDescription IS NULL)) AND (([longDescription] = @original_longDescription) OR ([longDescription] IS NULL AND @original_longDescription IS NULL))"
             InsertCommand="INSERT INTO [Companies] ([Name], [Abbreviation], [logo], [curprice], [shareAmount], [categoryId], [volatility], [shortDescription], [longDescription]) VALUES (@Name, @Abbreviation, @logo, @curprice, @shareAmount, @categoryId, @volatility, @shortDescription, @longDescription)"
             OldValuesParameterFormatString="original_{0}">
@@ -105,12 +106,11 @@ END ORDER BY [Name]"
                 <asp:Parameter Name="original_Id" Type="Int32" />
                 <asp:Parameter Name="original_Name" Type="String" />
                 <asp:Parameter Name="original_Abbreviation" Type="String" />
-                <asp:Parameter Name="original_logo" Type="String" />
+                <asp:Parameter Name="original_logo" />
                 <asp:Parameter Name="original_curprice" Type="Decimal" />
                 <asp:Parameter Name="original_shareAmount" Type="Int32" />
                 <asp:Parameter Name="original_categoryId" Type="Int32" />
                 <asp:Parameter Name="original_volatility" Type="Int32" />
-                <asp:Parameter Name="original_shortDescription" Type="String" />
             </UpdateParameters>
         </asp:SqlDataSource>
     </p>
@@ -199,6 +199,7 @@ style="margin:2px;">
                     <FooterStyle BackColor="#008FBF" ForeColor="White" Font-Bold="True" />
                     <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" 
                         Height="30px" />
+                    <PagerSettings Mode="NumericFirstLast" />
                     <PagerStyle BackColor="#008FBF" ForeColor="White" HorizontalAlign="Center" 
                         Height="20px" />
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" Height="40px" />
@@ -243,7 +244,7 @@ style="margin:2px;">
                                     ErrorMessage="Name required">*</asp:RequiredFieldValidator>
                             </InsertItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("Name") %>' ></asp:Label>
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" />
                         </asp:TemplateField>
@@ -266,7 +267,7 @@ style="margin:2px;">
                             <HeaderStyle HorizontalAlign="Left" Width="60px" />
                             <ItemStyle Width="900px" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="logo" SortExpression="logo">
+                        <asp:TemplateField HeaderText="Logo" SortExpression="logo">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("logo") %>'></asp:TextBox>
                             </EditItemTemplate>
@@ -274,14 +275,14 @@ style="margin:2px;">
                                 <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("logo") %>'></asp:TextBox>
                             </InsertItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label6" runat="server" Text='<%# Bind("logo") %>'></asp:Label>
                                 <br />
-                                <asp:Image ID="Image1" runat="server" 
-                                    ImageUrl='<%# Bind("Imagefile", "Images/Logos/{0}") %>' />
+                                <asp:Image ID="Image1" runat="server" Height="100px" 
+                                    ImageUrl='<%# Bind("logo", "/WebApp/Images/Logos/{0}") %>' 
+                                    ImageAlign="Middle" />
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Middle" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="curprice" SortExpression="curprice">
+                        <asp:TemplateField HeaderText="Current Price" SortExpression="curprice">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("curprice") %>'></asp:TextBox>
                                 &nbsp;<asp:RequiredFieldValidator ID="rfValPrice" runat="server" 
@@ -299,7 +300,7 @@ style="margin:2px;">
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="shareAmount" SortExpression="shareAmount">
+                        <asp:TemplateField HeaderText="Share Amount" SortExpression="shareAmount">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("shareAmount") %>'></asp:TextBox>
                                 &nbsp;<asp:RequiredFieldValidator ID="rfValShareAmount" runat="server" 
@@ -330,7 +331,7 @@ style="margin:2px;">
                             </EditItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="volatility" SortExpression="volatility">
+                        <asp:TemplateField HeaderText="Volatility" SortExpression="volatility">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("volatility") %>'></asp:TextBox>
                                 &nbsp;<asp:RequiredFieldValidator ID="rfValShareVolitility" runat="server" 
@@ -358,7 +359,7 @@ style="margin:2px;">
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="shortDescription" 
+                        <asp:TemplateField HeaderText="Short Description" 
                             SortExpression="shortDescription">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox8" runat="server" 
@@ -407,7 +408,7 @@ style="margin:2px;">
                         </asp:CommandField>
                     </Fields>
                     <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
-                    <HeaderStyle BackColor="DeepSkyBlue" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="DeepSkyBlue" Font-Bold="True" ForeColor="White"  />
                     <PagerStyle BackColor="#008FBF" ForeColor="White" HorizontalAlign="Center" />
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                 </asp:DetailsView>
@@ -424,8 +425,6 @@ style="margin:2px;">
         <p class="style6">
             <asp:Label ID="lblError" runat="server"></asp:Label>
         </p>
-        
-        <p>
-        </p>
+
     </div>
 </asp:Content>

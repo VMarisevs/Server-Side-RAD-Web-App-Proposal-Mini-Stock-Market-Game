@@ -74,7 +74,7 @@
       
     <p>
         <asp:SqlDataSource ID="dsCompanies" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
-            SelectCommand="SELECT Companies.Id, Companies.Name, Companies.Abbreviation, Companies.curprice, Companies.shareAmount, Categories.longName 
+            SelectCommand="SELECT Companies.Id, Companies.Name, Companies.logo, Companies.Abbreviation, Companies.curprice, Companies.shareAmount, Categories.longName 
                             FROM Companies INNER JOIN Categories 
                             ON Companies.categoryId = Categories.Id 
                             WHERE ([Name] LIKE '%' + @Name + '%')
@@ -135,26 +135,34 @@
                         DataKeyNames="Id">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
-                            <asp:BoundField DataField="Abbreviation" HeaderText="Name" 
+                            <asp:BoundField DataField="Id" HeaderText="Id" Visible="false"
+                                SortExpression="Id" InsertVisible="False" ReadOnly="True">
+                            </asp:BoundField>
+                            <asp:TemplateField HeaderText="Logo" SortExpression="logo">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("logo") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Image ID="Image1" runat="server" ImageAlign="Middle" 
+                                        ImageUrl='<%# Bind("logo","/WebApp/Images/Logos/{0}") %>' Width="150px" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="Name" SortExpression="Name" HeaderText="Name">
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Abbreviation" HeaderText="Abbreviation" 
                                 SortExpression="Abbreviation">
-                            <HeaderStyle HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Name" SortExpression="Name">
-                            <ItemStyle HorizontalAlign="Center" />
+                            <asp:BoundField DataField="curprice" HeaderText="Current Price" 
+                                SortExpression="curprice" DataFormatString="{0:c}" >
                             </asp:BoundField>
-                            <asp:BoundField DataField="curprice" HeaderText="Share Price" 
-                                SortExpression="curprice">
-                            <ItemStyle HorizontalAlign="Center" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="shareAmount" HeaderText="shareAmount" SortExpression="shareAmount">
-                            <ItemStyle HorizontalAlign="Center" />
-                            </asp:BoundField>
+                            <asp:BoundField DataField="shareAmount" HeaderText="Shares Available" 
+                                SortExpression="shareAmount" />
                             <asp:BoundField DataField="longName" HeaderText="Category" 
-                                SortExpression="longName" >
-                            <ItemStyle HorizontalAlign="Center" />
-                            </asp:BoundField>
-                            <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
+                                SortExpression="longName" />
+                            <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="buttonStyle" 
+                                ControlStyle-Width="100px" ControlStyle-Font-Underline="false">
+<ControlStyle CssClass="buttonStyle" Font-Underline="False" Width="100px"></ControlStyle>
+                            </asp:CommandField>
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#008FBF" ForeColor="White" Font-Bold="True" />
