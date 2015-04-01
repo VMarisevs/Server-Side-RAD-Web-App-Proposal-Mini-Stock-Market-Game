@@ -47,7 +47,7 @@ public class RoleDB
     }
 
     [DataObjectMethod(DataObjectMethodType.Insert)]
-    public static int InsertRole( string UserId, string RoleId)
+    public static int InsertRole( Guid UserId, string RoleId)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
         string ins = "INSERT INTO aspnet_UsersInRoles " +

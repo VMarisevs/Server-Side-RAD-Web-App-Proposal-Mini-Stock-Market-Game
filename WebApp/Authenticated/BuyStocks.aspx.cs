@@ -10,51 +10,57 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Gets a reference to a Label control that not in 
-        // a ContentPlaceHolder
-
-
-        //Label mpLabel = (Label)Master.FindControl("lblUserId");
-
-        //if (mpLabel != null)
-        //{
-        //    lblUserId.Text = "Master page label = " + MySession.Current.UserId; //Master.userId;
-        //}
-
-        try
-        {
-            DataView dvSql = (DataView)dsCompany.Select(DataSourceSelectArguments.Empty);
-            foreach (DataRowView drvSql in dvSql)
-            {
-                lblUserId.Text = drvSql["shareAmount"].ToString();
-            }
-        }
-        catch { }
-    }
-    
-    // Buy button
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-       // dsCompany.Select();
-       // DataSourceSelectArguments test 
-
-        dsCompany.Update();
-    }
-
-    protected void gwBuyStocks_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
-    protected void dsCompany_Selected(object sender, SqlDataSourceStatusEventArgs e)
-    {
-        //lblUserId.Text = e.Command.Parameters.ToString();
-
         
     }
 
 
-    protected void dsCompany_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+
+
+
+    protected void dsBuySell_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
     {
-        e.Command.Parameters["Id"].Value = 10003;
+        e.InputParameters["UserId"] = MySession.Current.UserId;
+        e.InputParameters["companyId"] = gwBuyStocks.SelectedDataKey.Value;
+
+    }
+
+
+    protected void LinkButton1_Click(object sender, EventArgs e)
+    {
+        dsBuySell.Select();
+    }
+
+
+    protected void gwBuyStocks_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        dsBuySell.Select();
+    }
+
+
+
+    protected void dsBuySell_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        BuySell stock = new BuySell();
+
+        stock = (BuySell)e.ReturnValue;
+
+        stock.userShares++;
+        stock.companyShares--;
+        stock.cash -= stock.price;
+
+         
+  
+        SharesDB.UpdateCash(MySession.Current.UserId,stock.cash);
+
+        SharesDB.UpdateUserShares(MySession.Current.UserId, (int)gwBuyStocks.SelectedDataKey.Value, stock.userShares);
+
+        if (stock.companyShares != 0)
+        {
+            SharesDB.UpdateCompanyShares((int)gwBuyStocks.SelectedDataKey.Value, stock.companyShares);
+        }
+       // dsStocks.Select();
+
+        
+        gwBuyStocks.DataBind();
     }
 }
