@@ -1,6 +1,10 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
 
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -57,10 +61,25 @@
                 </td>
                 <td id="user">
                 
-                
+
+
+
+
                  <asp:LoginView ID="LoginView1" runat="server">
                  <LoggedInTemplate>
-<asp:FormView ID="FormView1" runat="server" DataSourceID="dsCash">
+
+         <%--     <asp:UpdatePanel ID="UpdatePanelCash" runat="server" UpdateMode="Always">
+             <ContentTemplate>
+           <asp:Timer ID="TimerCash" runat="server" Interval="6000" />--%>
+
+                    <asp:Panel ID="profilePanel" runat="server" class="profileBox" Width="270px"> 
+                       <%-- <div style="display:table-caption">--%>
+                        
+                        <ul style="display:block">
+                            <li style="float:left">
+                        
+
+<asp:FormView ID="FormView1" runat="server" DataSourceID="dsCash" Width="200px">
                 <EditItemTemplate>
                     UserName:
                     <asp:TextBox ID="UserNameTextBox" runat="server" 
@@ -125,19 +144,63 @@
                         Text='<%# Bind("[Share Worth]") %>' Visible="False" />
                     <br />--%>
                     Net Worth:
+
                     <asp:Label ID="Net_WorthLabel" runat="server" 
                         Text='<%# Bind("[Net Worth]", "{0:c}") %>' />
                     <br />
 
                 </ItemTemplate>
             </asp:FormView>
-                 </LoggedInTemplate>
 
+            </li>
+
+
+
+            <li style="float:right">
+           <%-- This form is linked to the datasource that contains the users email, this email is then data bound to the gravatars source email--%>
+                          <asp:FormView ID="FormView2" runat="server" DataSourceID="dsCash" >
+              <ItemTemplate>
+<%--                    <asp:Label ID="lblTest" runat="server" Text='<%# Bind("Email") %>'></asp:Label>--%>
+                       <cc1:Gravatar ID="Gravatar1" runat="server" CssClass="buttonStyle" Width="55px"  DefaultImageBehavior="Retro" Email='<%# Bind("Email") %>'/>  
+             <%-- Click your gravatar image to view your email (that is associated with it)--%>
+               <cc1:BalloonPopupExtender ID="BalloonPopupExtender1" runat="server" TargetControlID="Gravatar1" BalloonPopupControlID="txtBalloon" 
+          BalloonStyle="Custom" CustomClassName="balloonStyle" CustomCssUrl="balloonStyle" UseShadow="True" Position="BottomLeft" BalloonSize="Small" OffsetX="25" OffsetY="5" DisplayOnMouseOver="False" DisplayOnClick="True">         </cc1:BalloonPopupExtender>
+               </ItemTemplate>
+                </asp:FormView>
+ 
+                        </div>
+                        </li>
+                        </ul>
+            </asp:Panel>
+
+
+
+     <%-- AJAX Control Toolkit Plugin--%>
+             <cc1:AlwaysVisibleControlExtender ID="AlwaysVisibleControlExtender1" runat="server" 
+                    TargetControlID="profilePanel"
+                    HorizontalSide="Right"
+                    VerticalSide="Top"
+                    ScrollEffectDuration=".5"
+                    UseAnimation="false" HorizontalOffset="30" VerticalOffset="1" />
+                
+                           
+      
+                
+
+                  
+        <%--       </ContentTemplate>
+            </asp:UpdatePanel>    --%>
+
+
+                 </LoggedInTemplate>
+                  
                  <AnonymousTemplate>
 
                  </AnonymousTemplate>
+          
                   </asp:LoginView>
 
+                   <asp:TextBox ID="txtBalloon" runat="server" Width="500px" ReadOnly="true" class="buttonStyle" Visible="false"/>
                                         <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="#07A2D9" 
                         Font-Names="Tahoma" Font-Bold="true" Font-Underline="false" Font-Size="0.9em" 
                         onloggedout="LoginStatus1_LoggedOut" onloggingout="LoginStatus1_LoggingOut"/>
@@ -147,13 +210,15 @@
             </table>
         </div>
 
+
+
+
         <div id="body">
             <table border="0" cellpadding="0" cellspacing="0" style="margin:0px 0px 60px 0px">
                 <tr>
-                    <%--                    <td style="width:15%;display:block;padding:5px; overflow:hidden">
-            <asp:ContentPlaceHolder ID="CellLeft" runat="server">
-            </asp:ContentPlaceHolder>
-                    </td>--%>
+                    <%--     <asp:UpdatePanel ID="UpdatePanelCash" runat="server" UpdateMode="Always">
+             <ContentTemplate>
+           <asp:Timer ID="TimerCash" runat="server" Interval="6000" />--%>
                     <td style="width:80%;display:block;padding:5px; overflow: auto;margin:0% 10% 0% 10%" >
                     <!--float:left;padding-left:20%;-->
                     <div style="margin:20px;">
@@ -162,25 +227,24 @@
                     </asp:ContentPlaceHolder>
                     </div>
                     </td>
-                    <%--                    <td style="width:15%;display:block;padding:5px; overflow:hidden">
-            <asp:ContentPlaceHolder ID="CellRight" runat="server">
-            </asp:ContentPlaceHolder>
-                    </td>--%>
+                    <%-- <div style="display:table-caption">--%>
                 </tr>
             </table>
+            <asp:SqlDataSource ID="dsEmail" runat="server"></asp:SqlDataSource>
+
         <asp:SqlDataSource ID="dsCash" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:StockMarketGameConnectionString %>" 
+                        ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
                         
                 
                 
-                SelectCommand="SELECT aspnet_Users.UserName, AVG(aspnet_Users.Cash) AS Cash, SUM(UserShares.shares) AS Shares, SUM(UserShares.shares * UserShares.price) AS [Share Worth], SUM(UserShares.shares * Companies.curprice) + AVG(aspnet_Users.Cash) AS [Net Worth] FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id WHERE (aspnet_Users.UserId = @userId) GROUP BY aspnet_Users.UserName, Companies.curprice ORDER BY [Net Worth] DESC">
+                
+                SelectCommand="SELECT aspnet_Users.UserName, AVG(aspnet_Users.Cash) AS Cash, SUM(UserShares.shares) AS Shares, SUM(UserShares.shares * UserShares.price) AS [Share Worth], SUM(UserShares.shares * Companies.curprice) + AVG(aspnet_Users.Cash) AS [Net Worth], aspnet_Membership.Email FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id INNER JOIN aspnet_Membership ON aspnet_Users.UserId = aspnet_Membership.UserId WHERE (aspnet_Users.UserId = @userId) GROUP BY aspnet_Users.UserName, aspnet_Membership.Email ORDER BY [Net Worth] DESC">
             <SelectParameters>
                 <asp:ControlParameter ControlID="lblUserId" Name="userId" PropertyName="Text" />
             </SelectParameters>
                     </asp:SqlDataSource>
 
-            <asp:Label ID="lblUserId" runat="server" Text="UserId" ></asp:Label>
-
+ 
         </div> <!--Body End-->
 
         </form>
@@ -197,7 +261,8 @@
              <tr>
                 <td colspan="9" style="">
                 <span class="headerLinks" style="padding:0px;text-align:right;"><br/>
-                    <a>ZomboCorp © 2015</a></span>
+                    <a>ZomboCorp © 2015</a></span><br />
+                     <asp:Label ID="lblUserId" runat="server" Text="UserId" ForeColor="#D64960"/>
                 </td>
              </tr>
 
@@ -205,5 +270,8 @@
         </div>
     </div> <!--container End-->
 </body>
+
+
+
 
 </html>

@@ -18,21 +18,25 @@ public partial class MasterPage : System.Web.UI.MasterPage
             lblUserId.Text = value;
         }
     }
-
-    public string userId;
-
+    
+    public string userId, email;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         
-
+        
         if (HttpContext.Current.User.Identity.IsAuthenticated)
         {
-
+            txtBalloon.Visible = true;
             // action for authenticated users.
             try
             {
                 userId = MySession.Current.UserId;
                 lblUserId.Text = userId;
+
+
+                email = MySession.Current.Email;
+                txtBalloon.Text = email;
 
             }
             catch
@@ -43,7 +47,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
         else
         {
-
+            txtBalloon.Visible = false;
             // action for non-authenticated users.
             userId = "";
             lblUserId.Text = "";

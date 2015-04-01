@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="EditNews.aspx.cs" Inherits="Authorised_EditNews" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -194,6 +196,9 @@ style="margin:2px;"/>
     BorderWidth="2px"
     style="margin:2px;"
      />
+
+        <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server"  TargetControlID="DeleteButton" ConfirmText="Are you sure you want to delete this News item?" />
+
                         <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" CausesValidation="false"
 ForeColor="black" 
 font-size="1em" 

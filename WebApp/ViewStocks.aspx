@@ -1,6 +1,8 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="ViewStocks.aspx.cs" Inherits="Guest_ViewStocks" %>
 
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
         .style4
@@ -19,11 +21,16 @@
 
     <div>
         <h3>
-        Graph
+            <asp:Label ID="lblSelCompany" runat="server" Text="Selected Company"></asp:Label>
         </h3>
         <p>
-        
-            <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px" 
+               <%--  AJAX--%>
+
+
+             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+             <ContentTemplate>
+                <asp:Timer ID="Timer1" runat="server" Interval="6000" />
+                 <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px" 
                 AlternateText="No data to display">
                 <Series>
                     <asp:Series ChartType="Area" Name="Series1" YValueMembers="price" 
@@ -36,14 +43,15 @@
                 </ChartAreas>
             </asp:Chart>
 
-         <%--  AJAX--%>
+  
+             </ContentTemplate>
+            </asp:UpdatePanel>
+             
 
              
-<%--             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            </asp:UpdatePanel>--%>
 
-<%--            <asp:Timer ID="Timer1" runat="server" Interval="30000">
-            </asp:Timer>--%>
+
+
             
             
 
@@ -127,15 +135,19 @@ ORDER BY [updated] DESC">
             <tr>
                 <td class="style3" align="right">
                     &nbsp;
-                    <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" DataSourceID="dsCategories"
-                        DataTextField="longName" DataValueField="Id" AppendDataBoundItems="True" Width="255px"
-                        Height="16px" Style="margin-left: 89px">
+                    <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" DataSourceID="dsCategories" CssClass="buttonStyle" BackColor="White"
+                        DataTextField="longName" DataValueField="Id" AppendDataBoundItems="True"  Width="150px"
+                         >
                         <asp:ListItem Value="-1">All</asp:ListItem>
                     </asp:DropDownList>
                     </td>
             </tr>
             <tr>
                 <td class="style3" align="center" >
+                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                 <ContentTemplate>
+                 <asp:Timer ID="Timer2" runat="server" Interval="6000" />
+
                     <asp:GridView ID="gvwCompanies0" runat="server" AllowPaging="True" AllowSorting="True"
                         AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="#333333"
                         GridLines="None" PageSize="5" Width="800px" Font-Names="Tahoma" 
@@ -183,6 +195,8 @@ ORDER BY [updated] DESC">
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
+            </ContentTemplate>
+            </asp:UpdatePanel>
                 </td>
             </tr>
             

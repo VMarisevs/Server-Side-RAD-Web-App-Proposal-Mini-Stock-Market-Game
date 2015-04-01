@@ -13,6 +13,8 @@ public class MySession
     {
         //in case we need to initialize any variable once session started
         UserId = Membership.GetUser().ProviderUserKey.ToString();
+
+        Email = Membership.GetUser().Email.ToString();
     }
 
     public static MySession Current
@@ -30,7 +32,7 @@ public class MySession
     }
 
     public string UserId { get; set; }
-
+    public string Email { get; set; }
     /**
      *  we can add extra parameters in here, like
      *  
