@@ -42,27 +42,106 @@
                     </asp:SiteMapPath>
                 </td>
                 <td id="middle">
-                    <asp:menu id="mnumain" runat="server" backcolor="#CEC2ED" 
-                        datasourceid="sitemapdatasourcemenu" dynamichorizontaloffset="2" 
+                    <asp:menu id="mnumain" runat="server" backcolor="#CEC2ED"  PathSeparator=""
+                        datasourceid="sitemapdatasourcemenu"  DynamicHorizontalOffset="20"
                         font-names="Tahoma" font-size="1em" forecolor="#EDEDC2" 
-                        orientation="horizontal" staticsubmenuindent="10px" style="text-align: center" 
+                        orientation="horizontal" staticsubmenuindent="0px" style="text-align: center" 
                         width="100%" renderingmode="table" font-bold="True" Font-Overline="False">
                         <dynamichoverstyle backcolor="" forecolor="white" />
-                        <dynamicmenuitemstyle horizontalpadding="15px" itemspacing="5px" />
-                        <dynamicmenustyle backcolor="#CEC2ED" />
+                        <dynamicmenuitemstyle horizontalpadding="10px" itemspacing="5px" VerticalPadding="5px"  />
+                        <dynamicmenustyle backcolor="#CEC2ED"/>
                         <statichoverstyle forecolor="white" />
-                        <staticmenuitemstyle horizontalpadding="5px" verticalpadding="2px" />
+                        <staticmenuitemstyle horizontalpadding="5px" verticalpadding="10px" />
                         <staticselectedstyle backcolor="" ForeColor="" />
                     </asp:menu>
                 </td>
                 <td id="user">
-                    <span style="font-weight:lighter">Welcome </span>
-                    <asp:LoginName ID="LoginName1" runat="server" Font-Names="Tahoma" Font-Size="1em" Font-Bold="false" />
+                
+                
+                 <asp:LoginView ID="LoginView1" runat="server">
+                 <LoggedInTemplate>
+<asp:FormView ID="FormView1" runat="server" DataSourceID="dsCash">
+                <EditItemTemplate>
+                    UserName:
+                    <asp:TextBox ID="UserNameTextBox" runat="server" 
+                        Text='<%# Bind("UserName") %>' />
                     <br />
-                    <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="#07A2D9" Font-Names="Tahoma" Font-Bold="true" Font-Underline="false" Font-Size="0.9em"/>
+                    Cash:
+                    <asp:TextBox ID="CashTextBox" runat="server" Text='<%# Bind("Cash") %>' />
                     <br />
-                    <asp:LoginView ID="LoginView1" runat="server" >
-                    </asp:LoginView>
+                    Shares:
+                    <asp:TextBox ID="SharesTextBox" runat="server" Text='<%# Bind("Shares") %>' />
+                    <br />
+                    Share Worth:
+                    <asp:TextBox ID="Share_WorthTextBox" runat="server" 
+                        Text='<%# Bind("[Share Worth]") %>' />
+                    <br />
+                    Net Worth:
+                    <asp:TextBox ID="Net_WorthTextBox" runat="server" 
+                        Text='<%# Bind("[Net Worth]") %>' />
+                    <br />
+                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
+                        CommandName="Update" Text="Update" />
+                    &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" 
+                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                </EditItemTemplate>
+                <InsertItemTemplate>
+                    UserName:
+                    <asp:TextBox ID="UserNameTextBox" runat="server" 
+                        Text='<%# Bind("UserName") %>' />
+                    <br />
+                    Cash:
+                    <asp:TextBox ID="CashTextBox" runat="server" Text='<%# Bind("Cash") %>' />
+                    <br />
+                    Shares:
+                    <asp:TextBox ID="SharesTextBox" runat="server" Text='<%# Bind("Shares") %>' />
+                    <br />
+                    Share Worth:
+                    <asp:TextBox ID="Share_WorthTextBox" runat="server" 
+                        Text='<%# Bind("[Share Worth]") %>' />
+                    <br />
+                    Net Worth:
+                    <asp:TextBox ID="Net_WorthTextBox" runat="server" 
+                        Text='<%# Bind("[Net Worth]") %>' />
+                    <br />
+                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
+                        CommandName="Insert" Text="Insert" />
+                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
+                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                </InsertItemTemplate>
+                <ItemTemplate>
+                    User:
+                    <asp:Label ID="UserNameLabel" runat="server" Text='<%# Bind("UserName") %>' />
+                    <br />
+                    Cash:
+                    <asp:Label ID="CashLabel" runat="server" Text='<%# Bind("Cash", "{0:c}") %>' />
+                    <br />
+<%--                    Shares:
+                    <asp:Label ID="SharesLabel" runat="server" Text='<%# Bind("Shares") %>' 
+                        Visible="False" />
+                    <br />
+                    Share Worth:
+                    <asp:Label ID="Share_WorthLabel" runat="server" 
+                        Text='<%# Bind("[Share Worth]") %>' Visible="False" />
+                    <br />--%>
+                    Net Worth:
+                    <asp:Label ID="Net_WorthLabel" runat="server" 
+                        Text='<%# Bind("[Net Worth]", "{0:c}") %>' />
+                    <br />
+
+                </ItemTemplate>
+            </asp:FormView>
+                 </LoggedInTemplate>
+
+                 <AnonymousTemplate>
+
+                 </AnonymousTemplate>
+                  </asp:LoginView>
+
+                                        <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="#07A2D9" 
+                        Font-Names="Tahoma" Font-Bold="true" Font-Underline="false" Font-Size="0.9em" 
+                        onloggedout="LoginStatus1_LoggedOut" onloggingout="LoginStatus1_LoggingOut"/>
+                    
                 </td>
             </tr>
             </table>
@@ -71,7 +150,7 @@
         <div id="body">
             <table border="0" cellpadding="0" cellspacing="0" style="margin:0px 0px 60px 0px">
                 <tr>
-<%--                    <td style="width:15%;display:block;padding:5px; overflow:hidden">
+                    <%--                    <td style="width:15%;display:block;padding:5px; overflow:hidden">
             <asp:ContentPlaceHolder ID="CellLeft" runat="server">
             </asp:ContentPlaceHolder>
                     </td>--%>
@@ -83,13 +162,30 @@
                     </asp:ContentPlaceHolder>
                     </div>
                     </td>
-<%--                    <td style="width:15%;display:block;padding:5px; overflow:hidden">
+                    <%--                    <td style="width:15%;display:block;padding:5px; overflow:hidden">
             <asp:ContentPlaceHolder ID="CellRight" runat="server">
             </asp:ContentPlaceHolder>
                     </td>--%>
                 </tr>
             </table>
- 
+        <asp:SqlDataSource ID="dsCash" runat="server" 
+                        ConnectionString="<%$ ConnectionStrings:StockMarketGameConnectionString %>" 
+                        
+                
+                
+                SelectCommand="SELECT aspnet_Users.UserName, AVG(aspnet_Users.Cash) AS Cash, SUM(UserShares.shares) AS Shares, SUM(UserShares.shares * UserShares.price) AS [Share Worth], SUM(UserShares.shares * Companies.curprice) + AVG(aspnet_Users.Cash) AS [Net Worth] FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id WHERE (aspnet_Users.UserId = @userId) GROUP BY aspnet_Users.UserName, Companies.curprice ORDER BY [Net Worth] DESC">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="lblUserId" Name="userId" PropertyName="Text" />
+            </SelectParameters>
+                    </asp:SqlDataSource>
+            <br />
+            <asp:Label ID="lblUserId" runat="server" Text="UserId"></asp:Label>
+            <br />
+            
+
+            <br />
+            
+
         </div> <!--Body End-->
 
         </form>

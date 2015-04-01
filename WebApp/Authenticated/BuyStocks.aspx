@@ -13,7 +13,8 @@
         <asp:GridView ID="gwBuyStocks" runat="server" AllowPaging="True" 
             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
             DataSourceID="dsStocks" ForeColor="#333333" GridLines="None" 
-            DataKeyNames="Id">
+            DataKeyNames="Id" 
+            onselectedindexchanged="gwBuyStocks_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" 
@@ -27,6 +28,12 @@
                 <asp:BoundField DataField="curprice" HeaderText="Price" 
                     SortExpression="curprice" />
                 <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
+                <asp:TemplateField ShowHeader="False">
+                    <ItemTemplate>
+                        <asp:Button ID="Button1" runat="server" CausesValidation="false" 
+                            CommandName="Select" onclick="Button1_Click" Text="Buy" />
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -40,6 +47,10 @@
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
+        
+        <br />
+        <asp:SqlDataSource ID="dsBuy" runat="server"></asp:SqlDataSource>
+        <br />
         
         <br />
         <asp:SqlDataSource ID="dsStocksDetails" runat="server" 

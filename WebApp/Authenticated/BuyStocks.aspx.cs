@@ -11,4 +11,12 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
     {
 
     }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void gwBuyStocks_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
