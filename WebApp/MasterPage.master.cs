@@ -7,7 +7,19 @@ using System.Web.UI.WebControls;
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {
-    string userId;
+    public string UserId
+    {
+        get
+        {
+            return lblUserId.Text;
+        }
+        set
+        {
+            lblUserId.Text = value;
+        }
+    }
+
+    public string userId;
 
     protected void Page_Load(object sender, EventArgs e)
     {

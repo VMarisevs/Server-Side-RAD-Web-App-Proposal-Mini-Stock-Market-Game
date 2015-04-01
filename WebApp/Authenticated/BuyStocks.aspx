@@ -1,10 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="BuyStocks.aspx.cs" Inherits="Authenticated_BuyStocks" %>
-
+<%@ MasterType virtualpath="~/MasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <h1>Buy Stocks
-    </h1>
+    <!--This directive causes the content page's Master property to be strongly typed.-->
+    <%--<%@ MasterType virtualpath="~/Master1.master" %>--%>
+
+    <h1>Buy Stocks</h1>
+    <p>
+        <asp:Label ID="lblUserId" runat="server" Text="UserId"></asp:Label>
+&nbsp;</p>
     <div>
         <asp:SqlDataSource ID="dsStocks" runat="server" 
             ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
@@ -27,11 +32,16 @@
                     SortExpression="shareAmount" />
                 <asp:BoundField DataField="curprice" HeaderText="Price" 
                     SortExpression="curprice" />
-                <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
                 <asp:TemplateField ShowHeader="False">
                     <ItemTemplate>
-                        <asp:Button ID="Button1" runat="server" CausesValidation="false" 
-                            CommandName="Select" onclick="Button1_Click" Text="Buy" />
+                        <asp:Button ID="Button2" runat="server" CausesValidation="False" 
+                            CommandName="Select" Text="Select" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField ShowHeader="False">
+                    <ItemTemplate>
+                        <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="Select"
+                             onclick="Button1_Click" Text="Buy" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -49,7 +59,40 @@
         </asp:GridView>
         
         <br />
-        <asp:SqlDataSource ID="dsBuy" runat="server"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="dsBuy" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+            InsertCommand="INSERT INTO TransactionHistory(userId, sharesAmount, buySell, companyId, priceBought, priceSold) VALUES (@userId, @sharesAmount, @buySell, @companyId, @priceBought, @priceSold)" 
+            SelectCommand="SELECT aspnet_Users.UserId AS [User Id], aspnet_Users.UserName AS [User Name], aspnet_Users.Cash AS [User Cash], Companies.curprice AS [Stock Price], Companies.shareAmount AS [Stock Available] FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id WHERE (aspnet_Users.UserId = @userId)" 
+            UpdateCommand="UPDATE Companies SET shareAmount = shareAmount - 1 WHERE (Id = @companyId)">
+            <InsertParameters>
+                <asp:Parameter Name="userId" />
+                <asp:Parameter Name="sharesAmount" />
+                <asp:Parameter Name="buySell" />
+                <asp:Parameter Name="companyId" />
+                <asp:Parameter Name="priceBought" />
+                <asp:Parameter Name="priceSold" />
+            </InsertParameters>
+            <SelectParameters>
+                <asp:ControlParameter ControlID="gwBuyStocks" Name="userId" 
+                    PropertyName="SelectedValue" />
+            </SelectParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="companyId" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="dsCompany" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+            onselected="dsCompany_Selected" 
+            SelectCommand="SELECT [shareAmount], [curprice] FROM [Companies] WHERE ([Id] = @Id)" 
+            UpdateCommand="UPDATE Companies SET shareAmount = shareAmount - 1 WHERE (Id = @id)">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="gwBuyStocks" DefaultValue="" Name="Id" 
+                    PropertyName="SelectedValue" Type="Int32" />
+            </SelectParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="id" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
         <br />
         
         <br />

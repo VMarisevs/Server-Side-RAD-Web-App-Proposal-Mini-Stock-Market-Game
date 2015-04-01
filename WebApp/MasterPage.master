@@ -178,13 +178,8 @@
                 <asp:ControlParameter ControlID="lblUserId" Name="userId" PropertyName="Text" />
             </SelectParameters>
                     </asp:SqlDataSource>
-            <br />
-            <asp:Label ID="lblUserId" runat="server" Text="UserId"></asp:Label>
-            <br />
-            
 
-            <br />
-            
+            <asp:Label ID="lblUserId" runat="server" Text="UserId" ></asp:Label>
 
         </div> <!--Body End-->
 

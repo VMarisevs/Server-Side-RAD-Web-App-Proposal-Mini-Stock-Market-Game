@@ -31,6 +31,7 @@ public partial class Authorised_AddStocks : System.Web.UI.Page
     protected void btnSearch_Click(object sender, EventArgs e)
     {
 
+
     }
 
 
