@@ -26,7 +26,7 @@ namespace StockPriceGenerator
 
 
 
-        double [] companyVelotility = { 1, 2, 3, 4 };
+        double [] companyVelotility = { 1.235, 2.658, 2.697, 3.5489,3.1579 };
 
         Random rnd = new Random();
         Random varation = new Random();
@@ -157,7 +157,7 @@ namespace StockPriceGenerator
                     categoryIndex = trends[rnd.Next(4), rnd.Next(5)];
                 }
 
-                varationPercentage = varation.Next(-100,100);
+                varationPercentage = varation.Next(-20,150);
 
 
                 priceUpdate = ( ( Int32.Parse( company.CategoryVolatility )* categoryIndex ) + ( Int32.Parse(company.CategoryVolatility ) * ( varationPercentage)/100 ) );
@@ -169,7 +169,8 @@ namespace StockPriceGenerator
 
                 if (float.Parse(company.Curprice) < 0)
                 {
-                    company.Curprice = "0.99";
+                    //company.Curprice = "0.99";
+                    company.Curprice = companyVelotility[rnd.Next(5)].ToString();
 
                 }
 
