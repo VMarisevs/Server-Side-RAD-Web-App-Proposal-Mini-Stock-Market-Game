@@ -76,11 +76,11 @@
     
 
 
-                 <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px" 
+                 <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px" runat="server"
                 AlternateText="No data to display">
 
                 <Series>
-                    <asp:Series ChartType="Line" Name="Series1" YValueMembers="price" 
+                    <asp:Series ChartType="Line" Name="Series1" YValueMembers="price"
                         YValuesPerPoint="4" XValueMember="updated" Label="#VAL{C}" Color="red" BorderWidth="2">
                         <SmartLabelStyle CalloutLineWidth="5" />
                     </asp:Series>
