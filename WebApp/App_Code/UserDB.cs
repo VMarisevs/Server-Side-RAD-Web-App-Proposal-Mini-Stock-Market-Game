@@ -20,10 +20,8 @@ public static class UserDB
     {
         List<User> listUsers = new List<User>();
 
-        string sel = "SELECT aspnet_Users.UserId, aspnet_Users.UserName, aspnet_Roles.RoleName, aspnet_Users.LastActivityDate FROM " +
-            "aspnet_Roles INNER JOIN " +
-            " aspnet_UsersInRoles ON aspnet_Roles.RoleId = aspnet_UsersInRoles.RoleId " +
-            "INNER JOIN  aspnet_Users ON aspnet_UsersInRoles.UserId = aspnet_Users.UserId ORDER BY aspnet_Users.UserName";
+        string sel = "SELECT UserId, UserName, LastActivityDate FROM aspnet_Users " +
+            "ORDER BY aspnet_Users.UserName";
 
         using (SqlConnection con = new SqlConnection(GetConnectionString()))
         {
@@ -34,9 +32,8 @@ public static class UserDB
             while (rdr.Read())
             {
                 User user = new User();
-                user.UserId = rdr["UserId"].ToString();
+                user.UserId = (Guid)rdr["UserId"];
                 user.UserName = rdr["UserName"].ToString();
-                user.UserRole = rdr["RoleName"].ToString();
                 user.UserLastActivity = Convert.ToDateTime(rdr["LastActivityDate"]);
 
                 listUsers.Add(user);
@@ -98,7 +95,6 @@ public static class UserDB
             "SET shares = @shares " +
             "WHERE (UserId = @UserId) AND (companyId = @companyId)";
             
-
         SqlCommand cmd = new SqlCommand(up, con);
         cmd.Parameters.AddWithValue("UserId", UserId);
         cmd.Parameters.AddWithValue("companyId", companyId);
@@ -107,11 +103,24 @@ public static class UserDB
         cmd.Parameters.AddWithValue("shares", shares);
 
         con.Open();
-        //int i = 
         cmd.ExecuteNonQuery();
-        //return i;
     }
 
+
+    [DataObjectMethod(DataObjectMethodType.Insert)]
+    public static int InsertUser(string UserName, string Cash)
+    {
+        SqlConnection con = new SqlConnection(GetConnectionString());
+        string ins = "INSERT INTO aspnet_Users" +
+                         "(UserName, Cash) "
+                        + "VALUES(@UserName, @Cash)";
+        SqlCommand cmd = new SqlCommand(ins, con);
+        cmd.Parameters.AddWithValue("UserName", UserName);
+        cmd.Parameters.AddWithValue("Cash", Cash);
+        con.Open();
+        int i = cmd.ExecuteNonQuery();
+        return i;
+    }
 
     private static string GetConnectionString()
     {

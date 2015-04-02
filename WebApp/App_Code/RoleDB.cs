@@ -47,7 +47,7 @@ public class RoleDB
     }
 
     [DataObjectMethod(DataObjectMethodType.Insert)]
-    public static int InsertRole( Guid UserId, string RoleId)
+    public static int InsertRole(Guid UserId, Guid RoleId)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
         string ins = "INSERT INTO aspnet_UsersInRoles " +
@@ -61,8 +61,23 @@ public class RoleDB
         return i;
     }
 
+    [DataObjectMethod(DataObjectMethodType.Insert)]
+    public static int InsertRole(Guid RoleId)
+    {
+        SqlConnection con = new SqlConnection(GetConnectionString());
+        string ins = "SELECT SCOPE_IDENTITY() FROM aspnet_Users AS  [@UserId] " +
+                     "INSERT INTO aspnet_UsersInRoles " +
+                         "(@UserId, RoleId) "
+                        + "VALUES(@RoleId)";
+        SqlCommand cmd = new SqlCommand(ins, con);
+        cmd.Parameters.AddWithValue("RoleId", RoleId);
+        con.Open();
+        int i = cmd.ExecuteNonQuery();
+        return i;
+    }
+
     [DataObjectMethod(DataObjectMethodType.Delete)]
-    public static int DeleteRole(string UserId, string RoleId)
+    public static int DeleteRole(Guid UserId, Guid RoleId)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
         string del = "DELETE FROM aspnet_UsersInRoles "
