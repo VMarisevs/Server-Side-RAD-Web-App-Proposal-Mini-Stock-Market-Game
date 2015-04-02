@@ -110,7 +110,8 @@
                                     <asp:TextBox ID="txtUserName" runat="server" Text='<%# Bind("UserName") %>'></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:Button ID="btnUpdate" runat="server" CommandName="Update" Text="Update" />
+                                    <asp:Button ID="btnUpdate" runat="server" CommandName="Update" Text="Update" 
+                                        onclick="btnUpdate_Click" />
                                 </td>
                             </tr>
                             <tr>
