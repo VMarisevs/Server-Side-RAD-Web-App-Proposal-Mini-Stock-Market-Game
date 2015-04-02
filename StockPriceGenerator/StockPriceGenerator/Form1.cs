@@ -11,7 +11,10 @@ using System.Threading.Tasks;
 namespace StockPriceGenerator
 {
     public partial class Form1 : Form
-    {        
+    {
+
+        private const int DELAY = 25000;
+        private const int DELAY_BETWEEN_RECORDS = 200;
 
      double[,] trends = new double[,]
 	{
@@ -109,7 +112,7 @@ namespace StockPriceGenerator
              {                
                     displayCompanyList();
                     makeUpdate();
-                    System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(DELAY);
              }
             
         }
@@ -173,9 +176,9 @@ namespace StockPriceGenerator
                
 
                 CompanyDB.UpdateCompanyPrice(company);
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(DELAY_BETWEEN_RECORDS);
                 CompanyDB.InsertIntoHistory(company);
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(DELAY_BETWEEN_RECORDS);
             }
         }
 
