@@ -61,14 +61,14 @@
                             CausesValidation="False" CommandName="Cancel" Text="Cancel" />
                     </InsertItemTemplate>--%>
                 <ItemTemplate>
+                    <strong>Name:</strong>
+                    <asp:Label ID="NameLabel" runat="server" Text='<%# Bind("Name") %>' />
+                    <br />
                     <strong>Price:</strong>
                     <asp:Label ID="priceLabel" runat="server" Text='<%# Bind("price", "{0:c}") %>' />
                     <br />
                     <strong>Updated:</strong>
                     <asp:Label ID="updatedLabel" runat="server" Text='<%# Bind("updated") %>' />
-                    <br />
-                    <strong>Name:</strong>
-                    <asp:Label ID="NameLabel" runat="server" Text='<%# Bind("Name") %>' />
                     <br />
                 </ItemTemplate>
             </asp:FormView>
@@ -80,13 +80,14 @@
                 AlternateText="No data to display">
 
                 <Series>
-                    <asp:Series ChartType="Area" Name="Series1" YValueMembers="price" 
-                        YValuesPerPoint="4" XValueMember="updated">
+                    <asp:Series ChartType="Line" Name="Series1" YValueMembers="price" 
+                        YValuesPerPoint="4" XValueMember="updated" Label="#VAL{C}" Color="red" BorderWidth="2">
+                        <SmartLabelStyle CalloutLineWidth="5" />
                     </asp:Series>
                 </Series>
 
                 <ChartAreas>
-                    <asp:ChartArea Name="ChartArea1">
+                    <asp:ChartArea Name="ChartArea1" BorderWidth="5">
                     </asp:ChartArea>
                 </ChartAreas>
             </asp:Chart>
