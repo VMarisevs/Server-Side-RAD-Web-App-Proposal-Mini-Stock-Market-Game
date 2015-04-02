@@ -9,9 +9,8 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 {
 
 
-    static bool adminChecked;
+    static bool isAdmin;
 
-    static bool userChecked;
 
     Guid AdminRoleId = Guid.Parse("014f909b-9864-45e1-9e74-99ea358b59d7");
 
@@ -19,7 +18,7 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        fvwUserShares.DataBind();
+        //fvwUserDetaileddd.DataBind();
     }
 
     private void getNetWorth()
@@ -29,80 +28,24 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 
     protected void btnEdit_Click(object sender, EventArgs e)
     {
-        fvwUserShares.ChangeMode(FormViewMode.Edit);
-        cbUser.Enabled = true;
-        cbAdmin.Enabled = true;
+        fvwUserDetaileddd.ChangeMode(FormViewMode.Edit);
+        rBtnAdmin.Enabled = true;
+        rBtnUser.Enabled = true;
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        fvwUserShares.ChangeMode(FormViewMode.ReadOnly);
+        fvwUserDetaileddd.ChangeMode(FormViewMode.ReadOnly);
+        rBtnAdmin.Enabled = false;
+        rBtnUser.Enabled = false;
     }
 
-    protected void dsUserShares_Updating(object sender, ObjectDataSourceMethodEventArgs e)
-    {
-        DropDownList list = fvwUserShares.FindControl("ddlCompanies") as DropDownList;
-        e.InputParameters["companyId"] = list.SelectedValue;
-    }
+  
     protected void dsUserShares_Updated(object sender, ObjectDataSourceStatusEventArgs e)
     {
         dsUser.Select();
         gvwUsers.DataBind();
 
     }
-
-    protected void btnCreate_Click(object sender, EventArgs e)
-    {
-        dsUserShares.Insert();
-    }
-    protected void btnCreateUser_Click(object sender, EventArgs e)
-    {
-        fvwUserShares.ChangeMode(FormViewMode.Insert);
-    }
-    protected void btnCreate_Click1(object sender, EventArgs e)
-    {
-        dsUserShares.Insert();
-    }
-
-
-
-
-    protected void btnUpdate_Click(object sender, EventArgs e)
-    {
-
-        Guid UserId = (Guid)gvwUsers.SelectedDataKey.Value;
-
-        CheckBox cbViewAdmin = fvwUserShares.FindControl("cbEditAdmin") as CheckBox;
-
-        CheckBox cbViewUser = fvwUserShares.FindControl("cbEditAdmin") as CheckBox;
-
-        if (cbAdmin.Checked != adminChecked)
-        {
-            if (cbAdmin.Checked)
-            {
-                RoleDB.InsertRole(UserId, AdminRoleId);
-
-            }
-            else
-            {
-                RoleDB.DeleteRole(UserId, AdminRoleId);
-                adminChecked = false;
-            }
-        }
-
-        if (cbUser.Checked != userChecked)
-        {
-            if (cbUser.Checked)
-            {
-                RoleDB.InsertRole(UserId, UserRoleId);
-            }
-            else
-            {
-                RoleDB.DeleteRole(UserId, UserRoleId);          
-            }
-        }
-        fvwUserShares.ChangeMode(FormViewMode.ReadOnly);
-    }
-
 
 
     protected void gvwUsers_SelectedIndexChanged(object sender, EventArgs e)
@@ -114,62 +57,66 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 
 
         listRole = RoleDB.GetUserRoles((Guid)gvwUsers.SelectedDataKey.Value);
-        adminChecked = false;
-        userChecked = false;
+
 
         foreach (Role role in listRole)
         {
             if (role.RoleName.Equals("Administrator"))
             {
-                adminChecked = true;
+                rBtnAdmin.Checked = true;
+                isAdmin = true;
+                break;
             }
-
             if (role.RoleName.Equals("User"))
             {
-                userChecked = true;
+                rBtnUser.Checked = true;
+                isAdmin = false;
             }
         }
 
-        cbAdmin.Checked = adminChecked;
+        rBtnAdmin.Visible = true;
+        rBtnUser.Visible = true;
 
-        cbUser.Checked = userChecked;
 
     }
 
-    protected void cbEditUser_CheckedChanged(object sender, EventArgs e)
+
+
+
+
+    protected void btnEditUser_Click(object sender, EventArgs e)
     {
-        if (userChecked)
-            userChecked = false;
-        else
-            userChecked = true;
+        fvwUserDetaileddd.ChangeMode(FormViewMode.Edit);
+        rBtnAdmin.Enabled = true;
+        rBtnUser.Enabled = true;
     }
 
-
-    protected void btnCreateUser_Click1(object sender, EventArgs e)
+    protected void btnUpdate_Click(object sender, EventArgs e)
     {
-        cbAdmin.Enabled = true;
-        cbUser.Enabled = true;
-        fvwUserShares.ChangeMode(FormViewMode.Insert);
-    }
+        Guid UserId = (Guid)gvwUsers.SelectedDataKey.Value;
 
-    protected void dsUserShares_Inserted(object sender, ObjectDataSourceStatusEventArgs e)
-    {
-        if (cbAdmin.Checked)
+        CheckBox cbViewAdmin = fvwUserDetaileddd.FindControl("cbEditAdmin") as CheckBox;
+
+        CheckBox cbViewUser = fvwUserDetaileddd.FindControl("cbEditAdmin") as CheckBox;
+
+        if (rBtnAdmin.Checked && !isAdmin)
         {
-            RoleDB.InsertRole(AdminRoleId);
-        }
-        else
-        {
-            RoleDB.InsertRole(UserRoleId);
-        }
-    }
-    protected void dsUserShares_Inserting(object sender, ObjectDataSourceMethodEventArgs e)
-    {
-        if (!cbAdmin.Checked && !cbUser.Checked)
-        {
-            e.Cancel = true;
-        }
-    }
+            RoleDB.InsertRole(UserId, AdminRoleId);
 
- 
+            RoleDB.DeleteRole(UserId, UserRoleId);
+        }
+
+        if (rBtnUser.Checked && isAdmin)
+        {
+
+            RoleDB.InsertRole(UserId, UserRoleId);
+
+            RoleDB.DeleteRole(UserId, AdminRoleId);
+        }
+        fvwUserDetaileddd.ChangeMode(FormViewMode.ReadOnly);
+        fvwUserDetaileddd.DataBind();
+        gvwUsers.DataBind();
+        rBtnAdmin.Enabled = false;
+        rBtnUser.Enabled = false;
+    }
 }
