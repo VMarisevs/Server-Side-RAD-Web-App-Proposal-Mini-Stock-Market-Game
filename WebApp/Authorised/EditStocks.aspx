@@ -275,7 +275,7 @@ style="margin:2px;">
                             <ItemTemplate>
                                 <br />
                                 <asp:Image ID="Image1" runat="server" Height="100px" 
-                                    ImageUrl='<%# Bind("logo", "/WebApp/Images/Logos/{0}") %>' 
+                                    ImageUrl='<%# Bind("logo", "~/Images/Logos/{0}") %>' 
                                     ImageAlign="Middle" />
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Middle" />
@@ -425,6 +425,7 @@ style="margin:2px;">
                     </Fields>
                     <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
                     <HeaderStyle BackColor="DeepSkyBlue" Font-Bold="True" ForeColor="White"  />
+                    <PagerSettings Mode="NextPreviousFirstLast" />
                     <PagerStyle BackColor="#008FBF" ForeColor="White" HorizontalAlign="Center" />
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                 </asp:DetailsView>

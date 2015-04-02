@@ -11,7 +11,10 @@ using System.Threading.Tasks;
 namespace StockPriceGenerator
 {
     public partial class Form1 : Form
-    {        
+    {
+
+        private const int DELAY = 25000;
+        private const int DELAY_BETWEEN_RECORDS = 200;
 
      double[,] trends = new double[,]
 	{
@@ -23,7 +26,7 @@ namespace StockPriceGenerator
 
 
 
-        double [] companyVelotility = { 1, 2, 3, 4 };
+        double [] companyVelotility = { 1.235, 2.658, 2.697, 3.5489,3.1579 };
 
         Random rnd = new Random();
         Random varation = new Random();
@@ -109,7 +112,7 @@ namespace StockPriceGenerator
              {                
                     displayCompanyList();
                     makeUpdate();
-                    System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(DELAY);
              }
             
         }
@@ -154,7 +157,7 @@ namespace StockPriceGenerator
                     categoryIndex = trends[rnd.Next(4), rnd.Next(5)];
                 }
 
-                varationPercentage = varation.Next(-100,100);
+                varationPercentage = varation.Next(-20,150);
 
 
                 priceUpdate = ( ( Int32.Parse( company.CategoryVolatility )* categoryIndex ) + ( Int32.Parse(company.CategoryVolatility ) * ( varationPercentage)/100 ) );
@@ -166,16 +169,17 @@ namespace StockPriceGenerator
 
                 if (float.Parse(company.Curprice) < 0)
                 {
-                    company.Curprice = "0.99";
+                    //company.Curprice = "0.99";
+                    company.Curprice = companyVelotility[rnd.Next(5)].ToString();
 
                 }
 
                
 
                 CompanyDB.UpdateCompanyPrice(company);
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(DELAY_BETWEEN_RECORDS);
                 CompanyDB.InsertIntoHistory(company);
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(DELAY_BETWEEN_RECORDS);
             }
         }
 

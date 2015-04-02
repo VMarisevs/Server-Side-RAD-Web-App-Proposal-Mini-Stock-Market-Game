@@ -4,15 +4,13 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
 	<meta name="description" content="Buy and sell virtual stocks in this fast paced stocks environment!"/>
 	<meta name="keywords" content="buy, sell, stocks, shares, virtual, business"/>
     
     <title>Stock Street - Buy and sell virtual stocks!</title>
+
     <link rel="icon" 
       type="image/png" 
       href="Images/favicon.ico" />
@@ -24,10 +22,10 @@
 <body>
     <div id="container">
         <div id="header">
-            <a accesskey="h" href="/WebApp/Default.aspx"><asp:Image ID="imgStockSt" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" /></a>
+            <a accesskey="h" href="~/Default.aspx" runat="server"><asp:Image ID="imgStockSt" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" /></a>
         </div>
         <form id="mainForm" runat="server">
-            <%--Enables the use of AJAX controls--%>
+            <%--Enables the use of AJAX controls--%> 
             <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
 
@@ -79,8 +77,8 @@
                             <li style="float:left">
                         
 
-<asp:FormView ID="FormView1" runat="server" DataSourceID="dsCash" Width="200px">
-                <EditItemTemplate>
+            <asp:FormView ID="FormView1" runat="server" DataSourceID="dsCash" Width="200px">
+               <%-- <EditItemTemplate>
                     UserName:
                     <asp:TextBox ID="UserNameTextBox" runat="server" 
                         Text='<%# Bind("UserName") %>' />
@@ -103,8 +101,8 @@
                         CommandName="Update" Text="Update" />
                     &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" 
                         CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                </EditItemTemplate>
-                <InsertItemTemplate>
+                </EditItemTemplate>--%>
+              <%--  <InsertItemTemplate>
                     UserName:
                     <asp:TextBox ID="UserNameTextBox" runat="server" 
                         Text='<%# Bind("UserName") %>' />
@@ -127,7 +125,7 @@
                         CommandName="Insert" Text="Insert" />
                     &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
                         CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                </InsertItemTemplate>
+                </InsertItemTemplate>--%>
                 <ItemTemplate>
                     User:
                     <asp:Label ID="UserNameLabel" runat="server" Text='<%# Bind("UserName") %>' />
@@ -158,13 +156,15 @@
 
             <li style="float:right">
            <%-- This form is linked to the datasource that contains the users email, this email is then data bound to the gravatars source email--%>
-                          <asp:FormView ID="FormView2" runat="server" DataSourceID="dsCash" >
+               <asp:FormView ID="FormView2" runat="server" DataSourceID="dsCash" >
               <ItemTemplate>
 <%--                    <asp:Label ID="lblTest" runat="server" Text='<%# Bind("Email") %>'></asp:Label>--%>
-                    <cc1:Gravatar ID="Gravatar1" runat="server" CssClass="buttonStyle" Width="55px"  DefaultImageBehavior="Retro" Email='rolo45@gmail.com>'/>    <!--<%# Eval("Email") %>-->
+                    <%--<cc1:Gravatar ID="Gravatar1" runat="server" CssClass="buttonStyle" Width="55px"  DefaultImageBehavior="Retro" Email='<%# Eval("Email") %>'/> --%>   <!--<%# Eval("Email") %> Size="55"-->
+               <%--     The AJAX toolkit was causing issues with the email binding when trying to udpate a grid view, so I included the gravatar control dll from (https://gravatar.codeplex.com) and added the control to the web.config file, all working now :)--%>
+                    <grav:gravatar ID="UserGravatar" runat="server" Email='<%# Eval("Email") %>'  CssClass="buttonStyle" Width="55px"/>
            <%-- Click your gravatar image to view your email (that is associated with it)--%>
-<%--               <cc1:BalloonPopupExtender ID="BalloonPopupExtender1" runat="server" TargetControlID="Gravatar1" BalloonPopupControlID="txtBalloon" 
-          BalloonStyle="Custom" CustomClassName="balloonStyle" CustomCssUrl="balloonStyle" UseShadow="True" Position="BottomLeft" BalloonSize="Small" OffsetX="25" OffsetY="5" DisplayOnMouseOver="False" DisplayOnClick="True">         </cc1:BalloonPopupExtender> --%>  
+            <cc1:BalloonPopupExtender ID="BalloonPopupExtender1" runat="server" TargetControlID="UserGravatar" BalloonPopupControlID="txtBalloon"
+          BalloonStyle="Custom" CustomClassName="balloonStyle" CustomCssUrl="balloonStyle" UseShadow="True" Position="BottomLeft" BalloonSize="Small" OffsetX="25" OffsetY="5" DisplayOnMouseOver="False" DisplayOnClick="True" />
             </ItemTemplate>
                 </asp:FormView>
  
@@ -198,10 +198,12 @@
 
                  </AnonymousTemplate>
           
+     
                   </asp:LoginView>
 
                    <asp:TextBox ID="txtBalloon" runat="server" Width="500px" ReadOnly="true" class="buttonStyle" Visible="false"/>
-                                        <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="#07A2D9" 
+
+                                        <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="#07A2D9" LogoutPageUrl="~/default.aspx" 
                         Font-Names="Tahoma" Font-Bold="true" Font-Underline="false" Font-Size="0.9em" 
                         onloggedout="LoginStatus1_LoggedOut" onloggingout="LoginStatus1_LoggingOut"/>
                     
@@ -243,7 +245,7 @@
             </SelectParameters>
                     </asp:SqlDataSource>
 
- 
+
         </div> <!--Body End-->
 
         </form>
@@ -251,11 +253,11 @@
             <table >
                 <tr>
                     <!--added access keys below-->
-                    <td><a accesskey="a" href="/WebApp/Footer/About.aspx" class="headerLinks"><u>A</u>bout</a></td><td>|</td>
-                    <td><a accesskey="c" href="/WebApp/Footer/ContactUs.aspx" class="headerLinks"><u>C</u>ontactUs</a></td><td>|</td>
-                    <td><a accesskey="b" href="/WebApp/Footer/Feedback.aspx" class="headerLinks">Feed<u>b</u>ack</a></td><td>|</td>
-                    <td><a accesskey="l" href="/WebApp/Footer/Legal.aspx" class="headerLinks"><u>L</u>egal</a></td><td>|</td>
-                    <td><a accesskey="s" href="/WebApp/Footer/SiteMap.aspx" class="headerLinks"><u>S</u>iteMap</a></td>
+                    <td><a accesskey="a" href="~/Footer/About.aspx" class="headerLinks" runat="server"><u>A</u>bout</a></td><td>|</td>
+                    <td><a accesskey="c" href="~/Footer/ContactUs.aspx" class="headerLinks" runat="server"><u>C</u>ontactUs</a></td><td>|</td>
+                    <td><a accesskey="b" href="~/Footer/Feedback.aspx" class="headerLinks" runat="server">Feed<u>b</u>ack</a></td><td>|</td>
+                    <td><a accesskey="l" href="~/Footer/Legal.aspx" class="headerLinks" runat="server"><u>L</u>egal</a></td><td>|</td>
+                    <td><a accesskey="s" href="~/Footer/SiteMap.aspx" class="headerLinks" runat="server"><u>S</u>iteMap</a></td>
                 </tr>
              <tr>
                 <td colspan="9" style="">

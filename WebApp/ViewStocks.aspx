@@ -18,25 +18,76 @@
     <h1>
         View Stocks
     </h1>
-
+                
     <div>
         <h3>
-            <asp:Label ID="lblSelCompany" runat="server" Text="Selected Company"></asp:Label>
+
         </h3>
+
         <p>
-               <%--  AJAX--%>
+                               <%--  AJAX--%>
              <asp:UpdatePanel ID="UpdatePanel1" runat="server">
              <ContentTemplate>
                 <asp:Timer ID="Timer1" runat="server" Interval="6000" />
-                 <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px" 
+                <asp:FormView ID="FormView1" runat="server" DataSourceID="dsGraphs" >
+<%--                    <EditItemTemplate>
+                        Price:
+                        <asp:TextBox ID="priceTextBox" runat="server" Text='<%# Bind("price", "{0:c}") %>' />
+                        <br />
+                        Updated:
+                        <asp:TextBox ID="updatedTextBox" runat="server" Text='<%# Bind("updated") %>' />
+                        <br />
+                        Name:
+                        <asp:TextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' />
+                        <br />
+                        <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
+                            CommandName="Update" Text="Update" />
+                        &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" 
+                            CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                    </EditItemTemplate>
+                    <InsertItemTemplate>
+                        price:
+                        <asp:TextBox ID="priceTextBox" runat="server" Text='<%# Bind("price") %>' />
+                        <br />
+                        updated:
+                        <asp:TextBox ID="updatedTextBox" runat="server" Text='<%# Bind("updated") %>' />
+                        <br />
+                        Name:
+                        <asp:TextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' />
+                        <br />
+                        <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
+                            CommandName="Insert" Text="Insert" />
+                        &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
+                            CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                    </InsertItemTemplate>--%>
+                <ItemTemplate>
+                    <strong>Name:</strong>
+                    <asp:Label ID="NameLabel" runat="server" Text='<%# Bind("Name") %>' />
+                    <br />
+                    <strong>Price:</strong>
+                    <asp:Label ID="priceLabel" runat="server" Text='<%# Bind("price", "{0:c}") %>' />
+                    <br />
+                    <strong>Updated:</strong>
+                    <asp:Label ID="updatedLabel" runat="server" Text='<%# Bind("updated") %>' />
+                    <br />
+                </ItemTemplate>
+            </asp:FormView>
+
+    
+
+
+                 <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px" runat="server"
                 AlternateText="No data to display">
+
                 <Series>
-                    <asp:Series ChartType="Area" Name="Series1" YValueMembers="price" 
-                        YValuesPerPoint="4" XValueMember="updated">
+                    <asp:Series ChartType="Line" Name="Series1" YValueMembers="price" 
+                        YValuesPerPoint="4" XValueMember="updated" Label="#VAL{C}" Color="red" BorderWidth="2">
+                        <SmartLabelStyle CalloutLineWidth="5" CalloutLineColor="Transparent" />
                     </asp:Series>
                 </Series>
+
                 <ChartAreas>
-                    <asp:ChartArea Name="ChartArea1">
+                    <asp:ChartArea Name="ChartArea1" BorderWidth="5">
                     </asp:ChartArea>
                 </ChartAreas>
             </asp:Chart>
@@ -63,16 +114,10 @@
             <asp:SqlDataSource ID="dsGraphs" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
                 
-                SelectCommand="SELECT TOP(20) [price],[updated] 
-FROM [StockHistory] 
-WHERE [companyId] = 
-CASE @companyId
-	WHEN 'topCompany' THEN (SELECT TOP (1) Id FROM Companies ORDER BY curprice DESC)
-	ELSE @companyId
-END
-ORDER BY [updated] DESC">
+                
+                SelectCommand="SELECT TOP (20) StockHistory.price, StockHistory.updated, Companies.Name FROM StockHistory INNER JOIN Companies ON StockHistory.companyId = Companies.Id WHERE (StockHistory.companyId = CASE @companyId WHEN 'topCompany' THEN (SELECT TOP (1) Id FROM Companies ORDER BY curprice DESC) ELSE @companyId END) ORDER BY StockHistory.updated DESC">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="gvwCompanies0" DefaultValue="topCompany" 
+                    <asp:ControlParameter ControlID="gvwCompanies0" DefaultValue="10003" 
                         Name="companyId" PropertyName="SelectedValue" Type="String" />
                 </SelectParameters>
             </asp:SqlDataSource>
@@ -161,7 +206,7 @@ ORDER BY [updated] DESC">
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Image ID="Image1" runat="server" ImageAlign="Middle" 
-                                        ImageUrl='<%# Bind("logo","/WebApp/Images/Logos/{0}") %>' Width="150px" />
+                                        ImageUrl='<%# Bind("logo","~/Images/Logos/{0}") %>' Width="150px" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Name" SortExpression="Name" HeaderText="Name">
@@ -176,10 +221,13 @@ ORDER BY [updated] DESC">
                                 SortExpression="shareAmount" />
                             <asp:BoundField DataField="longName" HeaderText="Category" 
                                 SortExpression="longName" />
-                            <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="buttonStyle" 
-                                ControlStyle-Width="100px" ControlStyle-Font-Underline="false">
-<ControlStyle CssClass="buttonStyle" Font-Underline="False" Width="100px"></ControlStyle>
-                            </asp:CommandField>
+                            <asp:TemplateField ShowHeader="False">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
+                                        CommandName="Select" Text="Select"></asp:LinkButton>
+                                </ItemTemplate>
+                                <ControlStyle CssClass="buttonStyle" Font-Underline="False" Width="100px" />
+                            </asp:TemplateField>
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#008FBF" ForeColor="White" Font-Bold="True" />
