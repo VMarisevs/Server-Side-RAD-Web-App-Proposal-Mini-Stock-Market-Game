@@ -4,7 +4,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" id="htmlPage">
 <head id="Head1" runat="server">
 	<meta name="description" content="Buy and sell virtual stocks in this fast paced stocks environment!"/>
 	<meta name="keywords" content="buy, sell, stocks, shares, virtual, business"/>
@@ -19,18 +19,20 @@
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body id="bodyPage">
+
     <div id="container">
         <div id="header">
             <a accesskey="h" href="~/Default.aspx" runat="server"><asp:Image ID="imgStockSt" runat="server" AlternateText="Logo" ImageUrl="Images/StockSt.png" Height="45px" style="padding:10px" /></a>
         </div>
         <form id="mainForm" runat="server">
-            <%--Enables the use of AJAX controls--%> 
+
+            <!--Enables the use of AJAX controls--> 
             <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
 
         <div id="navBar">
-            <table border="0" cellpadding="0" cellspacing="0">
+            <table border="0" cellpadding="0" cellspacing="0" id="myTable">
             <tr id="navRow">
                 <td id="breadcrumbs" colspan="2" style="padding:10px">
                     <asp:SiteMapDataSource ID="SiteMapDataSourceMenu" runat="server" 
@@ -61,7 +63,7 @@
                 
 
 
-
+                <%-- Takes 2 clicks to Login out for some reason? --%>
 
                  <asp:LoginView ID="LoginView1" runat="server">
                  <LoggedInTemplate>
@@ -155,14 +157,18 @@
 
 
             <li style="float:right">
-           <%-- This form is linked to the datasource that contains the users email, this email is then data bound to the gravatars source email--%>
+           <!-- This form is linked to the datasource that contains the users email, this email is then data bound to the gravatars source email-->
                <asp:FormView ID="FormView2" runat="server" DataSourceID="dsCash" >
               <ItemTemplate>
 <%--                    <asp:Label ID="lblTest" runat="server" Text='<%# Bind("Email") %>'></asp:Label>--%>
-                    <%--<cc1:Gravatar ID="Gravatar1" runat="server" CssClass="buttonStyle" Width="55px"  DefaultImageBehavior="Retro" Email='<%# Eval("Email") %>'/> --%>   <!--<%# Eval("Email") %> Size="55"-->
-               <%--     The AJAX toolkit was causing issues with the email binding when trying to udpate a grid view, so I included the gravatar control dll from (https://gravatar.codeplex.com) and added the control to the web.config file, all working now :)--%>
-                    <grav:gravatar ID="UserGravatar" runat="server" Email='<%# Eval("Email") %>'  CssClass="buttonStyle" Width="55px"/>
-           <%-- Click your gravatar image to view your email (that is associated with it)--%>
+                   <%--<cc1:Gravatar ID="Gravatar1" runat="server" CssClass="buttonStyle" Width="55px"  DefaultImageBehavior="Retro" Email='<%# Eval("Email") %>'/> --%>   <!--<%# Eval("Email") %> Size="55"-->
+                   <%--     The AJAX toolkit was causing issues with the email binding when trying to udpate a grid view, so I included the gravatar control dll from (https://gravatar.codeplex.com) and added the control to the web.config file, all working now :)--%>
+                   
+                 <%--  Email is not data bound with: (Email='<%# Eval("Email") %>'), it is bound using the findCnotrol in the load event, as to check if valid email (try/catch), this is to make sure the page doesn;t crash--%>
+                   <grav:gravatar ID="UserGravatar" runat="server"  CssClass="buttonStyle" Width="55px" DefaultImage="monsterid" AlternateText="No image available" />
+
+                  <%--<custom:gravatar ID="UserGravatar" runat="server" Email='<%# Eval("Email") %>' Size="120" />--%>
+           <!-- Click your gravatar image to view your email (that is associated with it)-->
             <cc1:BalloonPopupExtender ID="BalloonPopupExtender1" runat="server" TargetControlID="UserGravatar" BalloonPopupControlID="txtBalloon"
           BalloonStyle="Custom" CustomClassName="balloonStyle" CustomCssUrl="balloonStyle" UseShadow="True" Position="BottomLeft" BalloonSize="Small" OffsetX="25" OffsetY="5" DisplayOnMouseOver="False" DisplayOnClick="True" />
             </ItemTemplate>
@@ -175,7 +181,7 @@
 
 
 
-     <%-- AJAX Control Toolkit Plugin--%>
+     <!-- AJAX Control Toolkit Plugin-->
              <cc1:AlwaysVisibleControlExtender ID="AlwaysVisibleControlExtender1" runat="server" 
                     TargetControlID="profilePanel"
                     HorizontalSide="Right"
@@ -195,11 +201,13 @@
                  </LoggedInTemplate>
                   
                  <AnonymousTemplate>
-
+                        <%-- Used to test findControl function in page load--%>
+                                          <%-- <grav:gravatar ID="TestGravatar" runat="server"  CssClass="buttonStyle" Width="55px" DefaultImage="monsterid" AlternateText="No image available" />--%>
                  </AnonymousTemplate>
           
-     
+
                   </asp:LoginView>
+
 
                    <asp:TextBox ID="txtBalloon" runat="server" Width="500px" ReadOnly="true" class="buttonStyle" Visible="false"/>
 
@@ -207,6 +215,11 @@
                         Font-Names="Tahoma" Font-Bold="true" Font-Underline="false" Font-Size="0.9em" 
                         onloggedout="LoginStatus1_LoggedOut" onloggingout="LoginStatus1_LoggingOut"/>
                     
+
+                 
+
+
+
                 </td>
             </tr>
             </table>
@@ -239,7 +252,9 @@
                 
                 
                 
-                SelectCommand="SELECT aspnet_Users.UserName, AVG(aspnet_Users.Cash) AS Cash, SUM(UserShares.shares) AS Shares, SUM(UserShares.shares * UserShares.price) AS [Share Worth], SUM(UserShares.shares * Companies.curprice) + AVG(aspnet_Users.Cash) AS [Net Worth], aspnet_Membership.Email FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id INNER JOIN aspnet_Membership ON aspnet_Users.UserId = aspnet_Membership.UserId WHERE (aspnet_Users.UserId = @userId) GROUP BY aspnet_Users.UserName, aspnet_Membership.Email ORDER BY [Net Worth] DESC">
+                
+                SelectCommand="SELECT aspnet_Users.UserName, AVG(aspnet_Users.Cash) AS Cash, SUM(UserShares.shares) AS Shares, SUM(UserShares.shares * UserShares.price) AS [Share Worth], SUM(UserShares.shares * Companies.curprice) + AVG(aspnet_Users.Cash) AS [Net Worth], aspnet_Membership.Email FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id INNER JOIN aspnet_Membership ON aspnet_Users.UserId = aspnet_Membership.UserId WHERE (aspnet_Users.UserId = @userId) GROUP BY aspnet_Users.UserName, aspnet_Membership.Email ORDER BY [Net Worth] DESC" 
+                onload="dsCash_Load" onselected="dsCash_Selected">
             <SelectParameters>
                 <asp:ControlParameter ControlID="lblUserId" Name="userId" PropertyName="Text" />
             </SelectParameters>
@@ -263,6 +278,8 @@
                 <td colspan="9" style="">
                 <span class="headerLinks" style="padding:0px;text-align:right;"><br/>
                     <a>ZomboCorp © 2015</a></span><br />
+                    <br />
+                    <!--Shows user id, used for populating profile box, hidden, as an easter egg -->
                      <asp:Label ID="lblUserId" runat="server" Text="UserId" ForeColor="#D64960"/>
                 </td>
              </tr>

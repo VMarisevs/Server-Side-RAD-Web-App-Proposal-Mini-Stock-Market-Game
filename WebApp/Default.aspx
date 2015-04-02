@@ -143,6 +143,26 @@
                      </asp:Chart>
             </td>
         </tr>
+        <tr><td> &nbsp;</td></tr>
+                <tr>
+             <td class="style1" >
+                <!--This shows the amount of page hits for this application -->
+                 <h3>
+                <asp:Label ID="lblAppHitCount" runat="server" Text="UserId" ForeColor="#D64960"/>
+                 </h3>
+              </td>
+
+                 <td>
+
+                 </td>
+
+                 <td valign="top">
+                    <!--This shows the amount of page hits for this user session -->
+                     <h3>
+                    <asp:Label ID="lblSeshHitCount" runat="server" Text="UserId" ForeColor="#D64960"/>
+                     </h3>
+                 </td>
+        </tr>
         </table>
 </asp:Content>
 
