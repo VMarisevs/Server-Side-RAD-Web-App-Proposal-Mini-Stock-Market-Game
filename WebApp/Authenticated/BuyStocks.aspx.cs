@@ -83,42 +83,5 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
         }
     }
 
-    protected void Sell(int ammount, int companyId)
-    {
-        int userShares;
-        Guid UserId;
-        User user = new User();
-        Comapny company = new Comapny();
-
-
-        UserId = new Guid(MySession.Current.UserId);
-        user = UserDB.GetUser(UserId);
-        company = CompanyDB.GetCompanyShares(companyId);
-        userShares = SharesDB.GetUserShares(UserId, companyId);
-
-        if (userShares - ammount > 0)
-        {
-            user.cash += company.sharePrice * ammount;
-            company.shares += ammount;
-
-            if (userShares > 0)
-            {
-                SharesDB.UpdateUserShares(UserId, companyId, userShares - ammount);
-            }
-            else
-            {
-                SharesDB.InsertUserShares(UserId, companyId, ammount, userShares - ammount);
-            }
-
-            SharesDB.UpdateCash(UserId, user.cash);
-            CompanyDB.UpdateCompanyShares(companyId, company.shares);
-            gwBuyStocks.DataBind();
-
-        }
-        else
-        {
-
-
-        }
-    }
+   
 }
