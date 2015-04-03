@@ -20,8 +20,8 @@ public static class UserDB
     {
         List<User> listUsers = new List<User>();
 
-        string sel = "SELECT UserId, UserName, LastActivityDate FROM aspnet_Users " +
-            "ORDER BY aspnet_Users.UserName";
+        string sel = "SELECT UserId,  UserName, LastActivityDate, Cash FROM aspnet_Users " +
+            "ORDER BY UserName";
 
         using (SqlConnection con = new SqlConnection(GetConnectionString()))
         {
@@ -32,9 +32,10 @@ public static class UserDB
             while (rdr.Read())
             {
                 User user = new User();
-                user.UserId = (Guid)rdr["UserId"];
-                user.UserName = rdr["UserName"].ToString();
-                user.UserLastActivity = Convert.ToDateTime(rdr["LastActivityDate"]);
+                user.id = (Guid)rdr["UserId"];
+                user.name = rdr["UserName"].ToString();
+                user.lastActive = Convert.ToDateTime(rdr["LastActivityDate"]);
+                user.cash = Convert.ToDecimal(rdr["Cash"]);
 
                 listUsers.Add(user);
             }
@@ -45,52 +46,65 @@ public static class UserDB
 
 
 
-
     [DataObjectMethod(DataObjectMethodType.Select)]
-    public static IEnumerable GetUserInformation(Guid UserId)
+    public static User GetUser(Guid UserId)
     {
+        User user = new User();
         SqlConnection con = new SqlConnection(GetConnectionString());
-        string sel = "SELECT aspnet_Users.UserId, aspnet_Users.UserName, aspnet_Users.Cash " +
-                    // "SUM(UserShares.shares * Companies.curprice) + AVG(aspnet_Users.Cash) AS [NetWorth] " +
-                     "FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId " +
-                     "WHERE (aspnet_Users.UserId = @UserId)";
-        SqlCommand cmd = new SqlCommand(sel, con);     
-        cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier).Value = UserId;
+        string sel = "SELECT UserId, UserName, LastActivityDate, Cash FROM aspnet_Users " +
+                     "WHERE (UserId = @UserId)";
+          
+        SqlCommand cmd = new SqlCommand(sel, con);
+        cmd.Parameters.AddWithValue("UserId", UserId);
+
         con.Open();
-        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-        return dr;
+        SqlDataReader rdr = cmd.ExecuteReader();
+        rdr.Read();
+        
+        user.id = (Guid)rdr["UserId"];
+        user.name = rdr["UserName"].ToString();
+        user.lastActive = Convert.ToDateTime(rdr["LastActivityDate"]);
+        user.cash = (decimal)rdr["Cash"];
+        
+        rdr.Close();
+        con.Close();
+                           
+        return user;
     }
 
-
     [DataObjectMethod(DataObjectMethodType.Update)]
-    public static void UpdateUser(Guid UserId, string UserName, string Cash)
+    public static void UpdateUser(User user)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
         string up = " UPDATE aspnet_Users "
             + "SET UserName = @UserName, "
+            + "LoweredUserName = @LoweredUserName,"
             + "Cash = @Cash " +
             "WHERE (UserId = @UserId)";
-            
+
         SqlCommand cmd = new SqlCommand(up, con);
-        cmd.Parameters.AddWithValue("UserId", UserId);
-        cmd.Parameters.AddWithValue("UserName", UserName);
-        cmd.Parameters.AddWithValue("Cash", Cash);
+        cmd.Parameters.AddWithValue("UserId", user.id);
+        cmd.Parameters.AddWithValue("UserName", user.name);
+        cmd.Parameters.AddWithValue("LoweredUserName", user.loweredName);
+        cmd.Parameters.AddWithValue("Cash", user.cash);
 
         con.Open();
         cmd.ExecuteNonQuery();
+        con.Close();
     }
 
 
     [DataObjectMethod(DataObjectMethodType.Insert)]
-    public static int InsertUser(string UserName, string Cash)
+    public static int InsertUser(User user)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
         string ins = "INSERT INTO aspnet_Users" +
-                         "(UserName, Cash) "
-                        + "VALUES(@UserName, @Cash)";
+                         "(UserName, LoweredUserName, Cash) "
+                        + "VALUES(@UserName, @LoweredUserName, @Cash)";
         SqlCommand cmd = new SqlCommand(ins, con);
-        cmd.Parameters.AddWithValue("UserName", UserName);
-        cmd.Parameters.AddWithValue("Cash", Cash);
+        cmd.Parameters.AddWithValue("UserName", user.name);
+        cmd.Parameters.AddWithValue("LoweredUserName", user.loweredName);
+        cmd.Parameters.AddWithValue("Cash", user.cash);
         con.Open();
         int i = cmd.ExecuteNonQuery();
         return i;

@@ -18,34 +18,9 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //fvwUserDetaileddd.DataBind();
+      
     }
 
-    private void getNetWorth()
-    {
-
-    }
-
-    protected void btnEdit_Click(object sender, EventArgs e)
-    {
-        fvwUserDetaileddd.ChangeMode(FormViewMode.Edit);
-        rBtnAdmin.Enabled = true;
-        rBtnUser.Enabled = true;
-    }
-    protected void btnCancel_Click(object sender, EventArgs e)
-    {
-        fvwUserDetaileddd.ChangeMode(FormViewMode.ReadOnly);
-        rBtnAdmin.Enabled = false;
-        rBtnUser.Enabled = false;
-    }
-
-  
-    protected void dsUserShares_Updated(object sender, ObjectDataSourceStatusEventArgs e)
-    {
-        dsUser.Select();
-        gvwUsers.DataBind();
-
-    }
 
 
     protected void gvwUsers_SelectedIndexChanged(object sender, EventArgs e)
@@ -54,11 +29,6 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 
         listRole = RoleDB.GetUserRoles((Guid)gvwUsers.SelectedDataKey.Value);
      
-
-
-        listRole = RoleDB.GetUserRoles((Guid)gvwUsers.SelectedDataKey.Value);
-
-
         foreach (Role role in listRole)
         {
             if (role.RoleName.Equals("Administrator"))
@@ -73,49 +43,55 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
                 isAdmin = false;
             }
         }
-
+        fvwUser.Visible = true;
         rBtnAdmin.Visible = true;
         rBtnUser.Visible = true;
-
 
     }
 
 
-
-
-
-    protected void btnEditUser_Click(object sender, EventArgs e)
+    protected void UpdateButton_Click(object sender, EventArgs e)
     {
-        fvwUserDetaileddd.ChangeMode(FormViewMode.Edit);
+         TextBox txtName = (TextBox)fvwUser.FindControl("txtName");
+         Label lblLoweredName = (Label)fvwUser.FindControl("lblNameLower");
+
+         lblLoweredName.Text = txtName.Text.ToLower();
+
+
+    
+    }
+
+    protected void btnCancelUpdate_Click(object sender, EventArgs e)
+    {
+        rBtnAdmin.Enabled = false;
+        rBtnUser.Enabled = false;
+    }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
         rBtnAdmin.Enabled = true;
         rBtnUser.Enabled = true;
     }
 
-    protected void btnUpdate_Click(object sender, EventArgs e)
+    protected void dsUser_Updated(object sender, ObjectDataSourceStatusEventArgs e)
     {
         Guid UserId = (Guid)gvwUsers.SelectedDataKey.Value;
 
-        CheckBox cbViewAdmin = fvwUserDetaileddd.FindControl("cbEditAdmin") as CheckBox;
-
-        CheckBox cbViewUser = fvwUserDetaileddd.FindControl("cbEditAdmin") as CheckBox;
-
         if (rBtnAdmin.Checked && !isAdmin)
         {
-            RoleDB.InsertRole(UserId, AdminRoleId);
+            RoleDB.InsertUserRole(UserId, AdminRoleId);
 
-            RoleDB.DeleteRole(UserId, UserRoleId);
+            RoleDB.DeleteUserRole(UserId, UserRoleId);
         }
 
         if (rBtnUser.Checked && isAdmin)
         {
 
-            RoleDB.InsertRole(UserId, UserRoleId);
+            RoleDB.InsertUserRole(UserId, UserRoleId);
 
-            RoleDB.DeleteRole(UserId, AdminRoleId);
+            RoleDB.DeleteUserRole(UserId, AdminRoleId);
         }
-        fvwUserDetaileddd.ChangeMode(FormViewMode.ReadOnly);
-        fvwUserDetaileddd.DataBind();
-        gvwUsers.DataBind();
+
         rBtnAdmin.Enabled = false;
         rBtnUser.Enabled = false;
     }

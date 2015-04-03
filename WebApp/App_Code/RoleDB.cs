@@ -33,21 +33,22 @@ public class RoleDB
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
 
+
             while (rdr.Read())
             {
                 Role role = new Role();
-                role.RoleId = rdr["RoleId"].ToString();
+                role.id = rdr["RoleId"].ToString();
                 role.RoleName = rdr["RoleName"].ToString();
 
                 listRole.Add(role);
             }
         }
-
+   
         return listRole;
     }
 
     [DataObjectMethod(DataObjectMethodType.Insert)]
-    public static int InsertRole(Guid UserId, Guid RoleId)
+    public static int InsertUserRole(Guid UserId, Guid RoleId)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
         string ins = "INSERT INTO aspnet_UsersInRoles " +
@@ -58,6 +59,7 @@ public class RoleDB
         cmd.Parameters.AddWithValue("RoleId", RoleId);
         con.Open();
         int i = cmd.ExecuteNonQuery();
+        con.Close();
         return i;
     }
 
@@ -73,11 +75,12 @@ public class RoleDB
         cmd.Parameters.AddWithValue("RoleId", RoleId);
         con.Open();
         int i = cmd.ExecuteNonQuery();
+        con.Close();
         return i;
     }
 
     [DataObjectMethod(DataObjectMethodType.Delete)]
-    public static int DeleteRole(Guid UserId, Guid RoleId)
+    public static int DeleteUserRole(Guid UserId, Guid RoleId)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
         string del = "DELETE FROM aspnet_UsersInRoles "

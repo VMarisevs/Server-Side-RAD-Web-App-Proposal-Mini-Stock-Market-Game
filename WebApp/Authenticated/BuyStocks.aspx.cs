@@ -25,42 +25,100 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
     }
 
 
-    protected void LinkButton1_Click(object sender, EventArgs e)
-    {
-        dsBuySell.Select();
-    }
 
 
     protected void gwBuyStocks_SelectedIndexChanged(object sender, EventArgs e)
     {
-        dsBuySell.Select();
+
+
     }
 
 
 
-    protected void dsBuySell_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+    protected void Button1_Click(object sender, EventArgs e)
     {
-        BuySell stock = new BuySell();
+        int RowId = ((GridViewRow)((Button)sender).Parent.Parent).RowIndex;
+        int CompanyId = (int)gwBuyStocks.DataKeys[RowId].Value;
+        Buy(1, CompanyId);
+    }
 
-        stock = (BuySell)e.ReturnValue;
 
-        stock.userShares++;
-        stock.companyShares--;
-        stock.cash -= stock.price;
+    protected void Buy(int ammount, int companyId)
+    {
+        int userShares;
+        Guid UserId;
+        User user = new User();
+        Comapny company = new Comapny();
 
-         
-  
-        SharesDB.UpdateCash(MySession.Current.UserId,stock.cash);
 
-        SharesDB.UpdateUserShares(MySession.Current.UserId, (int)gwBuyStocks.SelectedDataKey.Value, stock.userShares);
+        UserId = new Guid(MySession.Current.UserId);
+        user = UserDB.GetUser(UserId);
+        company = CompanyDB.GetCompanyShares(companyId);
 
-        if (stock.companyShares != 0)
+        userShares = SharesDB.GetUserShares(UserId, companyId);
+
+        if (company.shares - ammount > 0)
         {
-            SharesDB.UpdateCompanyShares((int)gwBuyStocks.SelectedDataKey.Value, stock.companyShares);
-        }
-       // dsStocks.Select();
+            user.cash -= company.sharePrice * ammount;
+            company.shares -= ammount;
 
-        
-        gwBuyStocks.DataBind();
+            if (userShares > 0)
+            {
+                SharesDB.UpdateUserShares(UserId, companyId, userShares + ammount);
+            }
+            else
+            {
+                SharesDB.InsertUserShares(UserId, companyId, ammount, userShares + ammount);
+            }
+            SharesDB.UpdateCash(UserId, user.cash);
+            CompanyDB.UpdateCompanyShares(companyId, company.shares);
+
+            gwBuyStocks.DataBind();
+
+        }
+        else
+        {
+
+
+        }
+    }
+
+    protected void Sell(int ammount, int companyId)
+    {
+        int userShares;
+        Guid UserId;
+        User user = new User();
+        Comapny company = new Comapny();
+
+
+        UserId = new Guid(MySession.Current.UserId);
+        user = UserDB.GetUser(UserId);
+        company = CompanyDB.GetCompanyShares(companyId);
+        userShares = SharesDB.GetUserShares(UserId, companyId);
+
+        if (userShares - ammount > 0)
+        {
+            user.cash += company.sharePrice * ammount;
+            company.shares += ammount;
+
+            if (userShares > 0)
+            {
+                SharesDB.UpdateUserShares(UserId, companyId, userShares - ammount);
+            }
+            else
+            {
+                SharesDB.InsertUserShares(UserId, companyId, ammount, userShares - ammount);
+            }
+
+            SharesDB.UpdateCash(UserId, user.cash);
+            CompanyDB.UpdateCompanyShares(companyId, company.shares);
+            gwBuyStocks.DataBind();
+
+        }
+        else
+        {
+
+
+        }
     }
 }

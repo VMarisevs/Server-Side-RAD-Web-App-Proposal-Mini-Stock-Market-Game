@@ -10,82 +10,44 @@ using System.Configuration;
 using System.Data;
 
 
-public class BuySell
-{
-    public int userShares { get; set; }
 
-    public decimal cash { get; set; }
 
-    public int companyShares{ get; set; }
 
-    public string companyName{ get; set; }
-
-    public decimal price { get; set; }
-
- 
-}
 
 
 public class SharesDB
 {
 
-    [DataObjectMethod(DataObjectMethodType.Select)]
-    public static BuySell GetShares(string userId, int companyId)
+ 
+    public static int GetUserShares(Guid userId, int companyId)
     {
-        int a = 0;
-        BuySell stock = new BuySell();
-        string sel = "SELECT  aspnet_Users.Cash, Companies.Name, Companies.shareAmount, Companies.curprice, UserShares.shares, UserShares.price " +
-                     "FROM Companies INNER JOIN " +
-                         "UserShares ON Companies.Id = UserShares.companyId INNER JOIN " +
-                        "aspnet_Users ON UserShares.userId = aspnet_Users.UserId " +
-                        "WHERE (UserShares.companyId = @companyId) AND (UserShares.userId = @userId) ";
+        int userShares = 0;
 
-        using (SqlConnection con = new SqlConnection(GetConnectionString()))
-        {
-         
-            SqlCommand cmd = new SqlCommand(sel, con);
-            cmd.Parameters.AddWithValue("companyId", companyId);
-            cmd.Parameters.AddWithValue("UserId", userId);
-            con.Open();
-            SqlDataReader rdr = cmd.ExecuteReader();
-
-            rdr.Read();
-
-            if ((rdr["shares"]) == null)              
-                stock.userShares = 0;
-            else
-                stock.userShares = (int)(rdr["shares"]);
-
-
-            stock.cash = (decimal)(rdr["Cash"]);
-
-            stock.companyShares = (int)(rdr["shareAmount"]);
-            stock.companyName = rdr["Name"].ToString();
-            stock.price = (decimal)(rdr["curprice"]);
-                        
-        }
-
-        return stock;
-    }
-
-    [DataObjectMethod(DataObjectMethodType.Update)]
-    public static int UpdateCash(string UserId, decimal cash)
-    {
         SqlConnection con = new SqlConnection(GetConnectionString());
-        string ins = " UPDATE aspnet_Users "
-            + "SET Cash = @Cash " +
-              "WHERE (UserId = @UserId)";
-        SqlCommand cmd = new SqlCommand(ins, con);
-        cmd.Parameters.AddWithValue("UserId", UserId);
-        cmd.Parameters.AddWithValue("Cash", cash);
+        string sel = "SELECT shares " +
+                     "FROM UserShares WHERE (companyId = @companyId) AND (userId = @userId) ";       
+                    
+        SqlCommand cmd = new SqlCommand(sel, con);
+        cmd.Parameters.AddWithValue("companyId", companyId);
+        cmd.Parameters.AddWithValue("UserId", userId);
         con.Open();
-        int i = cmd.ExecuteNonQuery();
-        return i;
+        SqlDataReader rdr = cmd.ExecuteReader();
+            
+        rdr.Read();
+      //  userShares = (int)(rdr["shares"]);
+        if (rdr.HasRows) 
+        {
+            userShares = (int)(rdr["shares"]);
+        }
+ 
+        rdr.Close();
+        con.Close();
+                               
+        return userShares;
     }
 
 
-    [DataObjectMethod(DataObjectMethodType.Update)]
-    public static int UpdateUserShares(string UserId,int companyId, int shares)
+    public static int UpdateUserShares(Guid UserId, int companyId, int shares)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
         string ins = "UPDATE UserShares " +
@@ -100,23 +62,43 @@ public class SharesDB
         return i;
     }
 
-    [DataObjectMethod(DataObjectMethodType.Update)]
-    public static int UpdateCompanyShares(int companyId, int shares)
+
+    public static int InsertUserShares(Guid userId, int companyId, int shares, decimal price)
     {
         SqlConnection con = new SqlConnection(GetConnectionString());
-        string ins = "UPDATE Companies " +
-                         "SET shareAmount = @shareAmount "+
-                         "WHERE (Id = @Id)";
+        string ins = "INSERT INTO UserShares " +
+                         "(userId, companyId, shares, price) "
+                        + "VALUES(@userId, @companyId, @shares, @price)";
         SqlCommand cmd = new SqlCommand(ins, con);
-        cmd.Parameters.AddWithValue("Id", companyId);
-        cmd.Parameters.AddWithValue("shareAmount", shares);
+        cmd.Parameters.AddWithValue("userId", userId);
+        cmd.Parameters.AddWithValue("companyId", companyId);
+        cmd.Parameters.AddWithValue("shares", shares);
+        cmd.Parameters.AddWithValue("price", price);
+        con.Open();
+        int i = cmd.ExecuteNonQuery();
+        con.Close();
+        return i;
+    }
+
+    public static int UpdateCash(Guid UserId, decimal cash)
+    {
+        SqlConnection con = new SqlConnection(GetConnectionString());
+        string ins = " UPDATE aspnet_Users "
+            + "SET Cash = @Cash " +
+              "WHERE (UserId = @UserId)";
+        SqlCommand cmd = new SqlCommand(ins, con);
+        cmd.Parameters.AddWithValue("UserId", UserId);
+        cmd.Parameters.AddWithValue("Cash", cash);
         con.Open();
         int i = cmd.ExecuteNonQuery();
         return i;
     }
 
+
+
     private static string GetConnectionString()
     {
         return ConfigurationManager.ConnectionStrings["GameConnectionString"].ConnectionString;
     }
+
 }

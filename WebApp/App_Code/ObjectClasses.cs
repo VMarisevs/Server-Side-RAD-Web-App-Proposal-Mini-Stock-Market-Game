@@ -8,20 +8,31 @@ using System.Web;
 /// </summary>
 public class User
 {
-    public Guid UserId { get; set; }
+    public Guid id { get; set; }
 
-    public string UserName { get; set; }
+    public string name { get; set; }
 
-    public string UserRole { get; set; }
+    public string loweredName { get; set; }
 
-    public string UserCash { get; set; }
+    public decimal cash { get; set; }
 
-    public DateTime UserLastActivity { get; set; }   
+    public DateTime lastActive { get; set; }   
+}
+
+
+public class Comapny
+{
+    public int shares { get; set; }
+
+    public string name { get; set; }
+
+    public decimal sharePrice { get; set; }
+
 }
 
 public class Role
 {
-    public string RoleId { get; set; }
+    public string id { get; set; }
 
     public string RoleName { get; set; }
 }

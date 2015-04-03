@@ -31,10 +31,13 @@
                     SortExpression="shareAmount" />
                 <asp:BoundField DataField="curprice" HeaderText="Price" 
                     SortExpression="curprice" />
-                <asp:TemplateField ShowHeader="False">
+                <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
+                <asp:TemplateField>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                    </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Button ID="Button1" runat="server" CausesValidation="False" 
-                            CommandName="Select" Text="Buy"/>
+                        <asp:Button ID="Button1" runat="server"  onclick="Button1_Click" Text="Buy" />
                     </ItemTemplate>
                 </asp:TemplateField>
 
@@ -68,17 +71,6 @@
             </UpdateParameters>
         </asp:SqlDataSource>
         <br />
-        
-        <asp:ObjectDataSource ID="dsBuySell" runat="server" 
-            onselecting="dsBuySell_Selecting" SelectMethod="GetShares" 
-            TypeName="SharesDB" OldValuesParameterFormatString="original_{0}" 
-            onselected="dsBuySell_Selected">
-            <SelectParameters>
-                <asp:Parameter Name="userId" Type="String" />
-                <asp:ControlParameter ControlID="gwBuyStocks" Name="companyId" 
-                    PropertyName="SelectedValue" Type="String" />
-            </SelectParameters>
-        </asp:ObjectDataSource>
         
         <br />
         <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
