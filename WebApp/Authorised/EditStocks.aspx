@@ -130,7 +130,7 @@ BorderWidth="2px"
 style="margin:2px;"
                 ></asp:TextBox>
                 &nbsp;&nbsp;
-                <asp:Button ID="btnSearch" runat="server" onclick="btnSearch_Click" 
+                <asp:Button ID="btnSearch" runat="server" 
                     Text="Search" 
                     ForeColor="black" 
 font-size="1em" 

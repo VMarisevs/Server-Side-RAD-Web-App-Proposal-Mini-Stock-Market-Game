@@ -14,25 +14,12 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
     }
 
 
-
-
-
     protected void dsBuySell_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
     {
         e.InputParameters["UserId"] = MySession.Current.UserId;
         e.InputParameters["companyId"] = gwBuyStocks.SelectedDataKey.Value;
 
     }
-
-
-
-
-    protected void gwBuyStocks_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-
-    }
-
 
 
     protected void Button1_Click(object sender, EventArgs e)

@@ -1,6 +1,21 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="BuyStocks.aspx.cs" Inherits="Authenticated_BuyStocks" %>
 <%@ MasterType virtualpath="~/MasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+        }
+        .style4
+        {
+            width: 290px;
+            height: 36px;
+        }
+        .style3
+        {
+            width: 290px;
+        }
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <!--This directive causes the content page's Master property to be strongly typed.-->
@@ -13,25 +28,87 @@
     <div>
         <asp:SqlDataSource ID="dsStocks" runat="server" 
             ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"                   
-            SelectCommand="SELECT Companies.Id, Companies.Name, Categories.longName, Companies.shareAmount, Companies.curprice FROM Categories INNER JOIN Companies ON Categories.Id = Companies.categoryId"></asp:SqlDataSource>
+            SelectCommand="SELECT Companies.Id, Companies.Name, Categories.longName, Companies.shareAmount, Companies.curprice FROM Categories INNER JOIN Companies ON Categories.Id = Companies.categoryId WHERE ([Name] LIKE '%' + @Name + '%') AND categoryId = CASE  @categoryId 
+WHEN '-1'  THEN categoryId 
+ELSE @categoryId 
+END ORDER BY [Name]">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="txtSearch" Name="Name" PropertyName="Text" 
+                    DefaultValue="%" />
+                <asp:ControlParameter ControlID="ddlCategories" Name="categoryId" 
+                    PropertyName="SelectedValue" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="dsCategories" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
+            SelectCommand="SELECT [Id], [longName] FROM [Categories] ORDER BY [longName]">
+        </asp:SqlDataSource>
+        <table class="style1">
+            <tr>
+            <td class="style4"  align ="right">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                </td>
+                <td>
+                <asp:Button ID="btnSearch" runat="server" 
+                    Text="Search" 
+                    ForeColor="black" 
+font-size="1em" 
+BackColor="#E8E8E8"
+Font-Names="Tahoma"
+Width="120px"
+BorderColor="#00BFFF"
+BorderStyle="Solid"
+BorderWidth="2px"
+style="margin:2px;" />
+                <asp:TextBox ID="txtSearch"  runat="server" 
+                ForeColor="black" 
+font-size="1em" 
+BackColor="White"
+Font-Names="Tahoma"
+Width="150px"
+BorderColor="#00BFFF"
+BorderStyle="Solid"
+BorderWidth="2px"
+style="margin:2px;"
+                ></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+            <td class="style3"  align ="right">
+                &nbsp;
+                </td>
+                <td>
+                <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" 
+            DataSourceID="dsCategories" DataTextField="longName" DataValueField="Id" 
+            AppendDataBoundItems="True" 
+            ForeColor="black" 
+font-size="1em" 
+BackColor="White"
+Font-Names="Tahoma"
+Width="120px"
+BorderColor="#00BFFF"
+BorderStyle="Solid"
+BorderWidth="2px"
+style="margin:2px; text-align: right;">
+            <asp:ListItem Value="-1">All</asp:ListItem>
+        </asp:DropDownList>
+                </td>
+            </tr>
+        </table>
         <asp:GridView ID="gwBuyStocks" runat="server" AllowPaging="True" 
             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
             DataSourceID="dsStocks" ForeColor="#333333" GridLines="None" 
-            DataKeyNames="Id" 
-            onselectedindexchanged="gwBuyStocks_SelectedIndexChanged">
+            DataKeyNames="Id">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" 
                     InsertVisible="False" ReadOnly="True" Visible="False" />
                 <asp:BoundField DataField="Name" HeaderText="Company" 
                     SortExpression="Name" />
-                <asp:BoundField DataField="longName" HeaderText="Category" 
-                    SortExpression="longName" />
-                <asp:BoundField DataField="shareAmount" HeaderText="Available Shares" 
+                <asp:BoundField DataField="shareAmount" HeaderText="Shares Owned" 
                     SortExpression="shareAmount" />
                 <asp:BoundField DataField="curprice" HeaderText="Price" 
                     SortExpression="curprice" />
-                <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
                 <asp:TemplateField>
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
@@ -73,7 +150,6 @@
         <br />
         
         <br />
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
         <br />
     </div>
 </asp:Content>
