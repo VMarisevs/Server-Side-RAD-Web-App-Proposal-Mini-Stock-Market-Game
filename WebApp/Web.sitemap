@@ -15,14 +15,16 @@
     <siteMapNode url="Authenticated/SellStocks.aspx" title="My Stocks"  description="" >
       <siteMapNode url="Authenticated/BuyStocks.aspx" title="Buy Stocks"  description="" />
     </siteMapNode>
-    
-    <siteMapNode url="Authenticated/History.aspx" title="History"  description=""/>
-    <siteMapNode url="Authenticated/PassChange.aspx" title="Password Change"  description=""/>
+
+    <siteMapNode url="Authenticated/History.aspx" title="History"  description="">
+      <siteMapNode url="Authenticated/PassChange.aspx" title="Password Change"  description=""/>
+    </siteMapNode>
 
     <!-- Available to Admin(authorised) -->
     <siteMapNode url="Authorised/EditStocks.aspx" title="Edit Stocks"  description="">
       <siteMapNode url="Authorised/EditNews.aspx" title="Edit News"  description="" />
       <siteMapNode url="Authorised/EditUsers.aspx" title="Edit Users"  description="" />
+      <siteMapNode url="Authorised/ViewFeedback.aspx" title="View Feedback"  description="" />
     </siteMapNode>
 
   </siteMapNode>

@@ -5,8 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <h1 class="style2">
         We thank You very much for taking the time to give us your input, and will get back to You shortly. </h1>
-     <h1 class="style2">
+     <h3>
         Kind Regards,<br/> 
-        Zombo Corp Team.</h1>
+        ZomboCorp Team.</h3>
 </asp:Content>
 
