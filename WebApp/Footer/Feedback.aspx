@@ -47,12 +47,16 @@
             <td class="style3">
 &nbsp;&nbsp; 1.&nbsp; On which devices did you access the website ? <br /></td>
             <td>
-                <asp:CheckBoxList ID="CheckBoxList1" runat="server">
-                    <asp:ListItem Value="0">Mobile</asp:ListItem>
-                    <asp:ListItem Value="1">PC</asp:ListItem>
-                    <asp:ListItem Value="2">Tablet</asp:ListItem>
-                    <asp:ListItem Value="3">Laptop</asp:ListItem>
+                <asp:CheckBoxList ID="cblstWebsiteAccess" runat="server" 
+                    DataSourceID="dsCheckBoxList" DataTextField="Name" DataValueField="Id">
                 </asp:CheckBoxList>
+                <asp:SqlDataSource ID="dsCheckBoxList" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+                    SelectCommand="SELECT [Id], [TYPE], [Name] FROM [Feedback_Options] WHERE ([TYPE] = @TYPE)">
+                    <SelectParameters>
+                        <asp:Parameter DefaultValue="ac" Name="TYPE" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
             </td>
         </tr>
         <tr>
@@ -64,12 +68,17 @@
             <td class="style3">
                 &nbsp;&nbsp; 3.&nbsp; How did you first learn about our website ?&nbsp;</td>
             <td>
-                <asp:DropDownList ID="DropDownList1" runat="server">
-                    <asp:ListItem Value="0">Advertisement</asp:ListItem>
-                    <asp:ListItem Value="1">Word of Mouth</asp:ListItem>
-                    <asp:ListItem Value="2">Email</asp:ListItem>
-                    <asp:ListItem Value="3">Search Engine</asp:ListItem>
+                <asp:DropDownList ID="ddlLearnAbout" runat="server" 
+                    DataSourceID="dsDropDownList" DataTextField="Name" DataValueField="Id" 
+                    style="margin-left: 0px">
                 </asp:DropDownList>
+                <asp:SqlDataSource ID="dsDropDownList" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+                    SelectCommand="SELECT [Id], [Name], [TYPE] FROM [Feedback_Options] WHERE ([TYPE] = @TYPE)">
+                    <SelectParameters>
+                        <asp:Parameter DefaultValue="ab" Name="TYPE" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
             </td>
         </tr>
         <tr>
@@ -80,15 +89,22 @@
         </tr>
         <tr>
             <td class="style3">
-&nbsp;&nbsp; 2.&nbsp; What's your access medium to Internet?</td>
+&nbsp;&nbsp; 2.&nbsp; What's your access medium to Internet?<br />
+                <asp:RequiredFieldValidator ID="fvAccessMediumList" runat="server" 
+                    ControlToValidate="lstbAccessMedium" 
+                    ErrorMessage="Please specify Your access medium to continue." ForeColor="Red"></asp:RequiredFieldValidator>
+            </td>
             <td>
-                <asp:ListBox ID="ListBox1" runat="server">
-                    <asp:ListItem Value="0">Dial-Up</asp:ListItem>
-                    <asp:ListItem Value="1">Cable</asp:ListItem>
-                    <asp:ListItem Value="2">DSL</asp:ListItem>
-                    <asp:ListItem Value="3">Wireless</asp:ListItem>
-                    <asp:ListItem Value="4">Don't know</asp:ListItem>
+                <asp:ListBox ID="lstbAccessMedium" runat="server" DataSourceID="dsItemList" 
+                    DataTextField="Name" DataValueField="Id" style="margin-left: 0px">
                 </asp:ListBox>
+                <asp:SqlDataSource ID="dsItemList" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+                    SelectCommand="SELECT [Id], [TYPE], [Name] FROM [Feedback_Options] WHERE ([TYPE] = @TYPE)">
+                    <SelectParameters>
+                        <asp:Parameter DefaultValue="me" Name="TYPE" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
             </td>
         </tr>
         <tr>
@@ -99,13 +115,22 @@
         </tr>
         <tr>
             <td class="style3">
-                &nbsp;&nbsp; 4.&nbsp; What's the main reason for visiting our website?</td>
+                &nbsp;&nbsp; 4.&nbsp; What's the main reason for visiting our website?<br />
+                <asp:RequiredFieldValidator ID="fvRadioButtonValidation" runat="server" 
+                    ControlToValidate="rbtnlstReasonVisiting" 
+                    ErrorMessage="Please specify Your visiting reason." ForeColor="Red"></asp:RequiredFieldValidator>
+            </td>
             <td>
-                <asp:RadioButtonList ID="RadioButtonList1" runat="server">
-                    <asp:ListItem Value="0">Curious</asp:ListItem>
-                    <asp:ListItem Value="1">Gathering Information</asp:ListItem>
-                    <asp:ListItem Value="2">Other Reasons</asp:ListItem>
+                <asp:RadioButtonList ID="rbtnlstReasonVisiting" runat="server" 
+                    DataSourceID="dsRadioButtonList" DataTextField="Name" DataValueField="Id">
                 </asp:RadioButtonList>
+                <asp:SqlDataSource ID="dsRadioButtonList" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+                    SelectCommand="SELECT [Id], [Name], [TYPE] FROM [Feedback_Options] WHERE ([TYPE] = @TYPE)">
+                    <SelectParameters>
+                        <asp:Parameter DefaultValue="re" Name="TYPE" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
             </td>
         </tr>
         <tr>
@@ -119,7 +144,7 @@
                 &nbsp;&nbsp; 5.&nbsp; &nbsp;Describe your experience of this website in a few words:
             </td>
             <td>
-                <asp:TextBox ID="TextBox1" runat="server" Height="53px" TextMode="MultiLine" 
+                <asp:TextBox ID="txtExperience" runat="server" Height="53px" TextMode="MultiLine" 
                     Width="226px"></asp:TextBox>
             </td>
         </tr>
@@ -133,7 +158,7 @@
             <td class="style3">
                 &nbsp;&nbsp; 6.&nbsp; Would you come back to Stock St?</td>
             <td>
-                <asp:CheckBox ID="Yes" runat="server" />
+                <asp:CheckBox ID="chkbxComeBack" runat="server" />
             </td>
         </tr>
         <tr>
@@ -142,11 +167,11 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align: center">
-                <input id="Submit1" type="submit" value="Submit" 
-                    style="font-family: Tahoma; font-size: 1em;width:150px;" /></td>
-            <td style="text-align: center">
-                <input id="Reset1" type="reset" value="Reset" style="font-family: Tahoma; font-size: 1em;width:150px;" /></td>
+            <td style="text-align: center" colspan="2">
+            <asp:Button 
+                    ID="btnSubmit" runat="server" onclick="btnSubmit_Click" Text="Submit" 
+                    Width="220px" />
+            </td>
         </tr>
     </table>
 </div>

@@ -33,6 +33,7 @@ public class MySession
 
     public string UserId { get; set; }
     public string Email { get; set; }
+    public int HitCount { get; set; }
     /**
      *  we can add extra parameters in here, like
      *  

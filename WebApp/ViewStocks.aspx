@@ -29,7 +29,7 @@
              <asp:UpdatePanel ID="UpdatePanel1" runat="server">
              <ContentTemplate>
                 <asp:Timer ID="Timer1" runat="server" Interval="6000" />
-                <asp:FormView ID="FormView1" runat="server" DataSourceID="dsGraphs" >
+                <asp:FormView ID="FormView1" runat="server" DataSourceID="dsGraphs">
 <%--                    <EditItemTemplate>
                         Price:
                         <asp:TextBox ID="priceTextBox" runat="server" Text='<%# Bind("price", "{0:c}") %>' />
@@ -191,7 +191,7 @@
                  <ContentTemplate>
 <%--                 <asp:Timer ID="Timer2" runat="server" Interval="6000" />--%>
 
-                    <asp:GridView ID="gvwCompanies0" runat="server" AllowPaging="True" AllowSorting="True"
+                    <asp:GridView ID="gvwCompanies0" runat="server"
                         AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="#333333"
                         GridLines="None" PageSize="5" Width="800px" Font-Names="Tahoma" 
                         DataKeyNames="Id">
