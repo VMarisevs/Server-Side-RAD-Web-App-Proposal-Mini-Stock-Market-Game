@@ -70,15 +70,15 @@
             <asp:BoundField DataField="lastActive" HeaderText="Last Active" />
             <asp:TemplateField ShowHeader="False">
                 <ItemTemplate>
-                    <asp:Button ID="Button1" runat="server" CausesValidation="False" 
+                    <asp:Button ID="Button1" runat="server" CausesValidation="False" CssClass="buttonStyle"
                         CommandName="Select" onclick="Button1_Click" Text="Select" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
         <EditRowStyle BackColor="#999999" />
-        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+        <FooterStyle BackColor="#E8E8E8" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#E8E8E8" ForeColor="White" HorizontalAlign="Center" />
         <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
         <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
         <SortedAscendingCellStyle BackColor="#E9E7E2" />
@@ -111,40 +111,38 @@
                             Visible="False" />
                         <asp:Label ID="lblNameLower" runat="server"  Text='<%# Bind("loweredName") %>' 
                             Visible="False"></asp:Label>
-                        <table class="style7">
+                        <table>
                             <tr>
-                                <td>
-                                    <br />
-                                    name:
+                                <td colspan="2">
+                                    <strong>Name</strong>
                                     <asp:TextBox ID="txtName" runat="server" Text='<%# Bind("name") %>' />
                                 </td>
-                                <td>
-                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                   <strong>Cash:</strong>
+                                    <asp:TextBox ID="cashTextBox" runat="server" Text='<%# Bind("cash") %>' />
+                                </td>
                             </tr>
                             <tr>
                                 <td>
-                                    cash:
-                                    <asp:TextBox ID="cashTextBox" runat="server" Text='<%# Bind("cash") %>' />
                                     <br />
+                                    <asp:Button ID="UpdateButton" runat="server" CausesValidation="True" CssClass="buttonStyle"
+                                        CommandName="Update" onclick="UpdateButton_Click" Text="Update" />
                                 </td>
                                 <td>
-                                    <asp:Button ID="UpdateButton" runat="server" CausesValidation="True" 
-                                        CommandName="Update" onclick="UpdateButton_Click" Text="Update" />
-                                    &nbsp;
-                                    <asp:Button ID="btnCancelUpdate" runat="server" CausesValidation="False" 
+                                <br />
+                                    <asp:Button ID="btnCancelUpdate" runat="server" CausesValidation="False"  CssClass="buttonStyle"
                                         CommandName="Cancel" onclick="btnCancelUpdate_Click" Text="Cancel" />
                                 </td>
                             </tr>
                         </table>
-                        <br />
-                        <br />
-                        <br />
                         &nbsp;
                     </EditItemTemplate>
-                    <EditRowStyle BackColor="#999999" />
+                    <EditRowStyle BackColor="LightGray" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                     <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <InsertItemTemplate>
+                    <%--<InsertItemTemplate>
                         id:
                         <asp:TextBox ID="idTextBox" runat="server" Text='<%# Bind("id") %>' />
                         <br />
@@ -166,39 +164,42 @@
                             CommandName="Insert" Text="Insert" />
                         &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
                             CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                    </InsertItemTemplate>
+                    </InsertItemTemplate>--%>
                     <ItemTemplate>
                         &nbsp;<br />
-                        <table class="style7">
+                        <table width="100%">
                             <tr>
-                                 <td>
-                                    Id:
+                                <td colspan="2">
+                                  <strong>Id:</strong>  
                                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("id") %>' />
-                                <td>
-                                    name:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Name:</strong>  
                                     <asp:Label ID="nameLabel" runat="server" Text='<%# Bind("name") %>' />
                                 </td>
-                                <td>
-                                    <asp:Button ID="btnEdit" runat="server" CommandName="Edit" 
-                                        onclick="btnEdit_Click" style="margin-bottom: 0px" Text="Edit User" />
+
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Cash:</strong>  
+                                    <asp:Label ID="cashLabel" runat="server" Text='<%# Bind("cash") %>' />
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    cash:
-                                    <asp:Label ID="cashLabel" runat="server" Text='<%# Bind("cash") %>' />
-                                </td>
-                                <td>
-                                    <asp:Button ID="btnEditUserStocks" runat="server" CommandName="Select" 
+                                  <td>
+                                    <asp:Button ID="btnEdit" runat="server" CommandName="Edit" CssClass="buttonStyle"
+                                        onclick="btnEdit_Click" style="margin-bottom: 0px" Text="Edit User" />
+                                  </td>
+                                  <td>
+                                     <asp:Button ID="btnEditUserStocks" runat="server" CommandName="Select" CssClass="buttonStyle"
                                         Text="Edit Stocks" onclick="btnEditUserStocks_Click" />
-                                </td>
+                                  </td>
                             </tr>
                         </table>
-                        <br />
-                        <br />
-                        <br />
                     </ItemTemplate>
-                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                    <PagerStyle BackColor="#E8E8E8" ForeColor="White" HorizontalAlign="Center" />
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                 </asp:FormView>
 
@@ -245,21 +246,21 @@
                         </asp:TemplateField>
                         <asp:TemplateField ShowHeader="False">
                             <EditItemTemplate>
-                                <asp:Button ID="Button1" runat="server" CausesValidation="True" 
+                                <asp:Button ID="Button1" runat="server" CausesValidation="True" CssClass="buttonStyle"
                                     CommandName="Update" Text="Update" />
-                                &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" 
+                                &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CssClass="buttonStyle"
                                     CommandName="Cancel" Text="Cancel" />
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Button ID="Button1" runat="server" CausesValidation="False" 
-                                    CommandName="Edit" onclick="Button1_Click1" Text="Edit" />
+                                <asp:Button ID="Button1" runat="server" CausesValidation="False" CssClass="buttonStyle"
+                                    CommandName="Edit" Text="Edit" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                     <EditRowStyle BackColor="#999999" />
-                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                    <FooterStyle BackColor="#E8E8E8" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#E8E8E8" ForeColor="White" HorizontalAlign="Center" />
                     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                     <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
                     <SortedAscendingCellStyle BackColor="#E9E7E2" />

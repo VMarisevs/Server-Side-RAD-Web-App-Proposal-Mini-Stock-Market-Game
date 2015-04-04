@@ -25,27 +25,7 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 
     protected void gvwUsers_SelectedIndexChanged(object sender, EventArgs e)
     {
-        List<Role> listRole = new List<Role>();
 
-        listRole = RoleDB.GetUserRoles((Guid)gvwUsers.SelectedDataKey.Value);
-     
-        foreach (Role role in listRole)
-        {
-            if (role.RoleName.Equals("Administrator"))
-            {
-                rBtnAdmin.Checked = true;
-                isAdmin = true;
-                break;
-            }
-            if (role.RoleName.Equals("User"))
-            {
-                rBtnUser.Checked = true;
-                isAdmin = false;
-            }
-        }
-        fvwUser.Visible = true;
-        rBtnAdmin.Visible = true;
-        rBtnUser.Visible = true;
 
     }
 
@@ -79,21 +59,20 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
     {
         Guid UserId = (Guid)gvwUsers.SelectedDataKey.Value;
 
-        if (rBtnAdmin.Checked && !isAdmin)
+        if (rBtnAdmin.Checked != isAdmin)
         {
-            RoleDB.InsertUserRole(UserId, AdminRoleId);
-
-            RoleDB.DeleteUserRole(UserId, UserRoleId);
-        }
-
-        if (rBtnUser.Checked && isAdmin)
-        {
-
-            RoleDB.InsertUserRole(UserId, UserRoleId);
-
             RoleDB.DeleteUserRole(UserId, AdminRoleId);
-        }
+            RoleDB.DeleteUserRole(UserId, UserRoleId);
 
+            if (rBtnAdmin.Checked)
+            {
+                RoleDB.InsertUserRole(UserId, AdminRoleId);
+            }
+            else
+            {
+                RoleDB.InsertUserRole(UserId, UserRoleId);
+            }
+        }
         rBtnAdmin.Enabled = false;
         rBtnUser.Enabled = false;
     }
@@ -105,11 +84,35 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
     protected void Button1_Click(object sender, EventArgs e)
     {
         gvwEditStocks.Visible = false;
-    }
-    protected void Button1_Click1(object sender, EventArgs e)
-    {
+
+
+        List<Role> listRole = new List<Role>();
+
+        listRole = RoleDB.GetUserRoles((Guid)gvwUsers.SelectedDataKey.Value);
+
+        foreach (Role role in listRole)
+        {
+            if (role.RoleName.Equals("Administrator"))
+            {
+                rBtnAdmin.Checked = true;
+                isAdmin = true;
+                break;
+            }
+            if (role.RoleName.Equals("User"))
+            {
+                rBtnUser.Checked = true;
+                isAdmin = false;
+            }
+        }
+        fvwUser.Visible = true;
+        rBtnAdmin.Visible = true;
+        rBtnUser.Visible = true;
+
+        rBtnAdmin.Enabled = false;
+        rBtnUser.Enabled = false;
 
     }
+
     protected void dsUserStocks_Updating(object sender, ObjectDataSourceMethodEventArgs e)
     {
         if (Convert.ToInt32(e.InputParameters["Shares"]) <= 0)
