@@ -26,7 +26,7 @@ public class RoleDB
                      "INNER JOIN aspnet_Roles ON aspnet_UsersInRoles.RoleId = aspnet_Roles.RoleId " +
                      "WHERE (aspnet_Users.UserId = @UserId)"; ;
 
-        using (SqlConnection con = new SqlConnection(GetConnectionString()))
+        using (SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString()))
         {
             SqlCommand cmd = new SqlCommand(sel, con);
             cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier).Value = UserId;
@@ -50,7 +50,7 @@ public class RoleDB
     [DataObjectMethod(DataObjectMethodType.Insert)]
     public static int InsertUserRole(Guid UserId, Guid RoleId)
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string ins = "INSERT INTO aspnet_UsersInRoles " +
                          "(UserId, RoleId) "
                         + "VALUES(@UserId, @RoleId)";
@@ -66,7 +66,7 @@ public class RoleDB
     [DataObjectMethod(DataObjectMethodType.Insert)]
     public static int InsertRole(Guid RoleId)
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string ins = "SELECT SCOPE_IDENTITY() FROM aspnet_Users AS  [@UserId] " +
                      "INSERT INTO aspnet_UsersInRoles " +
                          "(@UserId, RoleId) "
@@ -82,7 +82,7 @@ public class RoleDB
     [DataObjectMethod(DataObjectMethodType.Delete)]
     public static int DeleteUserRole(Guid UserId, Guid RoleId)
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string del = "DELETE FROM aspnet_UsersInRoles "
             + "WHERE UserId = @UserId "
             + "AND RoleId = @RoleId ";
@@ -95,8 +95,5 @@ public class RoleDB
         return i;
     }
 
-    private static string GetConnectionString()
-    {
-        return ConfigurationManager.ConnectionStrings["GameConnectionString"].ConnectionString;
-    }
+ 
 }

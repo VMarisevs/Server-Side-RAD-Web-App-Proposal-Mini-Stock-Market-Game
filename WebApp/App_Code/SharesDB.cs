@@ -18,23 +18,37 @@ using System.Data;
 public class SharesDB
 {
 
- 
+    [DataObjectMethod(DataObjectMethodType.Select)]
+    public static IEnumerable GetUserCompaines(Guid userId)
+    {
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
+        string sel = "SELECT UserShares.shares, UserShares.companyId, Companies.Name, Companies.curprice " +
+                     "FROM Companies INNER JOIN " +
+                     "UserShares ON Companies.Id = UserShares.companyId " +
+                     "WHERE (userId = @userId) ";
+
+        SqlCommand cmd = new SqlCommand(sel, con);
+        cmd.Parameters.AddWithValue("UserId", userId);
+        con.Open();
+        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+        return dr;
+    }
+
     public static int GetUserShares(Guid userId, int companyId)
     {
         int userShares = 0;
 
-        SqlConnection con = new SqlConnection(GetConnectionString());
+       
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string sel = "SELECT shares " +
                      "FROM UserShares WHERE (companyId = @companyId) AND (userId = @userId) ";       
                     
         SqlCommand cmd = new SqlCommand(sel, con);
-        cmd.Parameters.AddWithValue("companyId", companyId);
         cmd.Parameters.AddWithValue("UserId", userId);
         con.Open();
         SqlDataReader rdr = cmd.ExecuteReader();
             
         rdr.Read();
-      //  userShares = (int)(rdr["shares"]);
         if (rdr.HasRows) 
         {
             userShares = (int)(rdr["shares"]);
@@ -49,7 +63,7 @@ public class SharesDB
 
     public static int UpdateUserShares(Guid UserId, int companyId, int shares)
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string ins = "UPDATE UserShares " +
                          "SET shares = @shares " +
                          "WHERE (UserId = @UserId) AND (companyId = @companyId)";
@@ -65,7 +79,7 @@ public class SharesDB
 
     public static int InsertUserShares(Guid userId, int companyId, int shares, decimal price)
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string ins = "INSERT INTO UserShares " +
                          "(userId, companyId, shares, price) "
                         + "VALUES(@userId, @companyId, @shares, @price)";
@@ -82,7 +96,7 @@ public class SharesDB
 
     public static int UpdateCash(Guid UserId, decimal cash)
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string ins = " UPDATE aspnet_Users "
             + "SET Cash = @Cash " +
               "WHERE (UserId = @UserId)";
@@ -95,10 +109,5 @@ public class SharesDB
     }
 
 
-
-    private static string GetConnectionString()
-    {
-        return ConfigurationManager.ConnectionStrings["GameConnectionString"].ConnectionString;
-    }
 
 }

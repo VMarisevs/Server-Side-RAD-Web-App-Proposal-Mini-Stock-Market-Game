@@ -15,7 +15,7 @@ public class CompanyDB
     {
         Comapny company = new Comapny();
 
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string sel = "SELECT Name, curprice, shareAmount " +
                      "FROM Companies WHERE (Id = @Id) ";
 
@@ -39,7 +39,7 @@ public class CompanyDB
 
     public static int UpdateCompanyShares(int companyId, int shares)
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string ins = "UPDATE Companies " +
                          "SET shareAmount = @shareAmount " +
                          "WHERE (Id = @Id)";
@@ -52,8 +52,4 @@ public class CompanyDB
         return i;
     }
 
-    private static string GetConnectionString()
-    {
-        return ConfigurationManager.ConnectionStrings["GameConnectionString"].ConnectionString;
-    }
 }

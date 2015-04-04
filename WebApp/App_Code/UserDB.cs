@@ -23,7 +23,7 @@ public static class UserDB
         string sel = "SELECT UserId,  UserName, LastActivityDate, Cash FROM aspnet_Users " +
             "ORDER BY UserName";
 
-        using (SqlConnection con = new SqlConnection(GetConnectionString()))
+        using (SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString()))
         {
             SqlCommand cmd = new SqlCommand(sel, con);
             con.Open();
@@ -50,7 +50,7 @@ public static class UserDB
     public static User GetUser(Guid UserId)
     {
         User user = new User();
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string sel = "SELECT UserId, UserName, LastActivityDate, Cash FROM aspnet_Users " +
                      "WHERE (UserId = @UserId)";
           
@@ -75,7 +75,7 @@ public static class UserDB
     [DataObjectMethod(DataObjectMethodType.Update)]
     public static void UpdateUser(User user)
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string up = " UPDATE aspnet_Users "
             + "SET UserName = @UserName, "
             + "LoweredUserName = @LoweredUserName,"
@@ -97,7 +97,7 @@ public static class UserDB
     [DataObjectMethod(DataObjectMethodType.Insert)]
     public static int InsertUser(User user)
     {
-        SqlConnection con = new SqlConnection(GetConnectionString());
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string ins = "INSERT INTO aspnet_Users" +
                          "(UserName, LoweredUserName, Cash) "
                         + "VALUES(@UserName, @LoweredUserName, @Cash)";
@@ -107,11 +107,8 @@ public static class UserDB
         cmd.Parameters.AddWithValue("Cash", user.cash);
         con.Open();
         int i = cmd.ExecuteNonQuery();
+        con.Close();
         return i;
     }
 
-    private static string GetConnectionString()
-    {
-        return ConfigurationManager.ConnectionStrings["GameConnectionString"].ConnectionString;
-    }
 }
