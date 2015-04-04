@@ -59,7 +59,8 @@
             <td>
                 <asp:Chart ID="Chart1" runat="server" DataSourceID="dsUsers">
                     <Series>
-                        <asp:Series ChartType="Pie" Name="Series1" YValueMembers="NetWorth">
+                        <asp:Series ChartType="Pie" Name="Series1" YValueMembers="NetWorth" 
+                            XValueMember="UserName">
                         </asp:Series>
                     </Series>
                     <ChartAreas>

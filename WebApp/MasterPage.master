@@ -253,7 +253,29 @@
                 
                 
                 
-                SelectCommand="SELECT aspnet_Users.UserName, AVG(aspnet_Users.Cash) AS Cash, SUM(UserShares.shares) AS Shares, SUM(UserShares.shares * UserShares.price) AS [Share Worth], SUM(UserShares.shares * Companies.curprice) + AVG(aspnet_Users.Cash) AS [NetWorth], aspnet_Membership.Email FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id INNER JOIN aspnet_Membership ON aspnet_Users.UserId = aspnet_Membership.UserId WHERE (aspnet_Users.UserId = @userId) GROUP BY aspnet_Users.UserName, aspnet_Membership.Email ORDER BY [NetWorth] DESC" 
+                SelectCommand="SELECT 
+[StockMarketGame].[dbo].[aspnet_Users].UserName
+,[aspnet_Users].Cash
+,(SELECT SUM([shares]) FROM [StockMarketGame].[dbo].[UserShares]
+		WHERE [UserShares].[userId] = [aspnet_Users].[UserId]
+		GROUP BY [userId]) AS Shares
+,(SELECT SUM([shares]) FROM [StockMarketGame].[dbo].[UserShares]
+		WHERE [UserShares].[userId] = [aspnet_Users].[UserId]
+		GROUP BY [userId]) AS SharesWorth
+,ISNULL(
+((SELECT SUM([shares] * [curprice]) 
+			FROM [StockMarketGame].[dbo].[UserShares]
+			INNER JOIN [StockMarketGame].[dbo].[Companies]
+			ON [Companies].Id = [UserShares].companyId
+			WHERE [UserShares].[userId] = [aspnet_Users].[UserId]
+			GROUP BY [userId])+[Cash]), [Cash])
+ AS NetWorth
+			
+,(SELECT [Email] FROM [StockMarketGame].[dbo].[aspnet_Membership] 
+WHERE [StockMarketGame].[dbo].[aspnet_Membership].UserId =  [aspnet_Users].[UserId]) AS Email	
+
+FROM [StockMarketGame].[dbo].[aspnet_Users]
+--WHERE ([StockMarketGame].[dbo].[aspnet_Users].UserId = @userId)" 
                 onload="dsCash_Load" onselected="dsCash_Selected">
             <SelectParameters>
                 <asp:ControlParameter ControlID="lblUserId" Name="userId" PropertyName="Text" />
