@@ -161,7 +161,7 @@
                <asp:FormView ID="FormView2" runat="server" DataSourceID="dsCash" >
               <ItemTemplate>
 <%--                    <asp:Label ID="lblTest" runat="server" Text='<%# Bind("Email") %>'></asp:Label>--%>
-                   <%--<cc1:Gravatar ID="Gravatar1" runat="server" CssClass="buttonStyle" Width="55px"  DefaultImageBehavior="Retro" Email='<%# Eval("Email") %>'/> --%>   <!--<%# Eval("Email") %> Size="55"-->
+                   <%--<cc1:Gravatar ID="Gravatar1" runat="server" CssClass="buttonStyle" Width="55px"  DefaultImageBehavior="Retro" Email='<%# Eval("Email") %>'/> --%>   <!-- Eval("Email") %> Size="55"-->
                    <%--     The AJAX toolkit was causing issues with the email binding when trying to udpate a grid view, so I included the gravatar control dll from (https://gravatar.codeplex.com) and added the control to the web.config file, all working now :)--%>
                    
                  <%--  Email is not data bound with: (Email='<%# Eval("Email") %>'), it is bound using the findCnotrol in the load event, as to check if valid email (try/catch), this is to make sure the page doesn;t crash--%>
@@ -249,11 +249,8 @@
         <asp:SqlDataSource ID="dsCash" runat="server" 
                         ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
                         
-                
-                
-                
-                
-                SelectCommand="SELECT 
+
+SelectCommand="SELECT 
 [StockMarketGame].[dbo].[aspnet_Users].UserName
 ,[aspnet_Users].Cash
 ,(SELECT SUM([shares]) FROM [StockMarketGame].[dbo].[UserShares]
@@ -275,8 +272,9 @@
 WHERE [StockMarketGame].[dbo].[aspnet_Membership].UserId =  [aspnet_Users].[UserId]) AS Email	
 
 FROM [StockMarketGame].[dbo].[aspnet_Users]
---WHERE ([StockMarketGame].[dbo].[aspnet_Users].UserId = @userId)" 
-                onload="dsCash_Load" onselected="dsCash_Selected">
+WHERE ([StockMarketGame].[dbo].[aspnet_Users].UserId = @userId)"
+
+  onload="dsCash_Load" onselected="dsCash_Selected">
             <SelectParameters>
                 <asp:ControlParameter ControlID="lblUserId" Name="userId" PropertyName="Text" />
             </SelectParameters>

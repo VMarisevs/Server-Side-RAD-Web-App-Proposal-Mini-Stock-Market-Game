@@ -69,6 +69,8 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 
     protected void btnEdit_Click(object sender, EventArgs e)
     {
+        gvwEditStocks.Visible = false;
+
         rBtnAdmin.Enabled = true;
         rBtnUser.Enabled = true;
     }
@@ -96,4 +98,12 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
         rBtnUser.Enabled = false;
     }
 
+    protected void btnEditUserStocks_Click(object sender, EventArgs e)
+    {
+        gvwEditStocks.Visible = true;
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        gvwEditStocks.Visible = false;
+    }
 }

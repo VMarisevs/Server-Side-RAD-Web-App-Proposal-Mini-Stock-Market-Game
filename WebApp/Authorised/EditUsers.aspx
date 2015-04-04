@@ -67,7 +67,12 @@
         <Columns>
             <asp:BoundField DataField="name" HeaderText="Name" />
             <asp:BoundField DataField="lastActive" HeaderText="Last Active" />
-            <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
+            <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:Button ID="Button1" runat="server" CausesValidation="False" 
+                        CommandName="Select" onclick="Button1_Click" Text="Select" />
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -165,6 +170,9 @@
                         &nbsp;<br />
                         <table class="style7">
                             <tr>
+                                 <td>
+                                    Id:
+                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("id") %>' />
                                 <td>
                                     name:
                                     <asp:Label ID="nameLabel" runat="server" Text='<%# Bind("name") %>' />
@@ -181,7 +189,7 @@
                                 </td>
                                 <td>
                                     <asp:Button ID="btnEditUserStocks" runat="server" CommandName="Select" 
-                                        Text="Edit user's stocks" />
+                                        Text="Edit Stocks" onclick="btnEditUserStocks_Click" />
                                 </td>
                             </tr>
                         </table>
@@ -198,7 +206,7 @@
                 
 
 
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+                <asp:GridView ID="gvwEditStocks" runat="server" AutoGenerateColumns="False" Visible="false"
                     CellPadding="4" DataSourceID="dsUserStocks" ForeColor="#333333" 
                     GridLines="None">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -244,41 +252,4 @@
                 &nbsp;</td>
         </tr>
     </table>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
 </asp:Content>
