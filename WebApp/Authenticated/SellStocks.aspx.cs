@@ -26,22 +26,27 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
         company = CompanyDB.GetCompanyShares(companyId);
         userShares = SharesDB.GetUserShares(UserId, companyId);
 
-        if (userShares - ammount > 0)
+        if (userShares - ammount >= 0)
         {
             user.cash += company.sharePrice * ammount;
             company.shares += ammount;
             userShares -= ammount;
 
-            SharesDB.UpdateUserShares(UserId, companyId, userShares);
+            
             SharesDB.UpdateCash(UserId, user.cash);
+
+            if (userShares == 0)
+            {
+                SharesDB.DeleteUserShares(UserId, companyId);
+            }
+            else
+            {
+                SharesDB.UpdateUserShares(UserId, companyId, userShares);
+            }
+
             CompanyDB.UpdateCompanyShares(companyId, company.shares);
             dsUserStocks.SelectParameters["UserId"].DefaultValue = MySession.Current.UserId;
             gvwUserStocks.DataBind();
-        }
-        else
-        {
-
-
         }
     }
 

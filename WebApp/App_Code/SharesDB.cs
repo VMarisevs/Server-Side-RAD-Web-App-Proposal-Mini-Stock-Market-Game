@@ -31,6 +31,7 @@ public class SharesDB
         cmd.Parameters.AddWithValue("UserId", userId);
         con.Open();
         SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+        con.Close();
         return dr;
     }
 
@@ -41,7 +42,7 @@ public class SharesDB
        
         SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string sel = "SELECT shares " +
-                     "FROM UserShares WHERE (companyId = @companyId) AND (userId = @userId) ";       
+                     "FROM UserShares WHERE (companyId = @companyId) AND (userId = @userId)";       
                     
         SqlCommand cmd = new SqlCommand(sel, con);
         cmd.Parameters.AddWithValue("UserId", userId);
@@ -61,6 +62,22 @@ public class SharesDB
         return userShares;
     }
 
+    public static int DeleteUserShares(Guid userId, int companyId)
+    {
+
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
+        string sel = "DELETE " +
+                     "FROM UserShares WHERE (companyId = @companyId) AND (userId = @userId)";
+
+        SqlCommand cmd = new SqlCommand(sel, con);
+        cmd.Parameters.AddWithValue("UserId", userId);
+        cmd.Parameters.AddWithValue("companyId", companyId);
+        con.Open();
+
+        int i = cmd.ExecuteNonQuery();
+        con.Close();
+        return i;
+    }
 
     public static int UpdateUserShares(Guid UserId, int companyId, int shares)
     {
@@ -74,6 +91,7 @@ public class SharesDB
         cmd.Parameters.AddWithValue("shares", shares);
         con.Open();
         int i = cmd.ExecuteNonQuery();
+        con.Close();
         return i;
     }
 
@@ -106,6 +124,7 @@ public class SharesDB
         cmd.Parameters.AddWithValue("Cash", cash);
         con.Open();
         int i = cmd.ExecuteNonQuery();
+        con.Close();
         return i;
     }
 

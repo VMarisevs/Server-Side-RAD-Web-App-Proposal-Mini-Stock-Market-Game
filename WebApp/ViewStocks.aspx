@@ -20,11 +20,6 @@
     </h1>
                 
     <div>
-        <h3>
-
-        </h3>
-
-        <p>
                                <%--  AJAX--%>
              <asp:UpdatePanel ID="UpdatePanel1" runat="server">
              <ContentTemplate>

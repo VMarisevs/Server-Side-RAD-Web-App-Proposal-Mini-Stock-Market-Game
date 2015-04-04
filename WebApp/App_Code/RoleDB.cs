@@ -42,8 +42,10 @@ public class RoleDB
 
                 listRole.Add(role);
             }
+
+            con.Close();
         }
-   
+        
         return listRole;
     }
 
@@ -92,6 +94,7 @@ public class RoleDB
         cmd.Parameters.AddWithValue("RoleId", RoleId);
         con.Open();
         int i = cmd.ExecuteNonQuery();
+        con.Close();
         return i;
     }
 

@@ -12,10 +12,28 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         // application counter displayed
+        if (Application["appHitCount"] == null){
+            Application.Lock();
+            Application["appHitCount"] = 1;
+            Application.UnLock();
+        }
+
         lblAppHitCount.Text = "Total Hitcount: " + Application["appHitCount"].ToString();
 
         // session counter displayed
         //seshHitCount = MySession.Current.HitCount;
+        if (Session["seshHitCount"] == null)
+        {
+            Session["seshHitCount"] = 1;
+            
+        }
+        else
+        {
+            // Session hitcount increment
+            Session["seshHitCount"] = Convert.ToInt32(Session["seshHitCount"]) + 1;
+            //MySession.Current.HitCount++;
+        }
+
         lblSeshHitCount.Text = "Session Hit Count: " + Session["seshHitCount"].ToString();       //seshHitCount.ToString() + "  ";
     }
 }

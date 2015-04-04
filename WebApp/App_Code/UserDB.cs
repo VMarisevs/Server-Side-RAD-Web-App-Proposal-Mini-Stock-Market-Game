@@ -73,7 +73,7 @@ public static class UserDB
     }
 
     [DataObjectMethod(DataObjectMethodType.Update)]
-    public static void UpdateUser(User user)
+    public static int UpdateUser(User user)
     {
         SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string up = " UPDATE aspnet_Users "
@@ -89,8 +89,9 @@ public static class UserDB
         cmd.Parameters.AddWithValue("Cash", user.cash);
 
         con.Open();
-        cmd.ExecuteNonQuery();
+        int i = cmd.ExecuteNonQuery();
         con.Close();
+        return i;
     }
 
 
