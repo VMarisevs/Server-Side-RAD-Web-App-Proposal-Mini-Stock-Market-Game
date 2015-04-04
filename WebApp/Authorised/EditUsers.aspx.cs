@@ -48,11 +48,9 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
                 isAdmin = false;
             }
         }
-
-        
+     
         rBtnAdmin.Enabled = false;
         rBtnUser.Enabled = false;
-
     }
 
 
@@ -62,7 +60,6 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
          Label lblLoweredName = (Label)fvwUser.FindControl("lblNameLower");
 
          lblLoweredName.Text = txtName.Text.ToLower();
-
 
          rBtnAdmin.Enabled = false;
          rBtnUser.Enabled = false;

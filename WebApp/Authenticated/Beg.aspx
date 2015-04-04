@@ -16,20 +16,21 @@
 
             <asp:ImageButton ID="imgButBeg" runat="server"  ImageUrl="~/Images/coinPadded.png" 
                 Width="150px" CssClass="buttonStyle" BorderWidth="5px" 
-                ImageAlign="Middle" onclick="imgButBeg_Click" />
+                ImageAlign="Middle" onclick="imgButBeg_Click" CommandName="Update" />
         </asp:Panel>
 
         <asp:SqlDataSource ID="dsBeg" runat="server" 
             ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
             SelectCommand="SELECT Cash FROM aspnet_Users WHERE (UserId = @userId)" 
+            
+            
             UpdateCommand="UPDATE aspnet_Users SET Cash = Cash + 1 WHERE (UserId = @userId)" >
             <SelectParameters>
-                <asp:ControlParameter ControlID="lblBeg" Name="userId" PropertyName="Text" />
+                <asp:ControlParameter ControlID="lblBeg" Name="userId" PropertyName="Text"  />
             </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="userId" />
             </UpdateParameters>
         </asp:SqlDataSource>
-    <asp:Label ID="lblBeg" runat="server" Text="Beg" />
-</asp:Content>
+    </asp:Content>
 
