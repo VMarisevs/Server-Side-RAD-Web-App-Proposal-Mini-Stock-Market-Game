@@ -146,7 +146,7 @@
                     Net Worth:
 
                     <asp:Label ID="Net_WorthLabel" runat="server" 
-                        Text='<%# Bind("[Net Worth]", "{0:c}") %>' />
+                        Text='<%# Bind("[NetWorth]", "{0:c}") %>' />
                     <br />
 
                 </ItemTemplate>
@@ -253,7 +253,7 @@
                 
                 
                 
-                SelectCommand="SELECT aspnet_Users.UserName, AVG(aspnet_Users.Cash) AS Cash, SUM(UserShares.shares) AS Shares, SUM(UserShares.shares * UserShares.price) AS [Share Worth], SUM(UserShares.shares * Companies.curprice) + AVG(aspnet_Users.Cash) AS [Net Worth], aspnet_Membership.Email FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id INNER JOIN aspnet_Membership ON aspnet_Users.UserId = aspnet_Membership.UserId WHERE (aspnet_Users.UserId = @userId) GROUP BY aspnet_Users.UserName, aspnet_Membership.Email ORDER BY [Net Worth] DESC" 
+                SelectCommand="SELECT aspnet_Users.UserName, AVG(aspnet_Users.Cash) AS Cash, SUM(UserShares.shares) AS Shares, SUM(UserShares.shares * UserShares.price) AS [Share Worth], SUM(UserShares.shares * Companies.curprice) + AVG(aspnet_Users.Cash) AS [NetWorth], aspnet_Membership.Email FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id INNER JOIN aspnet_Membership ON aspnet_Users.UserId = aspnet_Membership.UserId WHERE (aspnet_Users.UserId = @userId) GROUP BY aspnet_Users.UserName, aspnet_Membership.Email ORDER BY [NetWorth] DESC" 
                 onload="dsCash_Load" onselected="dsCash_Selected">
             <SelectParameters>
                 <asp:ControlParameter ControlID="lblUserId" Name="userId" PropertyName="Text" />

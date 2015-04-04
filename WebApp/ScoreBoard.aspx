@@ -15,50 +15,51 @@
         ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
         
         
-    SelectCommand="SELECT aspnet_Users.UserName, AVG(aspnet_Users.Cash) AS Cash, SUM(UserShares.shares) AS Shares, SUM(UserShares.shares * Companies.curprice ) AS [Share Worth], SUM(UserShares.shares * Companies.curprice) + AVG(aspnet_Users.Cash) AS [Net Worth] FROM aspnet_Users INNER JOIN UserShares ON aspnet_Users.UserId = UserShares.userId INNER JOIN Companies ON UserShares.companyId = Companies.Id GROUP BY aspnet_Users.UserName, Companies.curprice ORDER BY [Net Worth] DESC">
+    SelectCommand="SELECT
+[UserName]
+	  ,(SELECT SUM([shares]) FROM [StockMarketGame].[dbo].[UserShares]
+		WHERE [UserShares].[userId] = [aspnet_Users].[UserId]
+		GROUP BY [userId] ) AS userShares
+		,(SELECT SUM([shares] * [curprice]) 
+			FROM [StockMarketGame].[dbo].[UserShares]
+			INNER JOIN [StockMarketGame].[dbo].[Companies]
+			ON [Companies].Id = [UserShares].companyId
+			WHERE [UserShares].[userId] = [aspnet_Users].[UserId]
+			GROUP BY [userId]) AS ShareWorth
+      ,[Cash]
+      ,(SELECT SUM([shares] * [curprice]) 
+			FROM [StockMarketGame].[dbo].[UserShares]
+			INNER JOIN [StockMarketGame].[dbo].[Companies]
+			ON [Companies].Id = [UserShares].companyId
+			WHERE [UserShares].[userId] = [aspnet_Users].[UserId]
+			GROUP BY [userId])+[Cash] AS NetWorth
+      
+  FROM [StockMarketGame].[dbo].[aspnet_Users]">
     </asp:SqlDataSource>
-    <asp:GridView ID="gwScores" runat="server" AllowPaging="True" 
-        AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
-        DataSourceID="dsUsers" Font-Names="Tahoma" ForeColor="#333333" GridLines="None">
-        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-        <Columns>
-            <asp:BoundField DataField="UserName" HeaderText="User" 
-                SortExpression="UserName" >
-            </asp:BoundField>
-            <asp:BoundField DataField="Cash" DataFormatString="{0:c}" HeaderText="Cash" 
-                SortExpression="Cash" ReadOnly="True">
-            </asp:BoundField>
-            <asp:BoundField DataField="Shares" HeaderText="Shares" SortExpression="Shares" 
-                ReadOnly="True">
-            </asp:BoundField>
-            <asp:BoundField DataField="Share Worth" DataFormatString="{0:c}" 
-                HeaderText="Share Worth" ReadOnly="True" SortExpression="Share Worth">
-            </asp:BoundField>
-            <asp:BoundField DataField="Net Worth" DataFormatString="{0:c}" 
-                HeaderText="Net Worth" ReadOnly="True" SortExpression="Net Worth">
-            </asp:BoundField>
-        </Columns>
-        <EditRowStyle BackColor="#999999" />
-        <FooterStyle BackColor="#008FBF" Font-Bold="True" ForeColor="White" />
-        <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#008FBF" ForeColor="White" HorizontalAlign="Center" />
-        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-        <SortedAscendingCellStyle BackColor="#E9E7E2" />
-        <SortedAscendingHeaderStyle BackColor="#506C8C" />
-        <SortedDescendingCellStyle BackColor="#FFFDF8" />
-        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-    </asp:GridView>
     <table class="style1">
         <tr>
             <td>
-                &nbsp;</td>
+                <asp:GridView ID="gvwScoreBoard" runat="server" AllowPaging="True" 
+                    AllowSorting="True" AutoGenerateColumns="False" DataSourceID="dsUsers">
+                    <Columns>
+                        <asp:BoundField DataField="UserName" HeaderText="UserName" 
+                            SortExpression="UserName" />
+                        <asp:BoundField DataField="userShares" HeaderText="userShares" ReadOnly="True" 
+                            SortExpression="userShares" />
+                        <asp:BoundField DataField="ShareWorth" HeaderText="ShareWorth" ReadOnly="True" 
+                            SortExpression="ShareWorth" />
+                        <asp:BoundField DataField="Cash" HeaderText="Cash" SortExpression="Cash" />
+                        <asp:BoundField DataField="NetWorth" HeaderText="NetWorth" ReadOnly="True" 
+                            SortExpression="NetWorth" />
+                    </Columns>
+                </asp:GridView>
+            </td>
         </tr>
         <tr>
             <td>
                 <asp:Chart ID="Chart1" runat="server" DataSourceID="dsUsers">
                     <Series>
-                        <asp:Series ChartType="Pie" Name="Series1" YValueMembers="Net Worth">
+                        <asp:Series ChartType="Pie" Name="Series1" YValueMembers="NetWorth">
                         </asp:Series>
                     </Series>
                     <ChartAreas>
