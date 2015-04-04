@@ -53,12 +53,17 @@ public partial class MasterPage : System.Web.UI.MasterPage
         Application["appHitCount"] = (int)Application["appHitCount"] + 1;
         Application.UnLock();
 
-        // Session hitcount increment
-        Session["seshHitCount"] = (int)Session["seshHitCount"] + 1;
-        //MySession.Current.HitCount++;
+        if (Session["seshHitCount"] == null)
+        {
+            Session["seshHitCount"] = 1;
+        } else
+        {
+            // Session hitcount increment
+            Session["seshHitCount"] = Convert.ToInt32(Session["seshHitCount"]) + 1;
+            //MySession.Current.HitCount++;
+        }
 
         // default page shows these counters
-
 
 
         // this teaches about FindControl: http://www.asp.net/web-forms/overview/older-versions-getting-started/master-pages/control-id-naming-in-content-pages-cs (My savior :))

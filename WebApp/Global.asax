@@ -23,6 +23,8 @@
     void Session_Start(object sender, EventArgs e) 
     {
         // Code that runs when a new session is started
+        
+        // using MySession class for session counter instead of this file
         Session["seshHitCount"] = 0;
 
     }
