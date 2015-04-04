@@ -45,6 +45,7 @@ public class SharesDB
                     
         SqlCommand cmd = new SqlCommand(sel, con);
         cmd.Parameters.AddWithValue("UserId", userId);
+        cmd.Parameters.AddWithValue("companyId", companyId);
         con.Open();
         SqlDataReader rdr = cmd.ExecuteReader();
             
