@@ -106,4 +106,15 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
     {
         gvwEditStocks.Visible = false;
     }
+    protected void Button1_Click1(object sender, EventArgs e)
+    {
+
+    }
+    protected void dsUserStocks_Updating(object sender, ObjectDataSourceMethodEventArgs e)
+    {
+        if (Convert.ToInt32(e.InputParameters["Shares"]) <= 0)
+        {
+            SharesDB.DeleteUserShares((Guid)e.InputParameters["UserId"], (int)e.InputParameters["CompanyId"]);
+        }
+    }
 }

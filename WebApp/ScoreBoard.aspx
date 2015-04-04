@@ -39,28 +39,42 @@
     <table class="style1">
         <tr>
             <td>
-                <asp:GridView ID="gvwScoreBoard" runat="server" AllowPaging="True" 
-                    AllowSorting="True" AutoGenerateColumns="False" DataSourceID="dsUsers">
+                <asp:GridView ID="gvwScoreBoard" runat="server" AllowPaging="True"
+                    AllowSorting="True" AutoGenerateColumns="False" DataSourceID="dsUsers" 
+                    CellPadding="4" ForeColor="#333333" GridLines="None">
+                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
-                        <asp:BoundField DataField="UserName" HeaderText="UserName" 
+                        <asp:BoundField DataField="UserName" HeaderText="User" 
                             SortExpression="UserName" />
-                        <asp:BoundField DataField="userShares" HeaderText="userShares" ReadOnly="True" 
+                        <asp:BoundField DataField="userShares" HeaderText="Shares" ReadOnly="True" 
                             SortExpression="userShares" />
-                        <asp:BoundField DataField="ShareWorth" HeaderText="ShareWorth" ReadOnly="True" 
-                            SortExpression="ShareWorth" />
-                        <asp:BoundField DataField="Cash" HeaderText="Cash" SortExpression="Cash" />
-                        <asp:BoundField DataField="NetWorth" HeaderText="NetWorth" ReadOnly="True" 
-                            SortExpression="NetWorth" />
+                        <asp:BoundField DataField="ShareWorth" HeaderText="Share Worth" ReadOnly="True" 
+                            SortExpression="ShareWorth" DataFormatString="{0:c}" />
+                        <asp:BoundField DataField="Cash" HeaderText="Cash" SortExpression="Cash" 
+                            DataFormatString="{0:c}" />
+                        <asp:BoundField DataField="NetWorth" HeaderText="Net Worth" ReadOnly="True" 
+                            SortExpression="NetWorth" DataFormatString="{0:c}" />
                     </Columns>
+                    <EditRowStyle BackColor="#999999" />
+                    <FooterStyle BackColor="#E8E8E8" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#E8E8E8" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                 </asp:GridView>
             </td>
         </tr>
         <tr>
             <td>
-                <asp:Chart ID="Chart1" runat="server" DataSourceID="dsUsers">
+                <asp:Chart ID="Chart1" runat="server" DataSourceID="dsUsers" Height="500px" 
+                    Width="500px">
                     <Series>
                         <asp:Series ChartType="Pie" Name="Series1" YValueMembers="NetWorth" 
-                            XValueMember="UserName">
+                            XValueMember="UserName" YValuesPerPoint="6">
                         </asp:Series>
                     </Series>
                     <ChartAreas>

@@ -155,7 +155,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;
                  
-                    <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtSearch" runat="server" CssClass="buttonStyle" BackColor="White" Width="150px"/>
 
                     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search"
                         Style="margin-top: 4px" 

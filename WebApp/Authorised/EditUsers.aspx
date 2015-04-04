@@ -48,7 +48,8 @@
     <asp:ObjectDataSource ID="dsUserStocks" runat="server" 
         SelectMethod="GetUserCompanies" TypeName="SharesDB" 
         UpdateMethod="UpdateUserShares" 
-        OldValuesParameterFormatString="original_{0}">
+        OldValuesParameterFormatString="original_{0}" 
+        onupdating="dsUserStocks_Updating">
         <SelectParameters>
             <asp:ControlParameter ControlID="fvwUser" DbType="Guid" Name="userId" 
                 PropertyName="SelectedValue" />
@@ -206,7 +207,7 @@
                 
 
 
-                <asp:GridView ID="gvwEditStocks" runat="server" AutoGenerateColumns="False" Visible="false"
+                <asp:GridView ID="gvwEditStocks" runat="server" AutoGenerateColumns="False" Visible="False"
                     CellPadding="4" DataSourceID="dsUserStocks" ForeColor="#333333" 
                     GridLines="None">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -221,9 +222,39 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="True" 
                             SortExpression="Name" />
-                        <asp:BoundField DataField="shares" HeaderText="Number of Shares" 
-                            SortExpression="shares" />
-                        <asp:CommandField ButtonType="Button" ShowEditButton="True" />
+                        <asp:TemplateField HeaderText="Number of Shares" SortExpression="shares">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("shares") %>'></asp:TextBox>
+                                &nbsp;<br />
+                                <asp:RequiredFieldValidator ID="valReqShareNum" runat="server" 
+                                    ControlToValidate="TextBox1" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="*Required"></asp:RequiredFieldValidator>
+                                <br />
+                                <asp:CompareValidator ID="valComGreaterThen" runat="server" 
+                                    ControlToValidate="TextBox1" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="*Must be 0 or greater" Operator="GreaterThanEqual" 
+                                    ValueToCompare="0"></asp:CompareValidator>
+                                <br />
+                                <asp:CompareValidator ID="valComShareNum" runat="server" 
+                                    ControlToValidate="TextBox1" CssClass="validatorStyle" Display="Dynamic" 
+                                    ErrorMessage="*Must be an integer" Operator="DataTypeCheck" Type="Integer"></asp:CompareValidator>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("shares") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField ShowHeader="False">
+                            <EditItemTemplate>
+                                <asp:Button ID="Button1" runat="server" CausesValidation="True" 
+                                    CommandName="Update" Text="Update" />
+                                &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" 
+                                    CommandName="Cancel" Text="Cancel" />
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Button ID="Button1" runat="server" CausesValidation="False" 
+                                    CommandName="Edit" onclick="Button1_Click1" Text="Edit" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                     <EditRowStyle BackColor="#999999" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

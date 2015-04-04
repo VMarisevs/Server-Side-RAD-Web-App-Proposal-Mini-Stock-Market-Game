@@ -93,7 +93,7 @@ style="margin:2px; text-align: right;">
         </table>
     <br />
     <br />
-        <asp:GridView ID="gvwUserStocks" runat="server" AllowPaging="True" 
+        <asp:GridView ID="gvwUserStocks" runat="server" AllowPaging="True" EmptyDataText="Go buy some stocks."
             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
             DataSourceID="dsUserStocks" ForeColor="#333333" GridLines="None" 
             DataKeyNames="Id" onprerender="gvwUserStocks_PreRender">

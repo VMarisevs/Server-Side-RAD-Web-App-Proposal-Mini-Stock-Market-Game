@@ -75,18 +75,25 @@ public class SharesDB
 
     public static int UpdateUserShares(Guid UserId, int companyId, int shares)
     {
-        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
-        string ins = "UPDATE UserShares " +
-                         "SET shares = @shares " +
-                         "WHERE (UserId = @UserId) AND (companyId = @companyId)";
-        SqlCommand cmd = new SqlCommand(ins, con);
-        cmd.Parameters.AddWithValue("UserId", UserId);
-        cmd.Parameters.AddWithValue("companyId", companyId);
-        cmd.Parameters.AddWithValue("shares", shares);
-        con.Open();
-        int i = cmd.ExecuteNonQuery();
-        con.Close();
-        return i;
+        if (shares > 0)
+        {
+            SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
+            string ins = "UPDATE UserShares " +
+                             "SET shares = @shares " +
+                             "WHERE (UserId = @UserId) AND (companyId = @companyId)";
+            SqlCommand cmd = new SqlCommand(ins, con);
+            cmd.Parameters.AddWithValue("UserId", UserId);
+            cmd.Parameters.AddWithValue("companyId", companyId);
+            cmd.Parameters.AddWithValue("shares", shares);
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            con.Close();
+            return i;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
 
