@@ -68,9 +68,9 @@
                  <asp:LoginView ID="LoginView1" runat="server">
                  <LoggedInTemplate>
 
-         <%--     <asp:UpdatePanel ID="UpdatePanelCash" runat="server" UpdateMode="Always">
+         <asp:UpdatePanel ID="UpdatePanelCash" runat="server" UpdateMode="Always">
              <ContentTemplate>
-           <asp:Timer ID="TimerCash" runat="server" Interval="6000" />--%>
+           <asp:Timer ID="TimerCash" runat="server" Interval="6000" />
 
                     <asp:Panel ID="profilePanel" runat="server" class="profileBox" Width="270px"> 
                        <%-- <div style="display:table-caption">--%>
@@ -194,8 +194,8 @@
                 
 
                   
-        <%--       </ContentTemplate>
-            </asp:UpdatePanel>    --%>
+                   </ContentTemplate>
+                        </asp:UpdatePanel>   
 
 
                  </LoggedInTemplate>

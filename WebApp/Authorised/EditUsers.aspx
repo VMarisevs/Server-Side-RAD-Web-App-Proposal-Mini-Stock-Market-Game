@@ -46,7 +46,7 @@
     <asp:ObjectDataSource ID="dsUsers" runat="server" OldValuesParameterFormatString="original_{0}"
         SelectMethod="GetAllUsers" TypeName="UserDB"></asp:ObjectDataSource>
     <asp:ObjectDataSource ID="dsUserStocks" runat="server" 
-        SelectMethod="GetUserCompaines" TypeName="SharesDB" 
+        SelectMethod="GetUserCompanies" TypeName="SharesDB" 
         UpdateMethod="UpdateUserShares" 
         OldValuesParameterFormatString="original_{0}">
         <SelectParameters>

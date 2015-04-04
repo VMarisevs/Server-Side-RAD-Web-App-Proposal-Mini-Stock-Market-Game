@@ -49,9 +49,18 @@ public partial class MasterPage : System.Web.UI.MasterPage
     protected void Page_Load(object sender, EventArgs e)
     {
         // Application (total) hitcount increment (with concurrency)
-        Application.Lock();
-        Application["appHitCount"] = (int)Application["appHitCount"] + 1;
-        Application.UnLock();
+        if (Application["appHitCount"] == null)
+        {
+            Application.Lock();
+            Application["appHitCount"] = 1;
+            Application.UnLock();
+        }
+        else
+        {
+            Application.Lock();
+            Application["appHitCount"] = (int)Application["appHitCount"] + 1;
+            Application.UnLock();
+        }
 
         if (Session["seshHitCount"] == null)
         {

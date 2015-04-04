@@ -66,7 +66,7 @@ public static class UserDB
         user.lastActive = Convert.ToDateTime(rdr["LastActivityDate"]);
         user.cash = (decimal)rdr["Cash"];
         
-        rdr.Close();
+        //rdr.Close();
         con.Close();
                            
         return user;

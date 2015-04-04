@@ -9,17 +9,11 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
-
-
-
-
-
-
 public class SharesDB
 {
 
     [DataObjectMethod(DataObjectMethodType.Select)]
-    public static IEnumerable GetUserCompaines(Guid userId)
+    public static IEnumerable GetUserCompanies(Guid userId)
     {
         SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
         string sel = "SELECT UserShares.shares, UserShares.companyId, Companies.Name, Companies.curprice " +
@@ -31,7 +25,7 @@ public class SharesDB
         cmd.Parameters.AddWithValue("UserId", userId);
         con.Open();
         SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-        con.Close();
+        //con.Close(); (do not close this, it is needed, it is already closed above [.closeconnection])
         return dr;
     }
 
