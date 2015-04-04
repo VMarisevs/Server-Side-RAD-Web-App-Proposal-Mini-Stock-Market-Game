@@ -48,6 +48,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
     
     protected void Page_Load(object sender, EventArgs e)
     {
+
         // Application (total) hitcount increment (with concurrency)
         if (Application["appHitCount"] == null)
         {
@@ -75,18 +76,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
         // default page shows these counters
 
 
-        // this teaches about FindControl: http://www.asp.net/web-forms/overview/older-versions-getting-started/master-pages/control-id-naming-in-content-pages-cs (My savior :))
-        LoginView loginControl = FindControl("LoginView1") as LoginView;
-        Gravatar gravatarControl = loginControl.FindControl("UserGravatar") as Gravatar;
-
-        try
-        {
-            gravatarControl.Email = Email;
-        }
-        catch
-        {
-            //gravatarControl.Email = "";
-        }
 
         if (HttpContext.Current.User.Identity.IsAuthenticated)
         {
@@ -105,6 +94,21 @@ public partial class MasterPage : System.Web.UI.MasterPage
             catch
             {
                 lblUserId.Text = "";
+            }
+            
+
+            // this teaches about FindControl: http://www.asp.net/web-forms/overview/older-versions-getting-started/master-pages/control-id-naming-in-content-pages-cs (My savior :))
+            LoginView loginControl = FindControl("LoginView1") as LoginView;
+            //FormView formViewControl = loginControl.FindControl("FormView1") as FormView;
+            Gravatar gravatarControl = loginControl.FindControl("UserGravatar") as Gravatar;
+            gravatarControl.Email = "rolo45@gmail.com";
+            try
+            {
+                gravatarControl.Email = "rolo45@gmail.com";
+            }
+            catch
+            {
+                //gravatarControl.Email = "";
             }
         }
 
