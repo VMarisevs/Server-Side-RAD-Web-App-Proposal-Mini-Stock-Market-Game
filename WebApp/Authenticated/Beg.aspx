@@ -26,7 +26,7 @@
             
             UpdateCommand="UPDATE aspnet_Users SET Cash = Cash + 1 WHERE (UserId = @userId)" >
             <SelectParameters>
-                <asp:ControlParameter ControlID="lblBeg" Name="userId" PropertyName="Text"  />
+                <asp:Parameter Name="userId" />
             </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="userId" />
