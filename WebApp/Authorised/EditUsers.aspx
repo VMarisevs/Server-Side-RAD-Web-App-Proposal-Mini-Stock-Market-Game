@@ -71,7 +71,7 @@
             <asp:TemplateField ShowHeader="False">
                 <ItemTemplate>
                     <asp:Button ID="Button1" runat="server" CausesValidation="False" CssClass="buttonStyle"
-                        CommandName="Select" onclick="Button1_Click" Text="Select" />
+                        CommandName="Select"  Text="Select" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
