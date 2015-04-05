@@ -133,6 +133,15 @@ style="margin:2px; ">
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
         
+        <asp:Panel ID="Panel1" runat="server" BackColor="#33CCFF" Height="30px" 
+            style="text-align: center" Width="203px">
+            <asp:Label ID="Label1" runat="server" 
+    Text="No. of Shares:" Font-Size="Large"></asp:Label>
+            &nbsp;
+            <asp:TextBox ID="txtAmmount" runat="server" Width="52px" Height="21px" 
+                ontextchanged="txtAmmount_TextChanged">1</asp:TextBox>
+        </asp:Panel>
+        
         <br />
         <asp:SqlDataSource ID="dsCompany" runat="server" 
             ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 

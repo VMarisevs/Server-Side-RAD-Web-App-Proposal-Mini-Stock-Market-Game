@@ -27,7 +27,16 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
     {
         int RowId = ((GridViewRow)((Button)sender).Parent.Parent).RowIndex;
         int CompanyId = (int)gwBuyStocks.DataKeys[RowId].Value;
-        Buy(1, CompanyId);
+        int ammount = 0;
+
+        if (txtAmmount != null)
+        {
+            if (!int.TryParse(txtAmmount.Text, out ammount))
+            {
+                lblErrorMessage.Text = "Must enter a number";
+            }
+        }
+        Buy(ammount, CompanyId);
     }
 
 
@@ -59,7 +68,7 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
         if (user.cash - company.sharePrice * ammount >= 0 )
         {
             //if the company has enough shares 
-            if (company.shares - ammount > 0)
+            if (company.shares - ammount >= 0)
             {
                 user.cash -= company.sharePrice * ammount;
                 company.shares -= ammount;
@@ -84,6 +93,7 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
                 }
 
                 gwBuyStocks.DataBind();
+                lblErrorMessage.Text = "";
             }
             //else inform the user of the lack of available shares
             else
@@ -98,5 +108,5 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
         }
     }
 
-   
+
 }

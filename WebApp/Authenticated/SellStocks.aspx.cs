@@ -10,7 +10,7 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-     
+
     }
 
 
@@ -73,17 +73,33 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
 
             gvwUserStocks.DataBind();
         }
+        else
+        {
+            lblErrorMessage.Text="You can not sell that many shares";
+        }
     }
 
     protected void gvwUserStocks_PreRender(object sender, EventArgs e)
     {
         dsUserStocks.SelectParameters["UserId"].DefaultValue = MySession.Current.UserId;
         gvwUserStocks.DataBind();
+        lblErrorMessage.Text = "";
     }
+
     protected void btnSell_Click(object sender, EventArgs e)
     {
         int RowId = ((GridViewRow)((Button)sender).Parent.Parent).RowIndex;
         int CompanyId = (int)gvwUserStocks.DataKeys[RowId].Value;
-        Sell(1, CompanyId);
+        int ammount = 0;
+
+        if (txtAmmount != null)
+        {
+            if (!int.TryParse(txtAmmount.Text, out ammount))
+            {
+                lblErrorMessage.Text = "Must enter a number";
+            }
+        }
+
+        Sell(ammount, CompanyId);
     }
 }

@@ -115,6 +115,8 @@ style="margin:2px; text-align: right;">
                         <asp:Button ID="btnSell" runat="server"  onclick="btnSell_Click" 
                             Text="Sell Share" CssClass="buttonStyle"/>
                     </ItemTemplate>
+                    <HeaderStyle Width="15px" />
+                    <ItemStyle Width="15px" />
                 </asp:TemplateField>
 
             </Columns>
@@ -130,6 +132,14 @@ style="margin:2px; text-align: right;">
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
+        
+    <asp:Panel ID="Panel1" runat="server" BackColor="#33CCFF" Height="30px" 
+        style="text-align: center" Width="203px">
+        <asp:Label ID="Label1" runat="server" 
+    Text="No. of Shares:" Font-Size="Large"></asp:Label>
+        &nbsp;
+        <asp:TextBox ID="txtAmmount" runat="server" Width="52px" Height="21px">1</asp:TextBox>
+    </asp:Panel>
         
     <br />
     </asp:Content>
