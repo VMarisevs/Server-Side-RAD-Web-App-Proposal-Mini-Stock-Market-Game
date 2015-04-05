@@ -138,8 +138,7 @@ style="margin:2px; ">
             <asp:Label ID="Label1" runat="server" 
     Text="No. of Shares:" Font-Size="Large"></asp:Label>
             &nbsp;
-            <asp:TextBox ID="txtAmmount" runat="server" Width="52px" Height="21px" 
-                ontextchanged="txtAmmount_TextChanged">1</asp:TextBox>
+            <asp:TextBox ID="txtAmmount" runat="server" Width="52px" Height="21px">1</asp:TextBox>
         </asp:Panel>
         
         <br />

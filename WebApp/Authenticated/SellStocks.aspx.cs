@@ -13,6 +13,28 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
 
     }
 
+    protected void btnSell_Click(object sender, EventArgs e)
+    {
+        int RowId = ((GridViewRow)((Button)sender).Parent.Parent).RowIndex;
+        int CompanyId = (int)gvwUserStocks.DataKeys[RowId].Value;
+        int ammount = 0;
+
+        if (txtAmmount != null)
+        {
+            if (!int.TryParse(txtAmmount.Text, out ammount))
+            {
+                lblErrorMessage.Text = "Must enter a number";
+                return;
+            }
+            else if (ammount < 1)
+            {
+                lblErrorMessage.Text = "Must enter a number more than zero";
+                return;
+            }
+        }
+
+        Sell(ammount, CompanyId);
+    }
 
     protected void Sell(int ammount, int companyId)
     {
@@ -86,20 +108,5 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
         lblErrorMessage.Text = "";
     }
 
-    protected void btnSell_Click(object sender, EventArgs e)
-    {
-        int RowId = ((GridViewRow)((Button)sender).Parent.Parent).RowIndex;
-        int CompanyId = (int)gvwUserStocks.DataKeys[RowId].Value;
-        int ammount = 0;
 
-        if (txtAmmount != null)
-        {
-            if (!int.TryParse(txtAmmount.Text, out ammount))
-            {
-                lblErrorMessage.Text = "Must enter a number";
-            }
-        }
-
-        Sell(ammount, CompanyId);
-    }
 }

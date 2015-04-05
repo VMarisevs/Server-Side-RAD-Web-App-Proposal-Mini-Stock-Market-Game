@@ -34,6 +34,12 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
             if (!int.TryParse(txtAmmount.Text, out ammount))
             {
                 lblErrorMessage.Text = "Must enter a number";
+                return;
+            }
+            else if (ammount < 1)
+            {
+                lblErrorMessage.Text = "Must enter a number more than zero";
+                return;
             }
         }
         Buy(ammount, CompanyId);
