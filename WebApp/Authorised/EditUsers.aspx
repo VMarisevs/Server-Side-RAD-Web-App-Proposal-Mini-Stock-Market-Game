@@ -123,7 +123,7 @@
                             <tr>
                                 <td colspan="2">
                                    <strong>Cash:</strong>
-                                    <asp:TextBox ID="cashTextBox" runat="server" Text='<%# Bind("cash","{0:C2}") %>' />
+                                    <asp:TextBox ID="cashTextBox" runat="server" Text='<%# Bind("cash") %>' />
                                 </td>
                             </tr>
                             <tr>
