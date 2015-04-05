@@ -21,7 +21,7 @@
                 
     <div>
                                <%--  AJAX--%>
-             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+             <asp:UpdatePanel ID="updatePanelChart" runat="server">
              <ContentTemplate>
                 <asp:Timer ID="Timer1" runat="server" Interval="6000" />
                 <asp:FormView ID="FormView1" runat="server" DataSourceID="dsGraphs">
@@ -68,7 +68,14 @@
                 </ItemTemplate>
             </asp:FormView>
 
-    
+                 <asp:UpdateProgress ID="UpdateProgress1" runat="server" DynamicLayout="true" DisplayAfter="1000" AssociatedUpdatePanelID="updatePanelChart">
+                    <ProgressTemplate>
+                        <br />
+                        <br />
+                        <br />
+                    Please wait. The update is in progress.
+                    </ProgressTemplate>
+                 </asp:UpdateProgress>
 
 
                  <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px" runat="server"
@@ -90,21 +97,7 @@
   
              </ContentTemplate>
             </asp:UpdatePanel>
-             
 
-             
-
-
-
-            
-            
-
-            
-        </p>
-        
-        
-        <p>
-        </p>
         <p>
             <asp:SqlDataSource ID="dsGraphs" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
@@ -184,9 +177,9 @@
                 <td class="style3" align="center" >
                  <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                  <ContentTemplate>
-<%--                 <asp:Timer ID="Timer2" runat="server" Interval="6000" />--%>
+             <%-- <asp:Timer ID="Timer2" runat="server" Interval="1000" />--%>
 
-                    <asp:GridView ID="gvwCompanies0" runat="server"
+                    <asp:GridView ID="gvwCompanies0" runat="server" EnableSortingAndPagingCallbacks="false"
                         AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsCompanies" ForeColor="#333333"
                         GridLines="None" PageSize="5" Width="800px" Font-Names="Tahoma" 
                         DataKeyNames="Id">

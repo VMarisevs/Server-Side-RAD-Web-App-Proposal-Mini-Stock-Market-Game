@@ -4,12 +4,16 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div>
-        <h1>Error 404
+        <h1>Error 404 - File not found
         </h1>
         <asp:Image ID="imgError" runat="server" ImageUrl="~/Images/poor.gif" AlternateText="Poor Man"/>
 
-        <h3>Whoops there seems to be an error.
+        <h3>Whoops there seems to have been an error.
         </h3>
+
+        <p>
+            <asp:Button ID="btnReturnHome" runat="server" Text="Return to the home page" CssClass="buttonStyle" Width="200px" Height="40px" onclick="btnReturnHome_Click"/>
+        </p>
     </div>
 </asp:Content>
 

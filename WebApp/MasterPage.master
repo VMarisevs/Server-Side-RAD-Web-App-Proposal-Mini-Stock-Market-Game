@@ -70,7 +70,7 @@
 
              <asp:UpdatePanel ID="UpdatePanelCash" runat="server" UpdateMode="Always">
                  <ContentTemplate>
-               <asp:Timer ID="TimerCash" runat="server" Interval="6000" />
+              <%-- <asp:Timer ID="TimerCash" runat="server" Interval="6000" />--%>
 
                     <asp:Panel ID="profilePanel" runat="server" class="profileBox" Width="270px"> 
                        <%-- <div style="display:table-caption">--%>
@@ -174,7 +174,7 @@
             </ItemTemplate>
            
                 </asp:FormView>
-                <grav:gravatar ID="UserGravatar" runat="server"  CssClass="buttonStyle" Width="55px" DefaultImage="identicons" AlternateText="No image available" />
+                <grav:gravatar ID="UserGravatar" runat="server"  CssClass="buttonStyle" Width="55px" DefaultImage="identicon" AlternateText="No image available" />
                         </div>
                         </li>
                         </ul>

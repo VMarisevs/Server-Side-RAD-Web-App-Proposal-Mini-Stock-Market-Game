@@ -190,6 +190,16 @@ ul li {
     text-align:center;
 }
 
+.controlStyle
+{
+    font-size: 1em;
+    Font-Family:Tahoma;
+    Width:120px;
+    Color:black;
+    margin:2px;
+    text-align:center;
+}
+
 .pagerButtonStyle
 {
     background-color:#E8E8E8;

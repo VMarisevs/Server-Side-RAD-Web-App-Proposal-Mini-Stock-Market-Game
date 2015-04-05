@@ -23,7 +23,7 @@
 
     <h1>Buy Stocks</h1>
     <p>
-        <asp:Label ID="lblUserId" runat="server" Text="UserId"></asp:Label>
+        <asp:Label ID="lblUserId" runat="server" Text="UserId" Visible="false"></asp:Label>
 &nbsp;</p>
     <div>
         <asp:SqlDataSource ID="dsStocks" runat="server" 
@@ -48,18 +48,7 @@ END ORDER BY [Name]">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;
                 </td>
-                <td>
-                <asp:Button ID="btnSearch" runat="server" 
-                    Text="Search" 
-                    ForeColor="black" 
-font-size="1em" 
-BackColor="#E8E8E8"
-Font-Names="Tahoma"
-Width="120px"
-BorderColor="#00BFFF"
-BorderStyle="Solid"
-BorderWidth="2px"
-style="margin:2px;" />
+                <td style="text-align: right">
                 <asp:TextBox ID="txtSearch"  runat="server" 
                 ForeColor="black" 
 font-size="1em" 
@@ -71,13 +60,24 @@ BorderStyle="Solid"
 BorderWidth="2px"
 style="margin:2px;"
                 ></asp:TextBox>
+                <asp:Button ID="btnSearch" runat="server" 
+                    Text="Search" 
+                    ForeColor="black" 
+font-size="1em" 
+BackColor="#E8E8E8"
+Font-Names="Tahoma"
+Width="120px"
+BorderColor="#00BFFF"
+BorderStyle="Solid"
+BorderWidth="2px"
+style="margin:2px;" />
                 </td>
             </tr>
             <tr>
             <td class="style3"  align ="right">
                 &nbsp;
                 </td>
-                <td>
+                <td style="text-align: right">
                 <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" 
             DataSourceID="dsCategories" DataTextField="longName" DataValueField="Id" 
             AppendDataBoundItems="True" 
@@ -89,7 +89,7 @@ Width="120px"
 BorderColor="#00BFFF"
 BorderStyle="Solid"
 BorderWidth="2px"
-style="margin:2px; text-align: right;">
+style="margin:2px; ">
             <asp:ListItem Value="-1">All</asp:ListItem>
         </asp:DropDownList>
                 </td>
@@ -114,16 +114,16 @@ style="margin:2px; text-align: right;">
                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Button ID="Button1" runat="server"  onclick="Button1_Click" Text="Buy" />
+                        <asp:Button ID="Button1" runat="server"  onclick="Button1_Click" Text="Buy" CssClass="buttonStyle"/>
                     </ItemTemplate>
                 </asp:TemplateField>
 
             </Columns>
             <EditRowStyle BackColor="#999999" />
-            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <FooterStyle BackColor="#E8E8E8" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#00BFFF" Font-Bold="True" ForeColor="White" />
             <PagerSettings Mode="NextPreviousFirstLast" />
-            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+            <PagerStyle BackColor="#E8E8E8" ForeColor="White" HorizontalAlign="Center" />
             <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
             <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
             <SortedAscendingCellStyle BackColor="#E9E7E2" />

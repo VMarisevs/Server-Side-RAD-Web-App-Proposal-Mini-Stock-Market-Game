@@ -17,6 +17,8 @@
             <asp:ImageButton ID="imgButBeg" runat="server"  ImageUrl="~/Images/coinPadded.png" 
                 Width="150px" CssClass="buttonStyle" BorderWidth="5px" 
                 ImageAlign="Middle" onclick="imgButBeg_Click" CommandName="Update" />
+            <cc1:DropShadowExtender ID="imgButBeg_DropShadowExtender" runat="server" 
+                BehaviorID="imgButBeg_DropShadowExtender" TargetControlID="imgButBeg" />
         </asp:Panel>
 
         <asp:SqlDataSource ID="dsBeg" runat="server" 

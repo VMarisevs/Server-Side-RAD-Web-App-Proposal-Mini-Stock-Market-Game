@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Feedback.aspx.cs" Inherits="Footer_Feedback" %>
 
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 
     <style type="text/css">
@@ -34,6 +36,8 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:Panel ID="panFeedback" runat="server">
+    
     <div style="border:3px dashed #b5c7de;padding:10px;background-color:#FDFFCC;"> <!--style="display:block;padding:20px 20px 50px 20px; overflow:hidden"-->
     <table class="style1" 
             style="height:100%;overflow:hidden; font-family: Tahoma; font-size: 0.9em; font-weight: normal;">
@@ -47,7 +51,7 @@
             <td class="style3">
 &nbsp;&nbsp; 1.&nbsp; On which devices did you access the website ? <br /></td>
             <td>
-                <asp:CheckBoxList ID="cblstWebsiteAccess" runat="server" 
+                <asp:CheckBoxList ID="cblstWebsiteAccess" runat="server" TextAlign="Left" 
                     DataSourceID="dsCheckBoxList" DataTextField="Name" DataValueField="Id">
                 </asp:CheckBoxList>
                 <asp:SqlDataSource ID="dsCheckBoxList" runat="server" 
@@ -68,7 +72,7 @@
             <td class="style3">
                 &nbsp;&nbsp; 3.&nbsp; How did you first learn about our website ?&nbsp;</td>
             <td>
-                <asp:DropDownList ID="ddlLearnAbout" runat="server" 
+                <asp:DropDownList ID="ddlLearnAbout" runat="server"  CssClass="controlStyle" 
                     DataSourceID="dsDropDownList" DataTextField="Name" DataValueField="Id" 
                     style="margin-left: 0px">
                 </asp:DropDownList>
@@ -95,7 +99,7 @@
                     ErrorMessage="Please specify Your access medium to continue." ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
             <td>
-                <asp:ListBox ID="lstbAccessMedium" runat="server" DataSourceID="dsItemList" 
+                <asp:ListBox ID="lstbAccessMedium" runat="server" DataSourceID="dsItemList"  CssClass="controlStyle"
                     DataTextField="Name" DataValueField="Id" style="margin-left: 0px">
                 </asp:ListBox>
                 <asp:SqlDataSource ID="dsItemList" runat="server" 
@@ -169,11 +173,13 @@
         <tr>
             <td style="text-align: center" colspan="2">
             <asp:Button 
-                    ID="btnSubmit" runat="server" onclick="btnSubmit_Click" Text="Submit" 
+                    ID="btnSubmit" runat="server" onclick="btnSubmit_Click" Text="Submit" CssClass="buttonStyle"
                     Width="220px" />
             </td>
         </tr>
     </table>
-</div>
+    </div>
+
+    </asp:Panel>
 </asp:Content>
 

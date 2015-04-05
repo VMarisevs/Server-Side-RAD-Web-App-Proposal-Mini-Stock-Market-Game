@@ -79,6 +79,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
         if (HttpContext.Current.User.Identity.IsAuthenticated)
         {
+
+            Session["userId"] = MySession.Current.UserId;
+
             txtBalloon.Visible = true;
             // action for authenticated users.
             try
@@ -101,10 +104,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
             LoginView loginControl = FindControl("LoginView1") as LoginView;
             //FormView formViewControl = loginControl.FindControl("FormView1") as FormView;
             Gravatar gravatarControl = loginControl.FindControl("UserGravatar") as Gravatar;
-            gravatarControl.Email = "rolo45@gmail.com";
+            
             try
             {
-                gravatarControl.Email = "rolo45@gmail.com";
+                gravatarControl.Email = Email;
             }
             catch
             {
@@ -181,4 +184,12 @@ public partial class MasterPage : System.Web.UI.MasterPage
         //Gravatar gravatarControl = loginControl .FindControl("TestGravatar") as Gravatar;
         //gravatarControl.Email = "rolo45@gmail.com";
     }
+
+    // need email set up on server to use this page
+    //private void Page_Error(object sender, EventArgs e) 
+    //{
+    //    Exception ex = Server.GetLastError();
+    //    Session["Exception"] = ex;
+    //    Response.Redirect("~/Errors/ErrorPage.aspx");
+    //}
 }
