@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Data.SqlClient;
 
 public partial class Authenticated_BuyStocks : System.Web.UI.Page
 {
@@ -36,37 +37,64 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
         Guid UserId;
         User user = new User();
         Comapny company = new Comapny();
-
-
         UserId = new Guid(MySession.Current.UserId);
-        user = UserDB.GetUser(UserId);
-        company = CompanyDB.GetCompanyShares(companyId);
 
-        userShares = SharesDB.GetUserShares(UserId, companyId);
-
-        if (company.shares - ammount > 0)
+        try
         {
-            user.cash -= company.sharePrice * ammount;
-            company.shares -= ammount;
+            user = UserDB.GetUser(UserId);
+ 
+            company = CompanyDB.GetCompanyShares(companyId);
 
-            if (userShares > 0)
+            userShares = SharesDB.GetUserShares(UserId, companyId);
+        }
+        catch (SqlException sqlEx)
+        {
+            lblErrorMessage.Text = "A database error has occurred.<br /><br />" +
+                sqlEx.Message;
+            return;
+        }
+
+
+        //if the user has enough money 
+        if (user.cash - company.sharePrice * ammount >= 0 )
+        {
+            //if the company has enough shares 
+            if (company.shares - ammount > 0)
             {
-                SharesDB.UpdateUserShares(UserId, companyId, userShares + ammount);
+                user.cash -= company.sharePrice * ammount;
+                company.shares -= ammount;
+                try
+                {
+                    if (userShares > 0)
+                    {
+                        SharesDB.UpdateUserShares(UserId, companyId, userShares + ammount);
+                    }
+                    else
+                    {
+                        SharesDB.InsertUserShares(UserId, companyId, ammount, userShares + ammount);
+                    }
+                    SharesDB.UpdateCash(UserId, user.cash);
+                    CompanyDB.UpdateCompanyShares(companyId, company.shares);
+                }
+                catch (SqlException sqlEx)
+                {
+                    lblErrorMessage.Text = "A database error has occurred.<br /><br />" +
+                        sqlEx.Message;
+                    return;
+                }
+
+                gwBuyStocks.DataBind();
             }
+            //else inform the user of the lack of available shares
             else
             {
-                SharesDB.InsertUserShares(UserId, companyId, ammount, userShares + ammount);
+                lblErrorMessage.Text = "Sorry no shares of that company are currently available for purchase";
             }
-            SharesDB.UpdateCash(UserId, user.cash);
-            CompanyDB.UpdateCompanyShares(companyId, company.shares);
-
-            gwBuyStocks.DataBind();
-
         }
+        //else call the user poor
         else
         {
-
-
+            lblErrorMessage.Text = "You are too poor.";
         }
     }
 

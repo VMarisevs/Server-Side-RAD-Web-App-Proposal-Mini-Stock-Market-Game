@@ -32,7 +32,7 @@ public class Comapny
 
 public class Role
 {
-    public string id { get; set; }
+    public Guid id { get; set; }
 
     public string RoleName { get; set; }
 }

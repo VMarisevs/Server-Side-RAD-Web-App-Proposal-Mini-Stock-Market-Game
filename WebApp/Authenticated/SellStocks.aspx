@@ -71,7 +71,7 @@ style="margin:2px;" />
             </tr>
             <tr>
             <td class="style3"  align ="right">
-                &nbsp;
+                <asp:Label ID="lblErrorMessage" runat="server" ForeColor="#990000"></asp:Label>
                 </td>
                 <td style="text-align: right">
                 <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" 
@@ -106,7 +106,7 @@ style="margin:2px; text-align: right;">
                 <asp:BoundField DataField="shares" HeaderText="Available Shares" 
                     SortExpression="shareAmount" />
                 <asp:BoundField DataField="curprice" HeaderText="Price" 
-                    SortExpression="curprice" />
+                    SortExpression="curprice" DataFormatString="{0:c}" />
                 <asp:TemplateField>
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>

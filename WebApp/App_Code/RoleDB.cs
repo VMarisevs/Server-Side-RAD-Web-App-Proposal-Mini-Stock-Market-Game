@@ -37,7 +37,7 @@ public class RoleDB
             while (rdr.Read())
             {
                 Role role = new Role();
-                role.id = rdr["RoleId"].ToString();
+                role.id = (Guid)rdr["RoleId"];
                 role.RoleName = rdr["RoleName"].ToString();
 
                 listRole.Add(role);
@@ -48,6 +48,30 @@ public class RoleDB
         
         return listRole;
     }
+
+    public static Guid GetRoleId(string RoleName)
+    {
+        Guid roleId;
+        SqlConnection con = new SqlConnection(ConnectDB.GetConnectionString());
+        string sel = "SELECT RoleId FROM aspnet_Roles " +
+                     "WHERE (RoleName = @RoleName)";
+
+        SqlCommand cmd = new SqlCommand(sel, con);
+        cmd.Parameters.AddWithValue("RoleName", RoleName);
+
+        con.Open();
+        SqlDataReader rdr = cmd.ExecuteReader();
+        rdr.Read();
+
+        roleId = (Guid)rdr["RoleId"];
+
+
+        rdr.Close();
+        con.Close();
+
+        return roleId;
+    }
+
 
     [DataObjectMethod(DataObjectMethodType.Insert)]
     public static int InsertUserRole(Guid UserId, Guid RoleId)

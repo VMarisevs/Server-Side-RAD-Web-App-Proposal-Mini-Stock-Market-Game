@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
 
 public partial class Authenticated_SellStocks : System.Web.UI.Page
 {
@@ -22,9 +23,24 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
 
 
         UserId = new Guid(MySession.Current.UserId);
-        user = UserDB.GetUser(UserId);
-        company = CompanyDB.GetCompanyShares(companyId);
-        userShares = SharesDB.GetUserShares(UserId, companyId);
+
+
+
+        try
+        {
+            user = UserDB.GetUser(UserId);
+
+            company = CompanyDB.GetCompanyShares(companyId);
+
+            userShares = SharesDB.GetUserShares(UserId, companyId);
+        }
+        catch (SqlException sqlEx)
+        {
+            lblErrorMessage.Text = "A database error has occurred.<br /><br />" +
+                sqlEx.Message;
+            return;
+        }
+
 
         if (userShares - ammount >= 0)
         {
@@ -32,20 +48,29 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
             company.shares += ammount;
             userShares -= ammount;
 
-            
-            SharesDB.UpdateCash(UserId, user.cash);
-
-            if (userShares == 0)
+            try
             {
-                SharesDB.DeleteUserShares(UserId, companyId);
+                SharesDB.UpdateCash(UserId, user.cash);
+
+                if (userShares == 0)
+                {
+                    SharesDB.DeleteUserShares(UserId, companyId);
+                }
+                else
+                {
+                    SharesDB.UpdateUserShares(UserId, companyId, userShares);
+                }
+
+                CompanyDB.UpdateCompanyShares(companyId, company.shares);
+                dsUserStocks.SelectParameters["UserId"].DefaultValue = MySession.Current.UserId;
             }
-            else
+            catch (SqlException sqlEx)
             {
-                SharesDB.UpdateUserShares(UserId, companyId, userShares);
+                lblErrorMessage.Text = "A database error has occurred.<br /><br />" +
+                    sqlEx.Message;
+                return;
             }
 
-            CompanyDB.UpdateCompanyShares(companyId, company.shares);
-            dsUserStocks.SelectParameters["UserId"].DefaultValue = MySession.Current.UserId;
             gvwUserStocks.DataBind();
         }
     }

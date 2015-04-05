@@ -11,7 +11,7 @@
         .style3
         {
             height: 23px;
-            text-align: left;
+            text-align: right;
         }
         .style5
         {
@@ -90,6 +90,7 @@
     <table class="style1">
         <tr>
             <td class="style5">
+                <asp:Label ID="lblRoleErrorMessage" runat="server" ForeColor="#CC0000"></asp:Label>
                 <asp:RadioButton 
                     ID="rBtnUser" runat="server" Enabled="False" GroupName="Roles" Text="User" 
                     Visible="False" />
@@ -97,6 +98,7 @@
                     GroupName="Roles" Text="Admin" Visible="False" />
                 &nbsp;&nbsp;&nbsp;</td>
             <td class="style3">
+                <asp:Label ID="lblStockErrorMessage" runat="server" ForeColor="#990000"></asp:Label>
             </td>
         </tr>
         <tr>
@@ -121,7 +123,7 @@
                             <tr>
                                 <td colspan="2">
                                    <strong>Cash:</strong>
-                                    <asp:TextBox ID="cashTextBox" runat="server" Text='<%# Bind("cash") %>' />
+                                    <asp:TextBox ID="cashTextBox" runat="server" Text='<%# Bind("cash","{0:C2}") %>' />
                                 </td>
                             </tr>
                             <tr>
@@ -138,6 +140,7 @@
                             </tr>
                         </table>
                         &nbsp;
+                        <asp:Label ID="lblUserErrorMessage" runat="server"></asp:Label>
                     </EditItemTemplate>
                     <EditRowStyle BackColor="LightGray" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -184,7 +187,7 @@
                             <tr>
                                 <td colspan="2">
                                     <strong>Cash:</strong>  
-                                    <asp:Label ID="cashLabel" runat="server" Text='<%# Bind("cash") %>' />
+                                    <asp:Label ID="cashLabel" runat="server" Text='<%# Bind("cash","{0:C2}") %>' />
                                 </td>
                             </tr>
                             <tr>
@@ -210,7 +213,7 @@
 
                 <asp:GridView ID="gvwEditStocks" runat="server" AutoGenerateColumns="False" Visible="False"
                     CellPadding="4" DataSourceID="dsUserStocks" ForeColor="#333333" 
-                    GridLines="None">
+                    GridLines="None" onrowupdated="gvwEditStocks_RowUpdated">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
                         <asp:TemplateField HeaderText="ID" SortExpression="companyId">
