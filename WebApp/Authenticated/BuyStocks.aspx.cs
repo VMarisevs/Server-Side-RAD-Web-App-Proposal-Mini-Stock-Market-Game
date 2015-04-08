@@ -225,4 +225,14 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
     {
         gwBuyStocks.DataBind();
     }
+
+
+    protected void frmVwInfo_Load(object sender, EventArgs e)
+    {
+         frmVwInfo.DataBind();
+         //gwBuyStocks.DataBind();
+
+        //stocksUpdatePanel.Update();
+        chartUpdatePanel.Update();
+    }
 }

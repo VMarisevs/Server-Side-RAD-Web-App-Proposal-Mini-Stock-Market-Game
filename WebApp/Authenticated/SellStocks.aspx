@@ -15,6 +15,77 @@
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <h1>Sell Stocks
+    </h1>
+
+
+        <div>
+                               <%--  AJAX--%>
+             <asp:UpdatePanel ID="chartUpdatePanel" runat="server" UpdateMode="Conditional">
+             <ContentTemplate>
+                <%--<asp:Timer ID="chartTimer" runat="server" Interval="10000" />--%>
+                <asp:FormView ID="frmVwInfo" runat="server" DataSourceID="dsGraphs" 
+                     onload="frmVwInfo_Load">
+                <ItemTemplate>
+                    <strong>Name:</strong>
+                    <asp:Label ID="NameLabel" runat="server" Text='<%# Bind("Name") %>' />
+                    <br />
+                    <strong>Price:</strong>
+                    <asp:Label ID="priceLabel" runat="server" Text='<%# Bind("price", "{0:c}") %>' />
+                    <br />
+                    <strong>Updated:</strong>
+                    <asp:Label ID="updatedLabel" runat="server" Text='<%# Bind("updated") %>' />
+                    <br />
+                </ItemTemplate>
+            </asp:FormView>
+
+                 <asp:UpdateProgress ID="UpdateProgress1" runat="server" DynamicLayout="true" DisplayAfter="1000" AssociatedUpdatePanelID="chartUpdatePanel">
+                    <ProgressTemplate>
+                        <br />
+                        <br />
+                        <br />
+                    Please wait. The update is in progress.
+                    </ProgressTemplate>
+                 </asp:UpdateProgress>
+
+
+                 <asp:Chart ID="Chart1" runat="server" DataSourceID="dsGraphs" Width="600px" 
+                AlternateText="No data to display">
+
+                <Series>
+                    <asp:Series ChartType="Line" Name="Series1" YValueMembers="price" 
+                        YValuesPerPoint="4" XValueMember="updated" Label="#VAL{C}" Color="red" BorderWidth="2">
+                        <SmartLabelStyle CalloutLineWidth="5" CalloutLineColor="Transparent" />
+                    </asp:Series>
+                </Series>
+
+                <ChartAreas>
+                    <asp:ChartArea Name="ChartArea1" BorderWidth="5">
+                    </asp:ChartArea>
+                </ChartAreas>
+            </asp:Chart>
+
+  
+             </ContentTemplate>
+            </asp:UpdatePanel>
+
+    
+            <asp:SqlDataSource ID="dsGraphs" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 
+                
+                
+                SelectCommand="SELECT TOP (20) StockHistory.price, StockHistory.updated, Companies.Name FROM StockHistory INNER JOIN Companies ON StockHistory.companyId = Companies.Id WHERE (StockHistory.companyId = CASE @companyId WHEN 'topCompany' THEN (SELECT TOP (1) Id FROM Companies ORDER BY curprice DESC) ELSE @companyId END) ORDER BY StockHistory.updated DESC">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="gvwUserStocks" DefaultValue="10003" 
+                        Name="companyId" PropertyName="SelectedValue" Type="String" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+  
+
+    </div>
+
+
+
     <asp:SqlDataSource ID="dsUserStocks" runat="server" 
         ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" SelectCommand="SELECT        UserShares.shares, Companies.Id, Companies.Name, Companies.curprice
 FROM          UserShares INNER JOIN
@@ -33,16 +104,14 @@ ORDER BY Companies.curprice DESC">
                 Name="categoryId" PropertyName="SelectedValue" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <br />
         <asp:SqlDataSource ID="dsCategories" runat="server" ConnectionString="<%$ ConnectionStrings:GameConnectionString %>"
             SelectCommand="SELECT [Id], [longName] FROM [Categories] ORDER BY [longName]">
         </asp:SqlDataSource>
-    <br />
         <table class="style1">
             <tr>
             <td class="style4"  align ="right" colspan="2">
                 <h3>
-                    <asp:UpdatePanel ID="dialogUpdatePanel" runat="server" UpdateMode="Conditional">
+                    &nbsp;<asp:UpdatePanel ID="dialogUpdatePanel" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                     <asp:Timer ID="dialogTimer" runat="server" Interval="2000" />
 
@@ -56,8 +125,6 @@ ORDER BY Companies.curprice DESC">
             </tr>
             <tr>
             <td class="style4"  align ="right">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;
                 </td>
                 <td style="text-align: right">
                 <asp:TextBox ID="txtSearch"  runat="server" 
@@ -117,6 +184,9 @@ style="margin:2px; text-align: right;">
                     onload="gvwUserStocks_Load">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
+                <asp:CommandField ButtonType="Button" ShowSelectButton="True">
+                <ControlStyle CssClass="buttonStyle" />
+                </asp:CommandField>
                 <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" 
                     InsertVisible="False" ReadOnly="True" Visible="False" />
                 <asp:BoundField DataField="Name" HeaderText="Company" 

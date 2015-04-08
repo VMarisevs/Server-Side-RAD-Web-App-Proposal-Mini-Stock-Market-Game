@@ -160,4 +160,13 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
         //gvwUserStocks.DataBind();
         gvwUpdatePanel.Update();
     }
+
+    protected void frmVwInfo_Load(object sender, EventArgs e)
+    {
+        frmVwInfo.DataBind();
+        //gwBuyStocks.DataBind();
+
+        //stocksUpdatePanel.Update();
+        chartUpdatePanel.Update();
+    }
 }
