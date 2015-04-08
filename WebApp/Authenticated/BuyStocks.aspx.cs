@@ -65,26 +65,26 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
 
         int RowId = ((GridViewRow)((Button)sender).Parent.Parent).RowIndex;
         int CompanyId = (int)gwBuyStocks.DataKeys[RowId].Value;
-        int ammount = 0;
+        int amount = 0;
 
         if (txtAmmount != null)
         {
-            if (!int.TryParse(txtAmmount.Text, out ammount))
+            if (!int.TryParse(txtAmmount.Text, out amount))
             {
                 lblErrorMessage.Text = "Must enter a number";
                 return;
             }
-            else if (ammount < 1)
+            else if (amount < 1)
             {
                 lblErrorMessage.Text = "Must enter a number more than zero";
                 return;
             }
         }
-        Buy(ammount, CompanyId);
+        Buy(amount, CompanyId);
     }
 
 
-    protected void Buy(int ammount, int companyId)
+    protected void Buy(int amount, int companyId)
     {
         int userShares;
         Guid UserId;
@@ -112,22 +112,22 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
 
 
         //if the user has enough money 
-        if (user.cash - company.sharePrice * ammount >= 0 )
+        if (user.cash - company.sharePrice * amount >= 0 )
         {
             //if the company has enough shares 
-            if (company.shares - ammount >= 0)
+            if (company.shares - amount >= 0)
             {
-                user.cash -= company.sharePrice * ammount;
-                company.shares -= ammount;
+                user.cash -= company.sharePrice * amount;
+                company.shares -= amount;
                 try
                 {
                     if (userShares > 0)
                     {
-                        SharesDB.UpdateUserShares(UserId, companyId, userShares + ammount);
+                        SharesDB.UpdateUserShares(UserId, companyId, userShares + amount);
                     }
                     else
                     {
-                        SharesDB.InsertUserShares(UserId, companyId, ammount, userShares + ammount);
+                        SharesDB.InsertUserShares(UserId, companyId, amount, userShares + amount);
                     }
                     SharesDB.UpdateCash(UserId, user.cash);
                     CompanyDB.UpdateCompanyShares(companyId, company.shares);
@@ -141,9 +141,25 @@ public partial class Authenticated_BuyStocks : System.Web.UI.Page
                     return;
                 }
 
+                try
+                {
+                    UserHistoryDB.InsertHistory(UserId,companyId, amount, 'b' , company.sharePrice,0);
+                }
+                catch (SqlException sqlEx)
+                {
+                    lblErrorMessage.Text = "A database error has occurred.<br /><br />" +
+                        sqlEx.Message;
+
+                    // lblConfirmation.Text = "";
+                    return;
+                }
+
                 gwBuyStocks.DataBind();
                 lblErrorMessage.Text = "";
                 lblConfirmation.Text = "Share bought successfully";
+
+
+
             }
             //else inform the user of the lack of available shares
             else

@@ -90,6 +90,14 @@
     <table class="style1">
         <tr>
             <td class="style5">
+                <asp:CheckBox ID="chkApproval" runat="server" Enabled="False" Text="Approved" 
+                    Visible="False" />
+            </td>
+            <td class="style3">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style5">
                 <asp:Label ID="lblRoleErrorMessage" runat="server" ForeColor="#CC0000"></asp:Label>
                 <asp:RadioButton 
                     ID="rBtnUser" runat="server" Enabled="False" GroupName="Roles" Text="User" 

@@ -54,26 +54,26 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
     {
         int RowId = ((GridViewRow)((Button)sender).Parent.Parent).RowIndex;
         int CompanyId = (int)gvwUserStocks.DataKeys[RowId].Value;
-        int ammount = 0;
+        int amount = 0;
 
         if (txtAmmount != null)
         {
-            if (!int.TryParse(txtAmmount.Text, out ammount))
+            if (!int.TryParse(txtAmmount.Text, out amount))
             {
                 lblErrorMessage.Text = "Must enter a number";
                 return;
             }
-            else if (ammount < 1)
+            else if (amount < 1)
             {
                 lblErrorMessage.Text = "Must enter a number more than zero";
                 return;
             }
         }
 
-        Sell(ammount, CompanyId);
+        Sell(amount, CompanyId);
     }
 
-    protected void Sell(int ammount, int companyId)
+    protected void Sell(int amount, int companyId)
     {
         int userShares;
         Guid UserId;
@@ -101,11 +101,11 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
         }
 
 
-        if (userShares - ammount >= 0)
+        if (userShares - amount >= 0)
         {
-            user.cash += company.sharePrice * ammount;
-            company.shares += ammount;
-            userShares -= ammount;
+            user.cash += company.sharePrice * amount;
+            company.shares += amount;
+            userShares -= amount;
 
             try
             {
@@ -127,6 +127,19 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
             {
                 lblErrorMessage.Text = "A database error has occurred.<br /><br />" +
                     sqlEx.Message;
+                return;
+            }
+
+            try
+            {
+                UserHistoryDB.InsertHistory(UserId, companyId, amount, 's', 0, company.sharePrice);
+            }
+            catch (SqlException sqlEx)
+            {
+                lblErrorMessage.Text = "A database error has occurred.<br /><br />" +
+                    sqlEx.Message;
+
+                // lblConfirmation.Text = "";
                 return;
             }
 

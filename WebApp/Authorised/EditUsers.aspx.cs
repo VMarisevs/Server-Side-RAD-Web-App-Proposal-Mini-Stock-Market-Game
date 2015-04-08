@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 public partial class Authorised_EditUsers : System.Web.UI.Page
 {
     static bool isAdmin;
+    static bool isApproved;
     Guid adminRoleId;
     Guid userRoleId;
 
@@ -18,6 +19,8 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
         adminRoleId = RoleDB.GetRoleId("Administrator");
 
         userRoleId = RoleDB.GetRoleId("User");
+
+       
     }
 
 
@@ -27,9 +30,13 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
         rBtnAdmin.Visible = true;
         rBtnUser.Visible = true;
         fvwUser.Visible = true;
+        chkApproval.Visible = true;
         List<Role> listRole = new List<Role>();
 
         listRole = RoleDB.GetUserRoles((Guid)gvwUsers.SelectedDataKey.Value);
+        isApproved = MembershipDB.GetRoleId((Guid)gvwUsers.SelectedDataKey.Value);
+
+        chkApproval.Checked = isApproved;
 
         foreach (Role role in listRole)
         {
@@ -50,6 +57,7 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 
         rBtnAdmin.Enabled = false;
         rBtnUser.Enabled = false;
+        chkApproval.Enabled = false;
     }
 
 
@@ -62,6 +70,7 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
 
         rBtnAdmin.Enabled = false;
         rBtnUser.Enabled = false;
+        chkApproval.Enabled = false;
 
     }
 
@@ -69,6 +78,7 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
     {
         rBtnAdmin.Enabled = false;
         rBtnUser.Enabled = false;
+        chkApproval.Enabled = false;
     }
 
     protected void btnEdit_Click(object sender, EventArgs e)
@@ -76,6 +86,7 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
         gvwEditStocks.Visible = false;
         rBtnAdmin.Enabled = true;
         rBtnUser.Enabled = true;
+        chkApproval.Enabled = true;
     }
 
     protected void dsUser_Updated(object sender, ObjectDataSourceStatusEventArgs e)
@@ -105,16 +116,8 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
         {
             try
             {
+                
                 RoleDB.DeleteUserRole(userId, adminRoleId);
-            }
-            catch (SqlException sqlEx)
-            {
-                lblRoleErrorMessage.Text = "A database error has occurred.<br /><br />" +
-                sqlEx.Message;
-            }
-
-            try
-            {
                 RoleDB.DeleteUserRole(userId, userRoleId);
             }
             catch (SqlException sqlEx)
@@ -133,6 +136,20 @@ public partial class Authorised_EditUsers : System.Web.UI.Page
                 {
                     RoleDB.InsertUserRole(userId, userRoleId);
                 }
+            }
+            catch (SqlException sqlEx)
+            {
+                lblRoleErrorMessage.Text += "A database error has occurred.<br /><br />" +
+                sqlEx.Message;
+            }
+
+        }
+
+        if (chkApproval.Checked != isApproved)
+        {
+            try
+            {
+                MembershipDB.updateUserApproval(userId, chkApproval.Checked);
             }
             catch (SqlException sqlEx)
             {
