@@ -8,8 +8,8 @@
         }
         .style4
         {
-            width: 290px;
             height: 36px;
+            text-align: center;
         }
         .style3
         {
@@ -31,7 +31,7 @@
             SelectCommand="SELECT Companies.Id, Companies.Name, Categories.longName, Companies.shareAmount, Companies.curprice FROM Categories INNER JOIN Companies ON Categories.Id = Companies.categoryId WHERE ([Name] LIKE '%' + @Name + '%') AND categoryId = CASE  @categoryId 
 WHEN '-1'  THEN categoryId 
 ELSE @categoryId 
-END ORDER BY [Name]">
+END ORDER BY  Companies.curprice" onupdated="dsStocks_Updated">
             <SelectParameters>
                 <asp:ControlParameter ControlID="txtSearch" Name="Name" PropertyName="Text" 
                     DefaultValue="%" />
@@ -44,9 +44,34 @@ END ORDER BY [Name]">
         </asp:SqlDataSource>
         <table class="style1">
             <tr>
+            <td class="style4"  align ="right" colspan="2">
+                            <%--To clear dialog message--%>
+                <h3>
+                    <asp:UpdatePanel ID="dialogUpdatePanel" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                   <asp:Timer ID="dialogTimer" runat="server" Interval="2000" />
+
+                    <asp:Label ID="lblConfirmation" runat="server" onload="lblConfirmation_Load" />
+                    <asp:Label ID="lblErrorMessage" runat="server" ForeColor="#990000" />
+
+                    </ContentTemplate>
+                    </asp:UpdatePanel>   
+                </h3>
+                </td>
+            </tr>
+            <tr>
             <td class="style4"  align ="right">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;
+
+      <p>
+<%--         <asp:UpdatePanel ID="btnUpdatePanel" runat="server" UpdateMode="Always">
+            <ContentTemplate>
+                <asp:Timer ID="Timer1" runat="server" Interval="2000" />
+            <asp:Button ID="btnRefresh" runat="server" CssClass="buttonStyle"  Text="Refresh" 
+                    onclick="btnRefresh_Click"  />
+       </ContentTemplate>
+        </asp:UpdatePanel>--%>
+        </p>
+
                 </td>
                 <td style="text-align: right">
                 <asp:TextBox ID="txtSearch"  runat="server" 
@@ -76,7 +101,6 @@ style="margin:2px;" />
             <tr>
             <td class="style3"  align ="right">
                 &nbsp;
-                <asp:Label ID="lblErrorMessage" runat="server" ForeColor="#990000"></asp:Label>
                 </td>
                 <td style="text-align: right">
                 <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" 
@@ -96,10 +120,13 @@ style="margin:2px; ">
                 </td>
             </tr>
         </table>
-        <asp:GridView ID="gwBuyStocks" runat="server" AllowPaging="True" 
+                     <asp:UpdatePanel ID="gvwUpdatePanel" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:Timer ID="gvwTimer" runat="server" Interval="2000" />
+        <asp:GridView ID="gwBuyStocks" runat="server" 
             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
             DataSourceID="dsStocks" ForeColor="#333333" GridLines="None" 
-            DataKeyNames="Id">
+            DataKeyNames="Id" onload="gwBuyStocks_Load" onprerender="gwBuyStocks_PreRender">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" 
@@ -133,6 +160,9 @@ style="margin:2px; ">
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
         
+                            </ContentTemplate>
+                    </asp:UpdatePanel>   
+
         <asp:Panel ID="Panel1" runat="server" BackColor="#33CCFF" Height="30px" 
             style="text-align: center" Width="203px">
             <asp:Label ID="Label1" runat="server" 

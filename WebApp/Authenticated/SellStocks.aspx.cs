@@ -10,7 +10,44 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // makes sure this page is not cached (solves the "back button problem")
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
+        Response.Cache.SetNoStore();
+        Response.AppendHeader("Pragma", "no-cache");
+        // this technique works for most browsers to clear the cache (that way the page must be requested form the server again)
 
+        // The next technique is more fool proof and uses time stamps (or random numbers)
+        if (IsExpired())
+            Response.Redirect("~/Errors/Expired.aspx");
+        else
+            this.SaveTimeStamps();
+
+        //if (!IsPostBack) { 
+        //// execute more code
+        //}
+    }
+
+    private bool IsExpired()
+    {
+        if (Session["Cart_TimeStamp"] == null)
+            return false;
+        else if (ViewState["TimeStamp"] == null)
+            return false;
+        else if (ViewState["TimeStamp"].ToString() == Session["Cart_TimeStamp"].ToString())
+            return false;
+        else
+            return true;
+    }
+
+    private void SaveTimeStamps()
+    {
+        DateTime dtm = DateTime.Now;
+
+        // this view
+        ViewState.Add("TimeStamp", dtm);
+        // this session
+        Session.Add("Cart_TimeStamp", dtm);
     }
 
     protected void btnSell_Click(object sender, EventArgs e)
@@ -94,10 +131,13 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
             }
 
             gvwUserStocks.DataBind();
+            lblErrorMessage.Text = "";
+            lblConfirmation.Text = "Share sold successfully";
         }
         else
         {
-            lblErrorMessage.Text="You can not sell that many shares";
+            lblConfirmation.Text = "";
+            lblErrorMessage.Text = "You can not sell that many shares";
         }
     }
 
@@ -105,8 +145,19 @@ public partial class Authenticated_SellStocks : System.Web.UI.Page
     {
         dsUserStocks.SelectParameters["UserId"].DefaultValue = MySession.Current.UserId;
         gvwUserStocks.DataBind();
-        lblErrorMessage.Text = "";
+        //lblErrorMessage.Text = "";
     }
 
 
+    protected void lblConfirmation_Load(object sender, EventArgs e)
+    {
+        //dialogUpdatePanel.Update();
+       // lblConfirmation.Text = "";
+       // lblErrorMessage.Text = "";
+    }
+    protected void gvwUserStocks_Load(object sender, EventArgs e)
+    {
+        //gvwUserStocks.DataBind();
+        gvwUpdatePanel.Update();
+    }
 }

@@ -17,4 +17,12 @@ public partial class Guest_ViewStocks : System.Web.UI.Page
     {
 
     }
+    protected void frmVwInfo_Load(object sender, EventArgs e)
+    {
+        frmVwInfo.DataBind();
+        gvwCompanies0.DataBind();
+
+        stocksUpdatePanel.Update();
+        chartUpdatePanel.Update();
+    }
 }

@@ -192,4 +192,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
     //    Session["Exception"] = ex;
     //    Response.Redirect("~/Errors/ErrorPage.aspx");
     //}
+    protected void LoginView1_Load(object sender, EventArgs e)
+    {
+        FormView profileForm = LoginView1.FindControl("frmVwProfile") as FormView;
+        profileForm.DataBind();
+        profileUpdatePanel.Update();
+    }
 }

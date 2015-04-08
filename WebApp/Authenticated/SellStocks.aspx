@@ -5,8 +5,8 @@
 
         .style4
         {
-            width: 290px;
             height: 36px;
+            text-align: center;
         }
         .style3
         {
@@ -24,7 +24,7 @@ FROM          UserShares INNER JOIN
 WHEN '-1'  THEN categoryId 
 ELSE @categoryId 
 END 
-                        ">
+ORDER BY Companies.curprice DESC">
         <SelectParameters>
             <asp:Parameter Name="UserId" />
             <asp:ControlParameter ControlID="txtSearch" DefaultValue="%" Name="Name" 
@@ -39,6 +39,21 @@ END
         </asp:SqlDataSource>
     <br />
         <table class="style1">
+            <tr>
+            <td class="style4"  align ="right" colspan="2">
+                <h3>
+                    <asp:UpdatePanel ID="dialogUpdatePanel" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                    <asp:Timer ID="dialogTimer" runat="server" Interval="2000" />
+
+                    <asp:Label ID="lblConfirmation" runat="server" onload="lblConfirmation_Load" />
+                    <asp:Label ID="lblErrorMessage" runat="server" ForeColor="#990000" />
+
+                    </ContentTemplate>
+                    </asp:UpdatePanel>   
+                </h3>
+            </td>
+            </tr>
             <tr>
             <td class="style4"  align ="right">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -71,8 +86,7 @@ style="margin:2px;" />
             </tr>
             <tr>
             <td class="style3"  align ="right">
-                <asp:Label ID="lblErrorMessage" runat="server" ForeColor="#990000"></asp:Label>
-                </td>
+                &nbsp;</td>
                 <td style="text-align: right">
                 <asp:DropDownList ID="ddlCategories" runat="server" AutoPostBack="True" 
             DataSourceID="dsCategories" DataTextField="longName" DataValueField="Id" 
@@ -93,10 +107,14 @@ style="margin:2px; text-align: right;">
         </table>
     <br />
     <br />
-        <asp:GridView ID="gvwUserStocks" runat="server" AllowPaging="True" EmptyDataText="Go buy some stocks."
+             <asp:UpdatePanel ID="gvwUpdatePanel" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:Timer ID="gvwTimer" runat="server" Interval="2000" />
+        <asp:GridView ID="gvwUserStocks" runat="server" EmptyDataText="Go buy some stocks."
             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
             DataSourceID="dsUserStocks" ForeColor="#333333" GridLines="None" 
-            DataKeyNames="Id" onprerender="gvwUserStocks_PreRender">
+            DataKeyNames="Id" onprerender="gvwUserStocks_PreRender" 
+                    onload="gvwUserStocks_Load">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" 
@@ -132,7 +150,8 @@ style="margin:2px; text-align: right;">
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
-        
+                            </ContentTemplate>
+                    </asp:UpdatePanel>   
     <asp:Panel ID="Panel1" runat="server" BackColor="#33CCFF" Height="30px" 
         style="text-align: center" Width="203px">
         <asp:Label ID="Label1" runat="server" 

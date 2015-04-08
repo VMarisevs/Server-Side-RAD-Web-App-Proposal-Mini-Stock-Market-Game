@@ -64,13 +64,14 @@
 
 
                 <%-- Takes 2 clicks to Login out for some reason? --%>
-
-        <asp:LoginView ID="LoginView1" runat="server">
+             <asp:UpdatePanel ID="profileUpdatePanel" runat="server" UpdateMode="Conditional">
+                 <ContentTemplate>
+                 <asp:Timer ID="profileTimer" runat="server" Interval="3000" />
+        <asp:LoginView ID="LoginView1" runat="server" onload="LoginView1_Load">
         <LoggedInTemplate>
 
-             <asp:UpdatePanel ID="UpdatePanelCash" runat="server" UpdateMode="Always">
-                 <ContentTemplate>
-              <%-- <asp:Timer ID="TimerCash" runat="server" Interval="6000" />--%>
+
+              
 
                     <asp:Panel ID="profilePanel" runat="server" class="profileBox" Width="270px"> 
                        <%-- <div style="display:table-caption">--%>
@@ -79,7 +80,7 @@
                             <li style="float:left">
                         
 
-            <asp:FormView ID="FormView1" runat="server" DataSourceID="dsCash" Width="200px">
+            <asp:FormView ID="frmVwProfile" runat="server" DataSourceID="dsCash" Width="200px">
                <%-- <EditItemTemplate>
                     UserName:
                     <asp:TextBox ID="UserNameTextBox" runat="server" 
@@ -192,8 +193,7 @@
                     UseAnimation="false" HorizontalOffset="30" VerticalOffset="1" />
 
                   
-                   </ContentTemplate>
-                        </asp:UpdatePanel>   
+
 
 
                  </LoggedInTemplate>
@@ -206,7 +206,8 @@
 
                   </asp:LoginView>
 
-
+                                     </ContentTemplate>
+                        </asp:UpdatePanel>   
                    <asp:TextBox ID="txtBalloon" runat="server" Width="500px" ReadOnly="true" class="buttonStyle" Visible="false"/>
 
                                         <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="#07A2D9" LogoutPageUrl="~/default.aspx" 
