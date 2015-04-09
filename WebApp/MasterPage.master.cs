@@ -198,7 +198,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         //FormView profileForm = loginControl.FindControl("frmVwProfile") as FormView;
 
         FormView profileForm = LoginView1.FindControl("frmVwProfile") as FormView;
-        profileForm.DataBind();
+        //profileForm.DataBind();
         profileUpdatePanel.Update();
     }
 }
