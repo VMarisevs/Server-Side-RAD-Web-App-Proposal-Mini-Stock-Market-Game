@@ -41,9 +41,12 @@
                  <td valign="top">
                                   <h1>Latest Activity
                  </h1>
+                 <asp:UpdatePanel ID="activityUpdatePanel" runat="server" UpdateMode="Conditional">
+                 <ContentTemplate>
+                <%-- <asp:Timer ID="profileTimer" runat="server" Interval="3000" />--%>
                  <asp:GridView ID="gwActivity" runat="server" AllowPaging="True" 
                      AutoGenerateColumns="False" CellPadding="4" DataSourceID="dsUsers" 
-                     ForeColor="#333333" GridLines="None">
+                     ForeColor="#333333" GridLines="None" onload="gwActivity_Load">
                      <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                      <Columns>
                          <asp:BoundField DataField="UserName" HeaderText="UserName" 
@@ -66,7 +69,8 @@
                      <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                  </asp:GridView>
 
-                 
+               </ContentTemplate>
+            </asp:UpdatePanel>
 
             <asp:SqlDataSource ID="dsUsers" runat="server" 
                      ConnectionString="<%$ ConnectionStrings:GameConnectionString %>" 

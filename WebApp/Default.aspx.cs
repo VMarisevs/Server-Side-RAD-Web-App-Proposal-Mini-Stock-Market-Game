@@ -36,4 +36,9 @@ public partial class _Default : System.Web.UI.Page
 
         lblSeshHitCount.Text = "Session Hit Count: " + Session["seshHitCount"].ToString();       //seshHitCount.ToString() + "  ";
     }
+    protected void gwActivity_Load(object sender, EventArgs e)
+    {
+        gwActivity.DataBind();
+        activityUpdatePanel.Update();
+    }
 }

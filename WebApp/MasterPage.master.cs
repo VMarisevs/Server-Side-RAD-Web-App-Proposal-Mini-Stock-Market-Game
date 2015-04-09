@@ -194,6 +194,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
     //}
     protected void LoginView1_Load(object sender, EventArgs e)
     {
+       // LoginView loginControl = this.Master.FindControl("LoginView1") as LoginView;
+        //FormView profileForm = loginControl.FindControl("frmVwProfile") as FormView;
+
         FormView profileForm = LoginView1.FindControl("frmVwProfile") as FormView;
         profileForm.DataBind();
         profileUpdatePanel.Update();
