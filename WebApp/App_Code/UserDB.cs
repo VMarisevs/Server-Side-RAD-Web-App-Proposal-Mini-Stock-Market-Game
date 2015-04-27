@@ -39,6 +39,7 @@ public static class UserDB
 
                 listUsers.Add(user);
             }
+            con.Close();
         }
 
         return listUsers;
